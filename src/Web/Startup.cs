@@ -22,7 +22,7 @@ namespace Web
         {
             services.AddControllers();
             services.AddControllersWithViews();
-            services.AddSpaStaticFiles(cfg => cfg.RootPath = "clientApp");
+            services.AddSpaStaticFiles(cfg => cfg.RootPath = "ClientApp");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,7 +57,7 @@ namespace Web
                 {
                     endpoints.MapToVueCliProxy(
                         "{*path}",
-                        new SpaOptions { SourcePath = "clientApp" },
+                        new SpaOptions { SourcePath = "ClientApp" },
                         port: 8080,
                         npmScript: (System.Diagnostics.Debugger.IsAttached) ? "serve" : null,
                         regex: "Compiled successfully",
