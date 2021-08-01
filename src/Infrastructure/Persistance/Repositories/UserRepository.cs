@@ -1,5 +1,6 @@
 ﻿using Core.Commons.Repositories;
 using Core.Domain;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;
 
@@ -14,19 +15,19 @@ namespace Infrastructure.Persistance.Repositories
             _context = context;
         }
 
-        public Task AddAsync(User user)
+        public async Task AddAsync(User user)
         {
-            throw new NotImplementedException();
+            await _context.Users.AddAsync(user);
+            await _context.SaveChangesAsync();
         }
 
-        public Task<User> GetAsync(Guid id)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<User> GetAsync(Guid id)
+            => await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
 
-        public Task UpdateAsync(User user)
+        public async Task UpdateAsync(User user)
         {
-            throw new NotImplementedException();
+            _context.Users.Update(user);
+            await _context.SaveChangesAsync();
         }
     }
 }

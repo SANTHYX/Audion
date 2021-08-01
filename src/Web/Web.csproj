@@ -11,7 +11,6 @@
 
   <ItemGroup>
     <Folder Include="ClientApp\src\store\module\" />
-    <Folder Include="Models\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 

@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using VueCliMiddleware;
+using Web.Extensions;
+
 namespace Web
 {
     public class Startup
@@ -39,8 +41,6 @@ namespace Web
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Web v1"));
             }
 
-            app.UseHttpsRedirection();
-
             app.UseRouting();
 
             app.UseStaticFiles();
@@ -50,6 +50,8 @@ namespace Web
                 app.UseSpaStaticFiles();
             }
 
+            app.UseExceptionMiddleware();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -58,8 +60,9 @@ namespace Web
 
                 if (env.IsDevelopment())
                 {
-                    endpoints.MapToVueCliProxy("{*path}",
-                     new SpaOptions { SourcePath = "ClientApp"},
+                    endpoints.MapToVueCliProxy(
+                "{*path}",
+                 new SpaOptions { SourcePath = "ClientApp"},
                         port: 8080,
                         npmScript: (System.Diagnostics.Debugger.IsAttached) ? "serve" : null,
                         regex: "Compiled successfully",
