@@ -1,16 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SpaServices;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using VueCliMiddleware;
 
 namespace Web
 {
@@ -28,6 +23,7 @@ namespace Web
         {
 
             services.AddControllers();
+            services.AddSpaStaticFiles(spa => spa.RootPath = "ClientApp");
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Web", Version = "v1" });
@@ -46,6 +42,13 @@ namespace Web
 
             app.UseHttpsRedirection();
 
+            app.UseSpaStaticFiles();
+
+            if (env.IsDevelopment())
+            {
+                app.UseSpaStaticFiles();
+            }
+
             app.UseRouting();
 
             app.UseAuthorization();
@@ -53,6 +56,15 @@ namespace Web
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+
+                endpoints.MapToVueCliProxy("{*path}", 
+                    new SpaOptions{ SourcePath = "ClientApp"},
+                    port: 8080,
+                    npmScript: (System.Diagnostics.Debugger.IsAttached) ? "serve" : null,
+                    regex: "Compiled successfully",
+                    forceKill: true,
+                    wsl: false
+                    );
             });
         }
     }
