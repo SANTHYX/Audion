@@ -6,8 +6,8 @@
 
   <ItemGroup>
     <Folder Include="Api\Controllers\" />
-    <Folder Include="ClientApp\src\router\modules\" />
-    <Folder Include="ClientApp\src\store\modules\" />
+    <Folder Include="clientApp\src\router\modules\" />
+    <Folder Include="clientApp\src\store\modules\" />
   </ItemGroup>
 
   <ItemGroup>
