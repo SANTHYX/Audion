@@ -1,18 +1,28 @@
 ﻿using Application.Commons.Services;
+using Application.Models;
+using Core.Commons.Repositories;
 using System.Threading.Tasks;
 
 namespace Application.Services
 {
     public class AuthService : IAuthService
     {
-        public Task LoginAsync()
+        private readonly IUserRepository _userRepository;
+
+        public AuthService(IUserRepository userRepository)
+        {
+            _userRepository = userRepository;
+        }
+
+        public async Task LoginAsync(LoginUserModel model)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task RegisterAsync()
+        public async Task RegisterAsync(RegisterUserModel model)
         {
-            throw new System.NotImplementedException();
+            await _userRepository.AddAsync(
+                new(model.UserName, model.Password, model.Email));
         }
     }
 }
