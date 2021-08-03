@@ -7,6 +7,7 @@ namespace Core.Domain
     {
         public string UserName { get; private set; }
         public string Password { get; private set; }
+        public string Salt { get; set; }
         public string Email { get; private set; }
         public Profile Profile { get; private set; }
 

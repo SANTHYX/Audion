@@ -1,4 +1,4 @@
-﻿namespace Application.Models
+﻿namespace Application.Dto.User
 {
     public record LoginUserModel
     {

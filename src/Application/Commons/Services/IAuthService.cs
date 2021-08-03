@@ -1,4 +1,4 @@
-﻿using Application.Models;
+﻿using Application.Dto.User;
 using System.Threading.Tasks;
 
 namespace Application.Commons.Services

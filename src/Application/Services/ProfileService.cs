@@ -3,9 +3,6 @@ using Core.Commons.Repositories;
 using Core.Domain;
 using Microsoft.AspNetCore.Http;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Application.Services
@@ -14,7 +11,7 @@ namespace Application.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly IProfileRepository _profileRepository;
-        private readonly IHttpContextAccessor _httpContext;
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly Guid userId;
 
         public ProfileService(IUserRepository userRepository, IProfileRepository profileRepository,
@@ -22,9 +19,9 @@ namespace Application.Services
         {
             _userRepository = userRepository;
             _profileRepository = profileRepository;
-            _httpContext = httpContext;
-            userId = _httpContext.HttpContext.User.Identity.IsAuthenticated 
-                ? Guid.Parse(_httpContext.HttpContext.User.Identity.Name): Guid.Empty;
+            _httpContextAccessor = httpContext;
+            userId = _httpContextAccessor.HttpContext.User.Identity.IsAuthenticated 
+                ? Guid.Parse(_httpContextAccessor.HttpContext.User.Identity.Name): Guid.Empty;
         }
 
         public async Task AddAsync(Profile profile)

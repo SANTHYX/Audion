@@ -5,6 +5,6 @@ namespace Application.Commons.Mappers
 {
     public interface IUserMapper
     {
-        UserDto MapTo(User user);
+        GetUserDto MapTo(User user);
     }
 }

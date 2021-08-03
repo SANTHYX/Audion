@@ -5,6 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Dto\Playlist\" />
+    <Folder Include="Dto\Track\" />
     <Folder Include="Dto\User\NestedModels\" />
     <Folder Include="Exceptions\" />
     <Folder Include="Extensions\" />

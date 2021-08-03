@@ -1,5 +1,5 @@
 ﻿using Application.Commons.Services;
-using Application.Models;
+using Application.Dto.User;
 using Core.Commons.Repositories;
 using System.Threading.Tasks;
 
