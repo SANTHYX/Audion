@@ -24,6 +24,12 @@ namespace Infrastructure.Persistance.Repositories
         public async Task<User> GetAsync(Guid id)
             => await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
 
+        public async Task<User> GetAsync(string userName)
+            => await _context.Users.FirstOrDefaultAsync(x => x.UserName == userName);
+
+        public async Task<bool> IsExist(string userName)
+            => await _context.Users.AnyAsync(x => x.UserName == userName);
+
         public async Task UpdateAsync(User user)
         {
             _context.Users.Update(user);

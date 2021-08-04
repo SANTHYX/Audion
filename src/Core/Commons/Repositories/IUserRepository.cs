@@ -8,6 +8,8 @@ namespace Core.Commons.Repositories
     {
         Task AddAsync(User user);
         Task<User> GetAsync(Guid id);
+        Task<User> GetAsync(string userName);
+        Task<bool> IsExist(string userName);
         Task UpdateAsync(User user);
     }
 }

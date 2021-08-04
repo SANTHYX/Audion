@@ -2,5 +2,5 @@ module.exports = {
   transpileDependencies: [
     'vuetify'
   ],
-  outputDir: '../wwwroot/spa'
+  outputDir: '../wwwroot'
 }

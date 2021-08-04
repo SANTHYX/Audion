@@ -1,6 +1,6 @@
 ﻿using Core.Domain;
 
-namespace Infrastructure.Security
+namespace Application.Commons.Identity
 {
     public interface IEncryptor
     {

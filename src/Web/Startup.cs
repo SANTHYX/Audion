@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.SpaServices;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -45,10 +44,7 @@ namespace Web
 
             app.UseStaticFiles();
 
-            if (env.IsProduction())
-            {
-                app.UseSpaStaticFiles();
-            }
+            app.UseSpaStaticFiles();
 
             app.UseExceptionMiddleware();
 
@@ -57,19 +53,17 @@ namespace Web
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
 
+            app.UseSpa(opt =>
+            {
                 if (env.IsDevelopment())
-                {
-                    endpoints.MapToVueCliProxy(
-                "{*path}",
-                 new SpaOptions { SourcePath = "ClientApp"},
-                        port: 8080,
-                        npmScript: (System.Diagnostics.Debugger.IsAttached) ? "serve" : null,
-                        regex: "Compiled successfully",
-                        forceKill: true,
-                        wsl: false
-                    );
+                { 
+                    opt.Options.SourcePath = "ClientApp/";
+                    opt.UseVueCli("serve");
                 }
+                else
+                    opt.Options.SourcePath = "wwwroot";
             });
         }
     }

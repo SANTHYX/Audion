@@ -13,10 +13,11 @@ namespace Core.Domain
 
         protected User() { }
 
-        public User(string userName, string password, string email)
+        public User(string userName, string password, string salt, string email)
         {
             SetUserName(userName);
             SetPassword(password);
+            SetSalt(salt);
             SetEmail(email);
         }
 
@@ -46,6 +47,20 @@ namespace Core.Domain
             }
 
             Password = password;
+        }
+
+        public void SetSalt(string salt)
+        {
+            if (string.IsNullOrWhiteSpace(salt))
+            {
+                throw new Exception("Salt is required");
+            }
+            if (Salt == salt)
+            {
+                return;
+            }
+
+            Salt = salt;
         }
 
         public void SetEmail(string email)

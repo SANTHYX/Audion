@@ -1,7 +1,6 @@
 ﻿using Application.Commons.Services;
-using Application.Models;
+using Application.Dto.User;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -10,16 +9,16 @@ namespace Web.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class AuthController : ControllerBase
+    public class IdentityController : ControllerBase
     {      
-        private readonly IAuthService _service;
+        private readonly IIdentityService _service;
 
-        public AuthController(IAuthService service)
+        public IdentityController(IIdentityService service)
         {
             _service = service;
         }
 
-        [HttpPost]
+        [HttpPost("login")]
         public async Task<IActionResult> Post([FromBody] LoginUserModel model)
         {
             await _service.LoginAsync(model);
@@ -27,7 +26,7 @@ namespace Web.Controllers
             return Ok();
         }
 
-        [HttpPost]
+        [HttpPost("register")]
         public async Task<IActionResult> Post([FromBody] RegisterUserModel model)
         {
             await _service.RegisterAsync(model);

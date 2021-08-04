@@ -1,8 +1,9 @@
-﻿using Core.Domain;
+﻿using Application.Commons.Identity;
+using Core.Domain;
 using System;
 using System.Security.Cryptography;
 
-namespace Infrastructure.Security
+namespace Infrastructure.Identity
 {
     public class Encryptor : IEncryptor
     {
