@@ -19,7 +19,7 @@ namespace Infrastructure.Extensions
             services.AddDbContext<DataContext>(opt => 
             {
                 opt.UseNpgsql(configuration.GetConnectionString(""),
-                    npgCfg => npgCfg.MigrationsAssembly("Infrastructure"));
+                    npgCfg => npgCfg.MigrationsAssembly("Infrastructure.Persistance"));
                 opt.EnableDetailedErrors();
             });
             services.AddScoped<IUserRepository, UserRepository>();

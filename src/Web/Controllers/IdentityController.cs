@@ -17,6 +17,12 @@ namespace Web.Controllers
             _service = service;
         }
 
+        /// <summary>
+        /// Endpoint handling user authentication.
+        /// If he pass proccess sucesfully, controller will return access token. 
+        /// </summary>
+        /// <param name="model">Object contains user creedentials</param>
+        /// <returns>Access token and metadata</returns>
         [HttpPost("login")]
         public async Task<IActionResult> Post([FromBody] LoginUserDto model)
         {
@@ -25,6 +31,11 @@ namespace Web.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Endpoint handling registering user in system
+        /// </summary>
+        /// <param name="model">Informations required to create user instance</param>
+        /// <returns></returns>
         [HttpPost("register")]
         public async Task<IActionResult> Post([FromBody] RegisterUserDto model)
         {
@@ -33,6 +44,11 @@ namespace Web.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>Access token and metadata</returns>
         [HttpPost("refresh-token")]
         public async Task<IActionResult> Post([FromBody] RefreshTokenDto model)
         {

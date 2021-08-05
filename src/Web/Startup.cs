@@ -27,6 +27,7 @@ namespace Web
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Web", Version = "v1" });
+                //c.IncludeXmlComments("Documentation/documentation.xml", true);
             });
         }
 
