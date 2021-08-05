@@ -1,10 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Application.Commons.Services;
+using Application.Dto.Track;
+using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Web.Controllers
 {
@@ -12,36 +10,27 @@ namespace Web.Controllers
     [ApiController]
     public class TracksController : ControllerBase
     {
-        // GET: api/<TracksController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly ITrackService _service;
+
+        public TracksController(ITrackService service)
         {
-            return new string[] { "value1", "value2" };
+            _service = service;
         }
 
-        // GET api/<TracksController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
+        public async Task<IActionResult> Get(Guid id)
+            => Ok(await _service.GetAsync());
 
-        // POST api/<TracksController>
+        [HttpGet]
+        public async Task<IActionResult> Get()
+            => Ok(await _service.BrowseAsync());
+
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Post([FromForm] UploadTrackDto model)
         {
-        }
+            await _service.UploadAsync();
 
-        // PUT api/<TracksController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<TracksController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            return Ok();
         }
     }
 }

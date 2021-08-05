@@ -80,7 +80,7 @@ namespace Application.Services
             _logger.LogInformation($"User has been succesfuly registered");
         }
 
-        public async Task RevokeToken(RevokeTokenDto model)
+        public async Task RevokeTokenAsync(RevokeTokenDto model)
         {
             var token = await _tokenRepository.GetAsync(model.Refresh);
             token.RevokeToken();

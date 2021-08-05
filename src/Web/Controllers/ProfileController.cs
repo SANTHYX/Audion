@@ -1,8 +1,7 @@
 ﻿using Application.Commons.Services;
+using Application.Dto.Profile;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using System.Threading.Tasks;
 
 namespace Web.Controllers
 {
@@ -17,31 +16,16 @@ namespace Web.Controllers
             _service = service;
         }
 
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Post([FromBody] CreateProfileDto model)
         {
+            return Ok();
         }
 
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        public async Task<IActionResult> Put([FromBody] UpdateProfileDto model)
         {
-        }
-
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+            return Ok();
+        } 
     }
 }

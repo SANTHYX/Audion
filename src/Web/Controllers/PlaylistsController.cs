@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+﻿using Application.Commons.Services;
+using Application.Dto.Playlist;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
 
 namespace Web.Controllers
 {
@@ -9,36 +10,37 @@ namespace Web.Controllers
     [ApiController]
     public class PlaylistsController : ControllerBase
     {
-        // GET: api/<PlaylistsController>
+        private readonly IPlaylistService _service;
+
+        public PlaylistsController(IPlaylistService service)
+        {
+            _service = service;
+        }
+
+        [HttpGet("id")]
+        public async Task<IActionResult> Get(Guid id)
+            => Ok(await _service.GetAsync());
+
         [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+        public async Task<IActionResult> Get()
+            => Ok(await _service.BrowseAsync());
 
-        // GET api/<PlaylistsController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<PlaylistsController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Post([FromBody] CreatePlaylistDto model)
         {
+            return Ok();
         }
 
-        // PUT api/<PlaylistsController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        public async Task<IActionResult> Put([FromBody] UpdatePlaylistDto model)
         {
+            return Ok();
         }
 
-        // DELETE api/<PlaylistsController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("id")]
+        public async Task<IActionResult> Delete([FromBody] DeletePlaylistDto model)
         {
+            return Ok();
         }
     }
 }

@@ -44,7 +44,7 @@ namespace Web.Controllers
         [HttpPut("revoke-token")]
         public async Task<IActionResult> Put([FromBody] RevokeTokenDto model)
         {
-            await _service.RevokeToken(model);
+            await _service.RevokeTokenAsync(model);
 
             return Ok();
         }

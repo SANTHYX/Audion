@@ -5,7 +5,7 @@ namespace Application.Commons.Services
 {
     public interface IProfileService
     {
-        Task AddAsync(Profile profile);
+        Task CreateAsync(Profile profile);
         Task UpdateAsync(Profile profile);
     }
 }

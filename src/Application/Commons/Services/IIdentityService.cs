@@ -9,6 +9,6 @@ namespace Application.Commons.Services
         Task RegisterAsync(RegisterUserDto model);
         Task<GetJwtTokenDto> LoginAsync(LoginUserDto model);
         Task<GetJwtTokenDto> RefreshToken(RefreshTokenDto model);
-        Task RevokeToken(RevokeTokenDto model);
+        Task RevokeTokenAsync(RevokeTokenDto model);
     }
 }

@@ -1,7 +1,10 @@
 ﻿using Application.Commons.Services;
+using Application.Dto.Playlist;
 using Core.Commons.Repositories;
 using Microsoft.AspNetCore.Http;
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Application.Services
 {
@@ -17,6 +20,31 @@ namespace Application.Services
             _httpContextAccessor = httpContextAccessor;
             userId = _httpContextAccessor.HttpContext.User.Identity.IsAuthenticated 
                 ? Guid.Parse(_httpContextAccessor.HttpContext.User.Identity.Name) : Guid.Empty;
+        }
+
+        public Task<IEnumerable<GetPlaylistsDto>> BrowseAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task CreateAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<GetPlaylistDto> GetAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task RemoveAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task UpdateAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }

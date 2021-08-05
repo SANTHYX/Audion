@@ -3,8 +3,7 @@ using Core.Domain;
 
 namespace Application.Commons.Mappers
 {
-    public interface IUserMapper
+    public interface IUserMapper : IBaseMapper<GetUserDto, User>
     {
-        GetUserDto MapTo(User user);
     }
 }

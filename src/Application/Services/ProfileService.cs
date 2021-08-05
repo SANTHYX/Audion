@@ -24,7 +24,7 @@ namespace Application.Services
                 ? Guid.Parse(_httpContextAccessor.HttpContext.User.Identity.Name): Guid.Empty;
         }
 
-        public async Task AddAsync(Profile profile)
+        public async Task CreateAsync(Profile profile)
         {
             throw new NotImplementedException();
         }
