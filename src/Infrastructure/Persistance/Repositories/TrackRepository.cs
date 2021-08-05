@@ -1,5 +1,7 @@
 ﻿using Core.Commons.Repositories;
 using Core.Domain;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Infrastructure.Persistance.Repositories
@@ -13,19 +15,22 @@ namespace Infrastructure.Persistance.Repositories
             _context = context;
         }
 
-        public Task AddAsync(Track track)
+        public async Task AddAsync(Track track)
         {
-            throw new System.NotImplementedException();
+            await _context.Tracks.AddAsync(track);
+            await _context.SaveChangesAsync();
         }
 
-        public Task GetAsync(string name)
-        {
-            throw new System.NotImplementedException();
-        }
+        public async Task<IEnumerable<Track>> GetAllAsync()
+            => await _context.Tracks.ToListAsync();
 
-        public Task RemoveAsync(Track track)
+        public async Task<Track> GetAsync(string title)
+            => await _context.Tracks.FirstOrDefaultAsync(x => x.Title == title);
+
+        public async Task RemoveAsync(Track track)
         {
-            throw new System.NotImplementedException();
+            _context.Tracks.Remove(track);
+            await _context.SaveChangesAsync();
         }
     }
 }

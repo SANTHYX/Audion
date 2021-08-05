@@ -1,6 +1,8 @@
 ﻿using Application.Commons.Mappers;
 using Application.Dto.Track;
 using Core.Domain;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Application.Mappers
 {
@@ -11,5 +13,11 @@ namespace Application.Mappers
             {
 
             };
+
+        public IEnumerable<GetTracksDto> MapTo(IEnumerable<Track> source)
+            => source.Select(x => new GetTracksDto
+            {
+                Title = x.Title
+            });
     }
 }

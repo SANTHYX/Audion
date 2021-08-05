@@ -1,4 +1,5 @@
 ﻿using Core.Domain;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Core.Commons.Repositories
@@ -7,6 +8,7 @@ namespace Core.Commons.Repositories
     {
         Task AddAsync(Track track);
         Task RemoveAsync(Track track);
-        Task GetAsync(string name);
+        Task<Track> GetAsync(string title);
+        Task<IEnumerable<Track>> GetAllAsync();
     }
 }

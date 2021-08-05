@@ -1,4 +1,5 @@
-﻿using Application.Commons.Services;
+﻿using Application.Commons.Mappers;
+using Application.Commons.Services;
 using Application.Dto.Playlist;
 using Core.Commons.Repositories;
 using Microsoft.AspNetCore.Http;
@@ -12,39 +13,49 @@ namespace Application.Services
     {
         private readonly IPlaylistRepository _playlistRepository;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IPlaylistMapper _mapper;
         private readonly Guid userId;
 
-        public PlaylistService(IPlaylistRepository playlistRepository, IHttpContextAccessor httpContextAccessor)
+        public PlaylistService(IPlaylistRepository playlistRepository, IHttpContextAccessor httpContextAccessor,
+            IPlaylistMapper mapper)
         {
             _playlistRepository = playlistRepository;
             _httpContextAccessor = httpContextAccessor;
+            _mapper = mapper;
             userId = _httpContextAccessor.HttpContext.User.Identity.IsAuthenticated 
                 ? Guid.Parse(_httpContextAccessor.HttpContext.User.Identity.Name) : Guid.Empty;
         }
 
-        public Task<IEnumerable<GetPlaylistsDto>> BrowseAsync()
+        public async Task<IEnumerable<GetPlaylistsDto>> BrowseAsync()
         {
-            throw new NotImplementedException();
+            var playlists = await _playlistRepository.GetAllAsync();
+
+            return _mapper.MapTo(playlists);
         }
 
-        public Task CreateAsync()
+        public async Task CreateAsync(CreatePlaylistDto model)
         {
-            throw new NotImplementedException();
+            await _playlistRepository.AddAsync(new());
         }
 
-        public Task<GetPlaylistDto> GetAsync()
+        public async Task<GetPlaylistDto> GetAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var playlist = await _playlistRepository.GetAsync(id);
+
+            return _mapper.MapTo(playlist);
         }
 
-        public Task RemoveAsync()
+        public async Task RemoveAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var playlist = await _playlistRepository.GetAsync(id);
+            await _playlistRepository.RemoveAsync(playlist);
         }
 
-        public Task UpdateAsync()
+        public async Task UpdateAsync(UpdatePlaylistDto model)
         {
-            throw new NotImplementedException();
+            var playlist = await _playlistRepository.GetAsync(model.Id);
+            //Edit Logic and validation
+            await _playlistRepository.UpdateAsync(playlist);
         }
     }
 }

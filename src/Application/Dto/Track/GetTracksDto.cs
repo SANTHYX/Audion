@@ -2,5 +2,6 @@
 {
     public record GetTracksDto
     {
+        public string Title { get; set; }
     }
 }

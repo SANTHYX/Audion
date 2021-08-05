@@ -6,8 +6,8 @@ namespace Application.Commons.Services
 {
     public interface ITrackService
     {
-        Task UploadAsync();
-        Task<GetTrackDto> GetAsync();
+        Task UploadAsync(UploadTrackDto model);
+        Task<GetTrackDto> GetAsync(string title);
         Task<IEnumerable<GetTracksDto>> BrowseAsync();
     }
 }

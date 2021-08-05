@@ -1,5 +1,4 @@
-﻿using System;
-using Core.Domain;
+﻿using Core.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -9,7 +8,7 @@ namespace Infrastructure.Persistance.Configurations
     {
         public void Configure(EntityTypeBuilder<Playlist> builder)
         {
-            throw new NotImplementedException();
+            builder.HasKey(x => x.Id);
         }
     }
 }

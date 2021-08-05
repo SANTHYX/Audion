@@ -1,5 +1,6 @@
 ﻿using Core.Domain;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Core.Commons.Repositories
@@ -8,6 +9,8 @@ namespace Core.Commons.Repositories
     {
         Task AddAsync(Playlist playlist);
         Task UpdateAsync(Playlist playlist);
+        Task RemoveAsync(Playlist playlist);
         Task<Playlist> GetAsync(Guid id);
+        Task<IEnumerable<Playlist>> GetAllAsync();
     }
 }
