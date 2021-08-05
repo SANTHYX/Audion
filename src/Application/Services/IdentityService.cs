@@ -3,6 +3,7 @@ using Application.Commons.Services;
 using Application.Dto.Identity;
 using Application.Dto.User;
 using Core.Commons.Repositories;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 
@@ -14,26 +15,29 @@ namespace Application.Services
         private readonly ITokenRepository _tokenRepository;
         private readonly IEncryptor _encryptor;
         private readonly IJwtHandler _jwtHandler;
+        private readonly ILogger<IdentityService> _logger;
 
         public IdentityService(IUserRepository userRepository, ITokenRepository tokenRepository,
-            IEncryptor encryptor, IJwtHandler jwtHandler)
+            IEncryptor encryptor, IJwtHandler jwtHandler, ILogger<IdentityService> logger)
         {
             _userRepository = userRepository;
             _tokenRepository = tokenRepository;
             _encryptor = encryptor;
             _jwtHandler = jwtHandler;
+            _logger = logger;
         }
 
         //Need to change names
-        public async Task<GetJwtToken> LoginAsync(LoginUserModel model)
+        public async Task<GetJwtTokenDto> LoginAsync(LoginUserDto model)
         {
             var user = await _userRepository.GetAsync(model.UserName);
             if (user is null || !_encryptor.IsValidPassword(user, model.Password))
             {
-                throw new Exception("Invalid creedentials");
+                throw new UnauthorizedAccessException("Invalid creedentials");
             }
             var(token, accessToken) = _jwtHandler.GenerateToken(user);
             await _tokenRepository.AddAsync(token);
+            _logger.LogInformation($"User {model.UserName} has been logged at {DateTime.UtcNow}");
 
             return new()
             {
@@ -42,12 +46,12 @@ namespace Application.Services
             };
         }
 
-        public async Task<GetJwtToken> RefreshToken(RefreshTokenModel model)
+        public async Task<GetJwtTokenDto> RefreshToken(RefreshTokenDto model)
         {
             var token = await _tokenRepository.GetAsync(model.RefreshToken);
             if (token is null)
             {
-                throw new Exception("Invalid creedentials");
+                throw new UnauthorizedAccessException("Invalid creedentials");
             }
             if (token.IsRevoked)
             {
@@ -55,6 +59,8 @@ namespace Application.Services
             }
             var (newToken, accessToken) = _jwtHandler.GenerateToken(token.User);
             await _tokenRepository.AddAsync(newToken);
+            _logger.LogInformation($"Token for User: {token.User.UserName} " +
+                $"has been has been refreshed at {DateTime.UtcNow}");
 
             return new()
             {
@@ -63,15 +69,24 @@ namespace Application.Services
             };
         }
 
-        public async Task RegisterAsync(RegisterUserModel model)
+        public async Task RegisterAsync(RegisterUserDto model)
         {
             if (await _userRepository.IsExist(model.UserName))
             {
                 throw new Exception($"User with this Username: {model.UserName} already exist");
             }
             var (hash,salt) = _encryptor.HashPassword(model.Password);
-            await _userRepository.AddAsync(
-                new(model.UserName, hash, salt, model.Email));
+            await _userRepository.AddAsync(new(model.UserName, hash, salt, model.Email));
+            _logger.LogInformation($"User has been succesfuly registered");
+        }
+
+        public async Task RevokeToken(RevokeTokenDto model)
+        {
+            var token = await _tokenRepository.GetAsync(model.Refresh);
+            token.RevokeToken();
+            await _tokenRepository.UpdateAsync(token);
+            _logger.LogInformation($"Token {token.RefreshToken} " +
+                $"for {token.User.UserName} has been succesfuly revoked {DateTime.UtcNow}");
         }
     }
 }

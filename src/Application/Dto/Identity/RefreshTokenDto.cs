@@ -1,6 +1,6 @@
 ﻿namespace Application.Dto.Identity
 {
-    public record RefreshTokenModel
+    public record RefreshTokenDto
     {
         public string RefreshToken { get; set; }
     }

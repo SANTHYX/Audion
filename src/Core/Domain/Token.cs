@@ -21,5 +21,15 @@ namespace Core.Domain
             IsRevoked = false;
             User = user ?? throw new Exception("Cannot generate token for non existing user");
         }
+
+        public void RevokeToken()
+        {
+            if (IsRevoked)
+            {
+                throw new Exception("Token is already revoked");
+            }
+
+            IsRevoked = true;
+        }
     }
 }

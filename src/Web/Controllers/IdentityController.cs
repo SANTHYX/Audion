@@ -1,9 +1,8 @@
 ﻿using Application.Commons.Services;
+using Application.Dto.Identity;
 using Application.Dto.User;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Web.Controllers
 {
@@ -19,7 +18,7 @@ namespace Web.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Post([FromBody] LoginUserModel model)
+        public async Task<IActionResult> Post([FromBody] LoginUserDto model)
         {
             await _service.LoginAsync(model);
 
@@ -27,21 +26,27 @@ namespace Web.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Post([FromBody] RegisterUserModel model)
+        public async Task<IActionResult> Post([FromBody] RegisterUserDto model)
         {
             await _service.RegisterAsync(model);
 
             return Ok();
         }
 
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPost("refresh-token")]
+        public async Task<IActionResult> Post([FromBody] RefreshTokenDto model)
         {
+            await _service.RefreshToken(model);
+
+            return Ok();
         }
 
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpPut("revoke-token")]
+        public async Task<IActionResult> Put([FromBody] RevokeTokenDto model)
         {
+            await _service.RevokeToken(model);
+
+            return Ok();
         }
     }
 }

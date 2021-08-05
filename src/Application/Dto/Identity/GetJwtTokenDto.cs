@@ -1,6 +1,6 @@
 ﻿namespace Application.Dto.Identity
 {
-    public record GetJwtToken
+    public record GetJwtTokenDto
     {
         public string AccessToken { get; set; }
         public string Refresh { get; set; }

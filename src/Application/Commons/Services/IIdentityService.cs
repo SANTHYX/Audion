@@ -6,8 +6,9 @@ namespace Application.Commons.Services
 {
     public interface IIdentityService
     {
-        Task RegisterAsync(RegisterUserModel model);
-        Task<GetJwtToken> LoginAsync(LoginUserModel model);
-        Task<GetJwtToken> RefreshToken(RefreshTokenModel model);
+        Task RegisterAsync(RegisterUserDto model);
+        Task<GetJwtTokenDto> LoginAsync(LoginUserDto model);
+        Task<GetJwtTokenDto> RefreshToken(RefreshTokenDto model);
+        Task RevokeToken(RevokeTokenDto model);
     }
 }
