@@ -1,11 +1,12 @@
-﻿using Application.Dto.Track;
+﻿using Application.Dto;
+using Application.Dto.Track;
+using Core.Commons.Pagination;
 using Core.Domain;
-using System.Collections.Generic;
 
 namespace Application.Commons.Mappers
 {
     public interface ITrackMapper : IBaseMapper<GetTrackDto, Track>, 
-        IBaseMapper<IEnumerable<GetTracksDto>, IEnumerable<Track>>
+        IBaseMapper<PagedResponseDto<GetTracksDto>, IPagedResponse<Track>>
     {
     }
 }

@@ -2,6 +2,7 @@
 using Application.Commons.Services;
 using Application.Mappers;
 using Application.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Application.Extensions
@@ -19,6 +20,7 @@ namespace Application.Extensions
             services.AddSingleton<ITokenMapper, TokenMapper>();
             services.AddSingleton<IPlaylistMapper, PlaylistMapper>();
             services.AddSingleton<ITrackMapper, TrackMapper>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
     }
 }

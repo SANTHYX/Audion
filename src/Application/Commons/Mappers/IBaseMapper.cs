@@ -1,6 +1,4 @@
-﻿using Core.Types;
-
-namespace Application.Commons.Mappers
+﻿namespace Application.Commons.Mappers
 {
     public interface IBaseMapper<T, S>
     {

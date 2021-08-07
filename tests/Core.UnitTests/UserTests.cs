@@ -1,12 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Core.Domain;
+using Moq;
+using Xunit;
 
 namespace Core.UnitTests
 {
-    class UserTests
+    public class UserTests
     {
+        private readonly Mock<User> _user;
+
+        public UserTests()
+        {
+            _user = new();
+        }
+
+        [Fact]
+        public void Is_SetUserName_throws_exception_where_passed_value_is_empty_string()
+        {
+
+        }
     }
 }

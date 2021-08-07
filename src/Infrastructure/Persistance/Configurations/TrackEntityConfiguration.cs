@@ -9,6 +9,9 @@ namespace Infrastructure.Persistance.Configurations
         public void Configure(EntityTypeBuilder<Track> builder)
         {
             builder.HasKey(x => x.Id);
+            builder.Property(x => x.Title)
+                .HasMaxLength(30)
+                .IsRequired();
         }
     }
 }

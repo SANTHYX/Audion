@@ -1,5 +1,6 @@
 ﻿using Application.Commons.Services;
 using Application.Dto.Playlist;
+using Core.Commons.Pagination;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -19,21 +20,25 @@ namespace Web.Controllers
 
         [HttpGet("id")]
         public async Task<IActionResult> Get(Guid id)
-            => Ok(await _service.GetAsync());
+            => Ok(await _service.GetAsync(id));
 
         [HttpGet]
-        public async Task<IActionResult> Get()
-            => Ok(await _service.BrowseAsync());
+        public async Task<IActionResult> Get([FromQuery] PagedQuery query)
+            => Ok(await _service.BrowseAsync(query));
 
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreatePlaylistDto model)
         {
+            await _service.CreateAsync(model);
+
             return Ok();
         }
 
         [HttpPut]
         public async Task<IActionResult> Put([FromBody] UpdatePlaylistDto model)
         {
+            await _service.UpdateAsync(model);
+
             return Ok();
         }
 

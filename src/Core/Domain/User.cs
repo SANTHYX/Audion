@@ -1,5 +1,6 @@
-﻿using Core.Types;
+﻿using Core.Commons.Types;
 using System;
+using System.Collections.Generic;
 
 namespace Core.Domain
 {
@@ -10,6 +11,9 @@ namespace Core.Domain
         public string Salt { get; set; }
         public string Email { get; private set; }
         public Profile Profile { get; private set; }
+        public IEnumerable<Token> Tokens { get; private set; }
+        public IEnumerable<Playlist> Playlists { get; private set; }
+        public IEnumerable<Track> Tracks { get; private set; }
 
         protected User() { }
 

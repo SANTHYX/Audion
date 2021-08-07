@@ -12,7 +12,7 @@ namespace Infrastructure.Identity
 {
     public class JwtHandler : IJwtHandler
     {
-        private SecuritySettings _settings;
+        private readonly SecuritySettings _settings;
 
         public JwtHandler(IOptions<SecuritySettings> settings)
         {

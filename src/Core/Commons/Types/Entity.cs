@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Core.Types
+namespace Core.Commons.Types
 {
     public abstract class Entity
     {

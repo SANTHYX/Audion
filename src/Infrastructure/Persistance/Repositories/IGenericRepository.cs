@@ -1,4 +1,4 @@
-﻿using Core.Types;
+﻿using Core.Commons.Types;
 
 namespace Infrastructure.Persistance.Repositories
 {

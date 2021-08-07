@@ -1,7 +1,8 @@
 ﻿using Application.Commons.Mappers;
+using Application.Dto;
 using Application.Dto.Playlist;
+using Core.Commons.Pagination;
 using Core.Domain;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace Application.Mappers
@@ -14,10 +15,18 @@ namespace Application.Mappers
 
             };
 
-        public IEnumerable<GetPlaylistsDto> MapTo(IEnumerable<Playlist> source)
-            =>source.Select(x => new GetPlaylistsDto
+        public PagedResponseDto<GetPlaylistsDto> MapTo(IPagedResponse<Playlist> source)
+            => source is null ? null : new()
             {
-
-            });
+                Page = source.Page,
+                Results = source.Results,
+                TotalPages = source.TotalPages,
+                TotalResults = source.TotalResults,
+                Collection = source.Collection.Select(x => new GetPlaylistsDto
+                {
+                   Name = x.Name
+                }),
+            };
+            
     }
 }

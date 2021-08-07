@@ -1,5 +1,4 @@
 ﻿using Core.Domain;
-using System;
 using System.Threading.Tasks;
 
 namespace Core.Commons.Repositories

@@ -1,3 +1,5 @@
+using Application.Extensions;
+using Infrastructure.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -29,6 +31,8 @@ namespace Web
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Web", Version = "v1" });
                 //c.IncludeXmlComments("Documentation/documentation.xml", true);
             });
+            services.AddInfrastructureIoC(Configuration);
+            services.AddApplicationIoC();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

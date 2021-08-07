@@ -19,12 +19,16 @@ namespace Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateProfileDto model)
         {
+            await _service.CreateAsync(model);
+
             return Ok();
         }
 
         [HttpPut]
         public async Task<IActionResult> Put([FromBody] UpdateProfileDto model)
         {
+            await _service.UpdateAsync(model);
+
             return Ok();
         } 
     }

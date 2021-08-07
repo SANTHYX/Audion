@@ -2,5 +2,6 @@
 {
     public record CreatePlaylistDto
     {
+        public string Name { get; set; }
     }
 }

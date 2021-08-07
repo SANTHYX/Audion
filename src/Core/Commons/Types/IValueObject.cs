@@ -1,4 +1,4 @@
-﻿namespace Core.Types
+﻿namespace Core.Commons.Types
 {
     public interface IValueObject
     {

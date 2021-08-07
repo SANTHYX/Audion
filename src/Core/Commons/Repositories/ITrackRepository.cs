@@ -1,5 +1,7 @@
-﻿using Core.Domain;
-using System.Collections.Generic;
+﻿using Core.Commons.Pagination;
+using Core.Domain;
+using System;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Core.Commons.Repositories
@@ -9,6 +11,7 @@ namespace Core.Commons.Repositories
         Task AddAsync(Track track);
         Task RemoveAsync(Track track);
         Task<Track> GetAsync(string title);
-        Task<IEnumerable<Track>> GetAllAsync();
+        Task<IPagedResponse<Track>> GetAllAsync
+            (Expression<Func<Track, bool>> expression, PagedQuery pagedQuery);
     }
 }

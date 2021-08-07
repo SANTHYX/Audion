@@ -1,5 +1,6 @@
 ﻿using Application.Commons.Services;
 using Application.Dto.Track;
+using Core.Commons.Pagination;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -17,18 +18,18 @@ namespace Web.Controllers
             _service = service;
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get(Guid id)
-            => Ok(await _service.GetAsync());
+        [HttpGet("{title}")]
+        public async Task<IActionResult> Get(string title)
+            => Ok(await _service.GetAsync(title));
 
         [HttpGet]
-        public async Task<IActionResult> Get()
-            => Ok(await _service.BrowseAsync());
+        public async Task<IActionResult> Get([FromQuery] PagedQuery query)
+            => Ok(await _service.BrowseAsync(query));
 
         [HttpPost]
         public async Task<IActionResult> Post([FromForm] UploadTrackDto model)
         {
-            await _service.UploadAsync();
+            await _service.UploadAsync(model);
 
             return Ok();
         }

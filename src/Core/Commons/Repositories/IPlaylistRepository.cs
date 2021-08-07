@@ -1,6 +1,7 @@
-﻿using Core.Domain;
+﻿using Core.Commons.Pagination;
+using Core.Domain;
 using System;
-using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Core.Commons.Repositories
@@ -11,6 +12,7 @@ namespace Core.Commons.Repositories
         Task UpdateAsync(Playlist playlist);
         Task RemoveAsync(Playlist playlist);
         Task<Playlist> GetAsync(Guid id);
-        Task<IEnumerable<Playlist>> GetAllAsync();
+        Task<IPagedResponse<Playlist>> GetAllAsync
+            (Expression<Func<Playlist, bool>> expression, PagedQuery pagedQuery);
     }
 }

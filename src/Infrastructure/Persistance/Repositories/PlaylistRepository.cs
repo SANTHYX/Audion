@@ -1,8 +1,11 @@
-﻿using Core.Commons.Repositories;
+﻿using Core.Commons.Pagination;
+using Core.Commons.Repositories;
 using Core.Domain;
+using Infrastructure.Commons.Pagination;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Infrastructure.Persistance.Repositories
@@ -10,10 +13,12 @@ namespace Infrastructure.Persistance.Repositories
     public class PlaylistRepository : IPlaylistRepository
     {
         private readonly DataContext _context;
+        private readonly IPagedResponse<Playlist> _response;
 
-        public PlaylistRepository(DataContext context)
+        public PlaylistRepository(DataContext context, IPagedResponse<Playlist> response)
         {
             _context = context;
+            _response = response;
         }
 
         public async Task AddAsync(Playlist playlist)
@@ -22,8 +27,12 @@ namespace Infrastructure.Persistance.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<Playlist>> GetAllAsync()
-            => await _context.Playlists.ToListAsync();
+        public async Task<IPagedResponse<Playlist>> GetAllAsync
+            (Expression<Func<Playlist, bool>> expression, PagedQuery pagedQuery)
+            => await _response.GetPagedResponse(
+                _context.Playlists.Where(expression),
+                pagedQuery.Page,
+                pagedQuery.Results);
 
         public async Task<Playlist> GetAsync(Guid id)
             => await _context.Playlists.FirstOrDefaultAsync(x => x.Id == id);

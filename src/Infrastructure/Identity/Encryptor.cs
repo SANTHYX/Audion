@@ -28,7 +28,6 @@ namespace Infrastructure.Identity
                 throw new ArgumentNullException(nameof(password), 
                     "Cannot generate salt becouse password is empty value");
             }
-            var rand = new Random();
             var bytes = new byte[bytesNumber];
             var rng = RandomNumberGenerator.Create();
             rng.GetBytes(bytes);
@@ -53,7 +52,7 @@ namespace Infrastructure.Identity
             return Convert.ToBase64String(pkfd2.GetBytes(bytesNumber));
         }
 
-        private byte[] GetBytes(string value)
+        private static byte[] GetBytes(string value)
         {
             var bytes = new byte[value.Length * sizeof(char)];
             Buffer.BlockCopy(value.ToCharArray(),0,bytes,0,value.Length);

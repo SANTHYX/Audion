@@ -1,5 +1,8 @@
 ﻿using Application.Commons.Identity;
+using Core.Commons.Pagination;
 using Core.Commons.Repositories;
+using Core.Domain;
+using Infrastructure.Commons.Pagination;
 using Infrastructure.Identity;
 using Infrastructure.Options;
 using Infrastructure.Persistance;
@@ -12,16 +15,17 @@ namespace Infrastructure.Extensions
 {
     public static class InfrastructureIoC
     {
-        public static void AddInfrastructureIoC(IServiceCollection services, IConfiguration configuration)
+        public static void AddInfrastructureIoC(this IServiceCollection services, IConfiguration configuration)
         {
             //Infrastructure IoC Container Space
             services.Configure<SecuritySettings>(configuration.GetSection("Security"));
             services.AddDbContext<DataContext>(opt => 
             {
-                opt.UseNpgsql(configuration.GetConnectionString(""),
+                opt.UseNpgsql(configuration.GetConnectionString("DefaultConnection"),
                     npgCfg => npgCfg.MigrationsAssembly("Infrastructure.Persistance"));
                 opt.EnableDetailedErrors();
             });
+            services.AddScoped(typeof(IPagedResponse<>), typeof(PagedResponse<>));
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IProfileRepository, ProfileRepository>();
             services.AddScoped<ITokenRepository, TokenRepository>();
@@ -29,7 +33,6 @@ namespace Infrastructure.Extensions
             services.AddScoped<ITrackRepository, TrackRepository>();
             services.AddSingleton<IEncryptor, Encryptor>();
             services.AddSingleton<IJwtHandler, JwtHandler>();
-
         }
     }
 }

@@ -1,5 +1,6 @@
-﻿using Application.Dto.Track;
-using System.Collections.Generic;
+﻿using Application.Dto;
+using Application.Dto.Track;
+using Core.Commons.Pagination;
 using System.Threading.Tasks;
 
 namespace Application.Commons.Services
@@ -8,6 +9,6 @@ namespace Application.Commons.Services
     {
         Task UploadAsync(UploadTrackDto model);
         Task<GetTrackDto> GetAsync(string title);
-        Task<IEnumerable<GetTracksDto>> BrowseAsync();
+        Task<PagedResponseDto<GetTracksDto>> BrowseAsync(PagedQuery query);
     }
 }

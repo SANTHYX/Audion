@@ -9,16 +9,17 @@ namespace Infrastructure.Persistance.Maps
         public void Configure(EntityTypeBuilder<Profile> builder)
         {
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.FirstName).HasMaxLength(30);
-            builder.Property(x => x.LastName).HasMaxLength(35);
-            builder.Property(x => x.Country).HasMaxLength(15);
-            builder.Property(x => x.City).HasMaxLength(30);
+            builder.Property(x => x.FirstName)
+                .HasMaxLength(30);
+            builder.Property(x => x.LastName)
+                .HasMaxLength(35);
+            builder.Property(x => x.Country)
+                .HasMaxLength(15);
+            builder.Property(x => x.City)
+                .HasMaxLength(30);
             builder.HasOne(x => x.User)
                 .WithOne(y => y.Profile);
-            builder.OwnsOne(x => x.Stats, y =>
-            {
-              
-            });
+            builder.Ignore(x => x.Stats);
         }
     }
 }
