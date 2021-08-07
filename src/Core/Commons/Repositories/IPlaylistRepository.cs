@@ -12,7 +12,7 @@ namespace Core.Commons.Repositories
         Task UpdateAsync(Playlist playlist);
         Task RemoveAsync(Playlist playlist);
         Task<Playlist> GetAsync(Guid id);
-        Task<IPagedResponse<Playlist>> GetAllAsync
+        Task<Page<Playlist>> GetAllAsync
             (Expression<Func<Playlist, bool>> expression, PagedQuery pagedQuery);
     }
 }

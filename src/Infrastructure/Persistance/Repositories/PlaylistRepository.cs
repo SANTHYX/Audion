@@ -27,7 +27,7 @@ namespace Infrastructure.Persistance.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IPagedResponse<Playlist>> GetAllAsync
+        public async Task<Page<Playlist>> GetAllAsync
             (Expression<Func<Playlist, bool>> expression, PagedQuery pagedQuery)
             => await _response.GetPagedResponse(
                 _context.Playlists.Where(expression),

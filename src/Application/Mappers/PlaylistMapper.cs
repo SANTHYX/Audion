@@ -15,10 +15,10 @@ namespace Application.Mappers
 
             };
 
-        public PagedResponseDto<GetPlaylistsDto> MapTo(IPagedResponse<Playlist> source)
+        public PagedResponseDto<GetPlaylistsDto> MapTo(Page<Playlist> source)
             => source is null ? null : new()
             {
-                Page = source.Page,
+                Page = source.CurrentPage,
                 Results = source.Results,
                 TotalPages = source.TotalPages,
                 TotalResults = source.TotalResults,

@@ -25,7 +25,7 @@ namespace Infrastructure.Extensions
                     npgCfg => npgCfg.MigrationsAssembly("Infrastructure.Persistance"));
                 opt.EnableDetailedErrors();
             });
-            services.AddScoped(typeof(IPagedResponse<>), typeof(PagedResponse<>));
+            services.AddSingleton(typeof(IPagedResponse<>), typeof(PagedResponse<>));
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IProfileRepository, ProfileRepository>();
             services.AddScoped<ITokenRepository, TokenRepository>();

@@ -26,7 +26,7 @@ namespace Infrastructure.Persistance.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IPagedResponse<Track>> GetAllAsync
+        public async Task<Page<Track>> GetAllAsync
             (Expression<Func<Track, bool>> expression, PagedQuery pagedQuery)
             => await _response.GetPagedResponse(
                 _context.Tracks.Where(expression),

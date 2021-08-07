@@ -11,7 +11,7 @@ namespace Core.Commons.Repositories
         Task AddAsync(Track track);
         Task RemoveAsync(Track track);
         Task<Track> GetAsync(string title);
-        Task<IPagedResponse<Track>> GetAllAsync
+        Task<Page<Track>> GetAllAsync
             (Expression<Func<Track, bool>> expression, PagedQuery pagedQuery);
     }
 }

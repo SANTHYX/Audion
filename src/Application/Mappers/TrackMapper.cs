@@ -15,10 +15,10 @@ namespace Application.Mappers
 
             };
 
-        public PagedResponseDto<GetTracksDto> MapTo(IPagedResponse<Track> source)
+        public PagedResponseDto<GetTracksDto> MapTo(Page<Track> source)
             => new()
             {
-                Page = source.Page,
+                Page = source.CurrentPage,
                 Results = source.Results,
                 Collection = source.Collection.Select(x => new GetTracksDto
                 {
