@@ -1,4 +1,5 @@
 ﻿using Core.Domain;
+using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Persistance
@@ -13,5 +14,11 @@ namespace Infrastructure.Persistance
 
         public DataContext(DbContextOptions<DataContext> options) 
             : base(options) { }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            var assembly = typeof(DataContext).GetTypeInfo().Assembly;
+            builder.ApplyConfigurationsFromAssembly(assembly);
+        }
     }
 }

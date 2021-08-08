@@ -2,21 +2,39 @@ import api from '../plugins/axios'
 
 const identityService = {
     registerUser: async (userModel) => {
-        await api.post('', userModel);
+        try {
+            await api.post('/identity/register', userModel);
+        } catch (err) {
+            console.error(err.message);
+        }
     },
 
     loginUser: async (userCreedentials) => {
-        const response = await api.post('', userCreedentials);
-        return response;
+        try {
+            const response = await api.post('/identity/login', userCreedentials);
+
+            return response;
+        } catch (err) {
+            console.error(err.message);
+        }
     },
 
     refreshToken: async (tokens) => {
-        const response = await api.post('', tokens)
-        return response;
+        try {
+            const response = await api.post('identity/refresh-token', tokens);
+
+            return response;
+        } catch (err) {
+            console.error(err.message);
+        }
     },
 
     revokeToken: async (tokens) => {
-        await api.put('', tokens);
+        try {
+            await api.put('identity/revoke-token', tokens);
+        } catch (err) {
+            console.error(err.message);
+        }
     }
 };
 

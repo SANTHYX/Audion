@@ -1,7 +1,6 @@
 ﻿using Application.Commons.Identity;
 using Core.Commons.Pagination;
 using Core.Commons.Repositories;
-using Core.Domain;
 using Infrastructure.Commons.Pagination;
 using Infrastructure.Identity;
 using Infrastructure.Options;
@@ -22,7 +21,7 @@ namespace Infrastructure.Extensions
             services.AddDbContext<DataContext>(opt => 
             {
                 opt.UseNpgsql(configuration.GetConnectionString("DefaultConnection"),
-                    npgCfg => npgCfg.MigrationsAssembly("Infrastructure.Persistance"));
+                    npgCfg => npgCfg.MigrationsAssembly("Infrastructure"));
                 opt.EnableDetailedErrors();
             });
             services.AddSingleton(typeof(IPagedResponse<>), typeof(PagedResponse<>));

@@ -17,8 +17,6 @@ namespace Infrastructure.Persistance.Maps
                 .HasMaxLength(15);
             builder.Property(x => x.City)
                 .HasMaxLength(30);
-            builder.HasOne(x => x.User)
-                .WithOne(y => y.Profile);
             builder.Ignore(x => x.Stats);
         }
     }
