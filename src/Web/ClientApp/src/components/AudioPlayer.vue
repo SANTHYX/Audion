@@ -5,6 +5,12 @@
 <script>
 export default {
 	name: 'audio-player',
+	props: {
+		track: {
+			type: File,
+			required: true,
+		},
+	},
 };
 </script>
 
