@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import identityRoutes from './modules/identityRoutes'
+import userRoutes from './modules/userRoutes'
 
 Vue.use(VueRouter)
 
@@ -20,9 +22,14 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
 
+  ...identityRoutes,
+  ...userRoutes,
+
   {
     path: '*',
-    component: Home
+    redirect: {
+      name: 'Home'
+    }
   }
 ]
 

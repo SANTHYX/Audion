@@ -1,14 +1,14 @@
 const identityRoutes = [
     {
         path: '/login',
-        name: 'login',
-        component: import(() => '../../views/Login.vue')
+        name: 'Login',
+        component: () => import(/* webpackChunkName: "login" */ '../../views/Login.vue')
     },
 
     {
         path: '/register',
-        name: 'register',
-        component: import(() => '../../views/Register.vue')
+        name: 'Register',
+        component: () => import(/* webpackChunkName: "register" */ '../../views/Register.vue')
     }
 ];
 

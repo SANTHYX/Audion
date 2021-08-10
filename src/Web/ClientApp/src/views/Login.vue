@@ -4,7 +4,7 @@
 
 <script>
 export default {
-	name: 'login-page',
+	name: 'Login',
 };
 </script>
 
