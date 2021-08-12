@@ -26,9 +26,9 @@ namespace Web.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Post([FromBody] LoginUserDto model)
         {
-            await _service.LoginAsync(model);
+            var token = await _service.LoginAsync(model);
 
-            return Ok();
+            return Ok(token);
         }
 
         /// <summary>
@@ -52,11 +52,16 @@ namespace Web.Controllers
         [HttpPost("refresh-token")]
         public async Task<IActionResult> Post([FromBody] RefreshTokenDto model)
         {
-            await _service.RefreshToken(model);
+            var refreshToken = await _service.RefreshToken(model);
 
-            return Ok();
+            return Ok(refreshToken);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPut("revoke-token")]
         public async Task<IActionResult> Put([FromBody] RevokeTokenDto model)
         {

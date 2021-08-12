@@ -4,7 +4,7 @@
 
 <script>
 export default {
-	name: 'music-page',
+	name: 'Music',
 };
 </script>
 

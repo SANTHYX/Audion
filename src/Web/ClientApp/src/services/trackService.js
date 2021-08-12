@@ -6,7 +6,7 @@ const trackService = {
             const model = new FormData();
             await api.post('/tracks', model);
         } catch (err) {
-            console.error(err.message);
+            console.error(err.response.data);
         }
     },
 
@@ -16,7 +16,7 @@ const trackService = {
 
             return response;
         } catch (err) {
-            console.error(err.messgae);
+            console.error(err.response.data);
         }
     },
 
@@ -26,7 +26,7 @@ const trackService = {
 
             return response;
         } catch (err) {
-            console.error(err.message);
+            console.error(err.response.data);
         }
     }
 };

@@ -7,7 +7,7 @@ const userService = {
 
             return response;
         } catch (err) {
-            console.error(err.message);
+            console.error(err.response.data);
         }
     }
 };

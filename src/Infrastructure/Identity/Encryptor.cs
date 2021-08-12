@@ -19,7 +19,7 @@ namespace Infrastructure.Identity
         }
 
         public bool IsValidPassword(User user, string password)
-            => user.Password == GenerateHash(password,user.Salt);
+            => user is not null && user.Password == GenerateHash(password,user.Salt);
 
         private string GenerateSalt(string password)
         {

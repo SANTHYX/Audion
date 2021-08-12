@@ -1,6 +1,6 @@
 ﻿namespace Application.Dto.Identity
 {
-    public record RevokeTokenDto : GetJwtTokenDto
+    public record RevokeTokenDto : RefreshTokenDto
     {
     }
 }

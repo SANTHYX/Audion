@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import identityRoutes from './modules/identityRoutes'
 import userRoutes from './modules/userRoutes'
+import trackRoutes from './modules/trackRoutes'
+import playlistRoutes from './modules/playlistRoutes'
 
 Vue.use(VueRouter)
 
@@ -24,6 +26,8 @@ const routes = [
 
   ...identityRoutes,
   ...userRoutes,
+  ...trackRoutes,
+  ...playlistRoutes,
 
   {
     path: '*',

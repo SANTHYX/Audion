@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <Folder Include="Files\" />
+    <Folder Include="Externals\" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,5 @@
 ﻿using Core.Commons.Types;
+using Core.Extensions;
 using System;
 using System.Collections.Generic;
 
@@ -72,6 +73,10 @@ namespace Core.Domain
             if (string.IsNullOrWhiteSpace(email))
             {
                 throw new Exception("Email is required");
+            }
+            if (!email.IsValidEmail())
+            {
+                throw new Exception("Email is invaild");
             }
             if (Email == email)
             {

@@ -4,7 +4,7 @@
 
 <script>
 export default {
-	name: 'error',
+	name: 'Error',
 };
 </script>
 

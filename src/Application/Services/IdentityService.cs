@@ -31,7 +31,7 @@ namespace Application.Services
         public async Task<GetJwtTokenDto> LoginAsync(LoginUserDto model)
         {
             var user = await _userRepository.GetAsync(model.UserName);
-            if (user is null || !_encryptor.IsValidPassword(user, model.Password))
+            if (!_encryptor.IsValidPassword(user, model.Password))
             {
                 throw new UnauthorizedAccessException("Invalid creedentials");
             }
@@ -55,7 +55,7 @@ namespace Application.Services
             }
             if (token.IsRevoked)
             {
-                throw new Exception("Token is revoked");
+                throw new Exception("Token is revoked, cannot be refreshed");
             }
             var (newToken, accessToken) = _jwtHandler.GenerateToken(token.User);
             await _tokenRepository.AddAsync(newToken);
@@ -75,18 +75,22 @@ namespace Application.Services
             {
                 throw new Exception($"User with this Username: {model.UserName} already exist");
             }
-            var (hash,salt) = _encryptor.HashPassword(model.Password);
+            var (hash, salt) = _encryptor.HashPassword(model.Password);
             await _userRepository.AddAsync(new(model.UserName, hash, salt, model.Email));
-            _logger.LogInformation($"User has been succesfuly registered");
+            _logger.LogInformation($"User has been succesfully registered");
         }
 
         public async Task RevokeTokenAsync(RevokeTokenDto model)
         {
-            var token = await _tokenRepository.GetAsync(model.Refresh);
+            var token = await _tokenRepository.GetAsync(model.RefreshToken);
+            if (token.IsRevoked)
+            {
+                throw new Exception("Token is revoked, cannot be refreshed");
+            }
             token.RevokeToken();
             await _tokenRepository.UpdateAsync(token);
             _logger.LogInformation($"Token {token.RefreshToken} " +
-                $"for {token.User.UserName} has been succesfuly revoked {DateTime.UtcNow}");
+                $"for {token.User.UserName} has been succesfully revoked {DateTime.UtcNow}");
         }
     }
 }

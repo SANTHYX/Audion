@@ -5,7 +5,7 @@ const profileService = {
         try {
             await api.post('/profiles', profileModel);
         } catch (err) {
-            console.error(err.message);
+            console.error(err.response.data);
         }
     },
 
@@ -13,7 +13,7 @@ const profileService = {
         try {
             await api.put('/profiles', profileModel)
         } catch (err) {
-            console.error(err.message);
+            console.error(err.response.data);
         }
     }
 };

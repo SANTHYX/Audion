@@ -5,7 +5,7 @@ const playlistService = {
         try {
             await api.post('/playlists', playlistModel);
         } catch (err) {
-            console.error(err.message)
+            console.error(err.response.data)
         }
     },
 
@@ -13,7 +13,7 @@ const playlistService = {
         try {
             await api.put('/playlists', playlistModel);
         } catch (err) {
-            console.error(err);
+            console.error(err.response.data);
         }
     },
 
@@ -21,7 +21,7 @@ const playlistService = {
         try {
             await api.delete('/playlists', playlistModel);
         } catch (err) {
-            console.error(err.message);
+            console.error(err.response.data);
         }
     },
 
@@ -31,17 +31,19 @@ const playlistService = {
 
             return response;
         } catch (err) {
-            console.error(err.message)
+            console.error(err.response.data);
         }
     },
 
     browsePlaylists: async (playlistQuery) => {
         try {
-            const response = await api.get('/playlists', { params: { ...playlistQuery } });
+            const response = await api.get('/playlists', {
+                params: { ...playlistQuery }
+            });
 
             return response;
         } catch (err) {
-            console.error(err.message)
+            console.error(err.response.data)
         }
     }
 }
