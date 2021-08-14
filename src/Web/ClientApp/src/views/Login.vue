@@ -1,30 +1,46 @@
 <template>
 	<div id="login">
-		<v-main>
-			<v-card>
-				<v-card-title>
-					<h2 class="display-3">Login</h2>
+		<v-container>
+			<v-card class="mx-auto mt-12" max-width="600">
+				<v-card-title class="justify-center">
+					<h1 class="display-2">Login</h1>
 				</v-card-title>
-
-				<v-card-subtitle>
-					<h3 class="subtitle">Please, enter your creednetials</h3>
-				</v-card-subtitle>
-
 				<v-card-text>
-					<v-form>
-						<v-text-field label="Login" v-model="creedentials.login" />
+					<v-form class="mt-4">
+						<v-text-field
+							label="Login"
+							prepend-inner-icon="mdi-account"
+							outlined
+							dense
+							v-model="creedentials.login"
+						/>
 						<v-text-field
 							label="Password"
+							prepend-inner-icon="mdi-form-textbox-password"
+							outlined
+							dense
 							v-model="creedentials.password"
 							type="password"
 						/>
-						<v-btn class="success" @click="loginUser(creedentials)"
-							>Login</v-btn
-						>
 					</v-form>
 				</v-card-text>
+				<v-card-actions class="justify-center">
+					<v-btn class="success" width="120" @click="loginUser(creedentials)"
+						>Login</v-btn
+					>
+				</v-card-actions>
+				<v-card-subtitle class="flex justify-center">
+					<v-row class="justify-center">
+						<p>
+							Did you forgot your password?
+							<router-link tag="a" to="Register" exact="exact"
+								>Click here</router-link
+							>
+						</p>
+					</v-row>
+				</v-card-subtitle>
 			</v-card>
-		</v-main>
+		</v-container>
 	</div>
 </template>
 
@@ -33,14 +49,12 @@ import { mapActions } from 'vuex';
 
 export default {
 	name: 'Login',
-
 	data: () => ({
 		creedentials: {
 			login: '',
 			password: '',
 		},
 	}),
-
 	methods: {
 		...mapActions({
 			loginUser: 'identityStore/LOGIN_USER',

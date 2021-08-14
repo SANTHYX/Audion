@@ -1,12 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Core.Domain;
+using Moq;
+using Xunit;
 
 namespace Core.UnitTests
 {
-    class ProfileTests
+    public class ProfileTests
     {
+        private readonly Mock<Profile> _profileMock;
+
+        public ProfileTests()
+        {
+            _profileMock = new();
+        }
+
+        //[Fact]
+        //public void Is_SetFirstName_thro
     }
 }

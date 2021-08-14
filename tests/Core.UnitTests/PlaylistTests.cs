@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Core.Domain;
+using Moq;
 
 namespace Core.UnitTests
 {
-    class PlaylistTests
+    public class PlaylistTests
     {
+        private readonly Mock<Playlist> _playlistMock;
+
+        public PlaylistTests()
+        {
+            _playlistMock = new();
+        }
     }
 }

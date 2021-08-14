@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Core.Domain;
+using Moq;
 
 namespace Core.UnitTests
 {
-    class TrackTests
+    public class TrackTests
     {
+        private readonly Mock<Track> _trackMock;
+
+        public TrackTests()
+        {
+            _trackMock = new();
+        }
     }
 }

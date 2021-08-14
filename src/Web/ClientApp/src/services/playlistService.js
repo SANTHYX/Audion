@@ -2,49 +2,29 @@ import api from '../plugins/axios'
 
 const playlistService = {
     createPlaylist: async (playlistModel) => {
-        try {
-            await api.post('/playlists', playlistModel);
-        } catch (err) {
-            console.error(err.response.data)
-        }
+        await api.post('/playlists', playlistModel);
     },
 
     updatePlaylist: async (playlistModel) => {
-        try {
-            await api.put('/playlists', playlistModel);
-        } catch (err) {
-            console.error(err.response.data);
-        }
+        await api.put('/playlists', playlistModel);
     },
 
     deletePlaylist: async (playlistModel) => {
-        try {
-            await api.delete('/playlists', playlistModel);
-        } catch (err) {
-            console.error(err.response.data);
-        }
+        await api.delete('/playlists', playlistModel);
     },
 
     getPlaylist: async (id) => {
-        try {
-            const response = await api.get(`/playlists/${id}`);
+        const response = await api.get(`/playlists/${id}`);
 
-            return response;
-        } catch (err) {
-            console.error(err.response.data);
-        }
+        return response;
     },
 
     browsePlaylists: async (playlistQuery) => {
-        try {
-            const response = await api.get('/playlists', {
-                params: { ...playlistQuery }
-            });
+        const response = await api.get('/playlists', {
+            params: { ...playlistQuery }
+        });
 
-            return response;
-        } catch (err) {
-            console.error(err.response.data)
-        }
+        return response;
     }
 }
 

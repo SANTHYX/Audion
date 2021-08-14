@@ -4,7 +4,8 @@ const identityStore = {
     namespaced: true,
 
     state: {
-        tokens: {}
+        tokens: {},
+        error: {}
     },
 
     getters: {
@@ -16,17 +17,22 @@ const identityStore = {
             state.tokens = tokensObj;
         },
 
+        SET_ERROR: (state, errorObj) => {
+            state.error = errorObj
+        },
+
         CLEAR_IDENTITY: (state) => {
             state.tokens = {}
-        }
+        },
     },
 
     actions: {
-        REGISTER_USER: async (userModel) => {
+        REGISTER_USER: async ({ commit }, userModel) => {
             try {
                 await identityService.registerUser(userModel);
             } catch (err) {
-                console.error(err.message);
+                console.error(err.response.data.Message);
+                commit('SET_ERROR', err.response.data);
             }
         },
 
@@ -35,7 +41,8 @@ const identityStore = {
                 const response = await identityService.loginUser(creedendialsObj);
                 commit('SET_IDENTITY', response.data);
             } catch (err) {
-                console.error(err.message);
+                console.error(err.response.data.Message);
+                commit('SET_ERROR', err.response.data);
             }
         },
 
@@ -44,7 +51,8 @@ const identityStore = {
                 await identityService.revokeToken(tokens);
                 commit('CLEAR_IDENTITY');
             } catch (err) {
-                console.error(err.message);
+                console.error(err.response.data.Message);
+                commit('SET_ERROR', err.response.data);
             }
         }
     }

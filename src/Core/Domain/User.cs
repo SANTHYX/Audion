@@ -30,7 +30,7 @@ namespace Core.Domain
         {
             if (string.IsNullOrWhiteSpace(userName))
             {
-                throw new Exception("Username is required");
+                throw new ArgumentNullException(userName, "Username is required");
             }
             if (UserName == userName)
             {
@@ -44,7 +44,7 @@ namespace Core.Domain
         {
             if (string.IsNullOrWhiteSpace(password))
             {
-                throw new Exception("Password is required");
+                throw new ArgumentNullException(password, "Password is required");
             }
             if (Password == password)
             {
@@ -58,7 +58,7 @@ namespace Core.Domain
         {
             if (string.IsNullOrWhiteSpace(salt))
             {
-                throw new Exception("Salt is required");
+                throw new ArgumentNullException(salt, "Salt is required");
             }
             if (Salt == salt)
             {
@@ -72,7 +72,7 @@ namespace Core.Domain
         {
             if (string.IsNullOrWhiteSpace(email))
             {
-                throw new Exception("Email is required");
+                throw new ArgumentNullException(email, "Email is required");
             }
             if (!email.IsValidEmail())
             {

@@ -1,29 +1,43 @@
 <template>
 	<div id="register">
-		<v-main>
-			<v-card>
-				<v-card-title>
-					<h2 class="display-3">Register</h2>
+		<v-container>
+			<v-card class="mx-auto mt-12" max-width="600">
+				<v-card-title class="justify-center">
+					<h1 class="display-2">Register</h1>
 				</v-card-title>
-
-				<v-card-subtitle>
-					<h3 class="subtitle">Pass your account information</h3>
-				</v-card-subtitle>
-
 				<v-card-text>
-					<v-form>
-						<v-text-field label="Login" v-model="user.login" />
+					<v-form class="mt-4">
+						<v-text-field
+							label="Login"
+							prepend-inner-icon="mdi-account"
+							outlined
+							dense
+							v-model="user.login"
+						/>
 						<v-text-field
 							label="Password"
+							outlined
+							dense
+							prepend-inner-icon="mdi-form-textbox-password"
 							type="password"
 							v-model="user.password"
 						/>
-						<v-text-field label="E-mail" v-model="user.email" />
-						<v-btn class="success" @click="registerUser(user)">Register</v-btn>
+						<v-text-field
+							label="E-mail"
+							prepend-inner-icon="mdi-email"
+							outlined
+							dense
+							v-model="user.email"
+						/>
 					</v-form>
 				</v-card-text>
+				<v-card-actions class="justify-center">
+					<v-btn class="success" width="120" @click="registerUser(user)"
+						>Register</v-btn
+					>
+				</v-card-actions>
 			</v-card>
-		</v-main>
+		</v-container>
 	</div>
 </template>
 
@@ -32,7 +46,6 @@ import { mapActions } from 'vuex';
 
 export default {
 	name: 'Register',
-
 	data: () => ({
 		user: {
 			login: '',
@@ -40,7 +53,6 @@ export default {
 			email: '',
 		},
 	}),
-
 	methods: {
 		...mapActions({
 			registerUser: 'identityStore/REGISTER_USER',

@@ -4,7 +4,7 @@ const userStore = {
     namespaced: true,
 
     state: {
-        user: {}
+        user: {},
     },
 
     getters: {
@@ -14,7 +14,7 @@ const userStore = {
     mutations: {
         SET_USER: (state, userObj) => {
             state.user = userObj;
-        }
+        },
     },
 
     actions: {
@@ -23,7 +23,7 @@ const userStore = {
                 const response = await userService.getUser(userName);
                 commit('SET_USER', response.data);
             } catch (err) {
-                console.error(err.message);
+                console.error(err.response.data.Message);
             }
         }
     }

@@ -3,41 +3,26 @@ import storage from '../plugins/storage'
 
 const identityService = {
     registerUser: async (userModel) => {
-        try {
-            await api.post('/identity/register', userModel);
-        } catch (err) {
-            console.error(err.message);
-        }
+        await api.post('/identity/register', userModel);
     },
 
     loginUser: async (userCreedentials) => {
-        try {
-            const response = await api.post('/identity/login', userCreedentials);
-            storage.storeToken(response.data);
+        const response = await api.post('/identity/login', userCreedentials);
+        storage.storeToken(response.data);
 
-            return response;
-        } catch (err) {
-            console.error(err.response.data);
-        }
+        return response;
     },
 
     refreshToken: async (tokens) => {
-        try {
-            const response = await api.post('identity/refresh-token', tokens);
+        const response = await api.post('identity/refresh-token', tokens);
 
-            return response;
-        } catch (err) {
-            console.error(err.response.data);
-        }
+        return response;
+
     },
 
     revokeToken: async (tokens) => {
-        try {
-            await api.put('identity/revoke-token', tokens);
-            storage.removeToken();
-        } catch (err) {
-            console.error(err.response.data);
-        }
+        await api.put('identity/revoke-token', tokens);
+        storage.removeToken();
     }
 };
 
