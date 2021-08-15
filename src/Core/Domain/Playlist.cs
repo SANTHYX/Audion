@@ -23,7 +23,7 @@ namespace Core.Domain
         {
             if (string.IsNullOrWhiteSpace(name))
             {
-                throw new Exception("Name is required");
+                throw new ArgumentNullException(name, "Name is required");
             }
             if (Name == name)
             {

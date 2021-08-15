@@ -26,5 +26,7 @@ namespace Application.UnitTests
                 _encryptorMock.Object, _jwtHandlerMock.Object, 
                 _loggerMock.Object);
         }
+
+
     }
 }
