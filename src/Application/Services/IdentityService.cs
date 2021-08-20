@@ -3,6 +3,7 @@ using Application.Commons.Services;
 using Application.Dto.Identity;
 using Application.Dto.User;
 using Core.Commons.Repositories;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
@@ -83,6 +84,10 @@ namespace Application.Services
         public async Task RevokeTokenAsync(RevokeTokenDto model)
         {
             var token = await _tokenRepository.GetAsync(model.RefreshToken);
+            if (token is null)
+            {
+                throw new UnauthorizedAccessException("Invalid creendentials");
+            }
             if (token.IsRevoked)
             {
                 throw new Exception("Token is revoked, cannot be refreshed");

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -8,10 +9,12 @@ namespace Web.Middleware
 {
     public class ExceptionsMiddleware
     {
+        private readonly ILogger _logger;
         private readonly RequestDelegate _next;
 
-        public ExceptionsMiddleware(RequestDelegate next)
+        public ExceptionsMiddleware(ILogger logger, RequestDelegate next)
         {
+            _logger = logger;
             _next = next;
         }
 
@@ -27,11 +30,13 @@ namespace Web.Middleware
                 response.ContentType = "application/json";
                 response.StatusCode = ex switch
                 {
+                    UnauthorizedAccessException => StatusCodes.Status401Unauthorized,
                     _=> StatusCodes.Status500InternalServerError
                 };
                 var error = JsonSerializer.Serialize(
                     new ErrorResponse(response.StatusCode, ex.Message));
                 await response.WriteAsync(error);
+                _logger.LogError(ex.Message);
             }
         }
     }

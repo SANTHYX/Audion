@@ -32,9 +32,9 @@
 					</v-form>
 				</v-card-text>
 				<v-card-actions class="justify-center">
-					<v-btn class="success" width="120" @click="registerUser(user)"
-						>Register</v-btn
-					>
+					<v-btn class="success" width="120" @click="registerUser(user)">
+						Register
+					</v-btn>
 				</v-card-actions>
 			</v-card>
 		</v-container>

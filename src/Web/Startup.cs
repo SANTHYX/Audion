@@ -60,15 +60,15 @@ namespace Web
                 endpoints.MapControllers();
             });
 
-            app.UseSpa(opt =>
+            app.UseSpa(spa =>
             {
                 if (env.IsDevelopment())
                 { 
-                    opt.Options.SourcePath = "ClientApp/";
-                    opt.UseVueCli("serve");
+                    spa.Options.SourcePath = "ClientApp/";
+                    spa.UseVueCli("serve", forceKill: true);
                 }
                 else
-                    opt.Options.SourcePath = "wwwroot";
+                    spa.Options.SourcePath = "wwwroot";
             });
         }
     }

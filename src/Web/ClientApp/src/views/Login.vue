@@ -25,17 +25,17 @@
 					</v-form>
 				</v-card-text>
 				<v-card-actions class="justify-center">
-					<v-btn class="success" width="120" @click="loginUser(creedentials)"
-						>Login</v-btn
-					>
+					<v-btn class="success" width="120" @click="loginUser(creedentials)">
+						Login
+					</v-btn>
 				</v-card-actions>
 				<v-card-subtitle class="flex justify-center">
 					<v-row class="justify-center">
 						<p>
 							Did you forgot your password?
-							<router-link tag="a" to="Register" exact="exact"
-								>Click here</router-link
-							>
+							<router-link tag="a" to="Register" exact="exact">
+								Click here
+							</router-link>
 						</p>
 					</v-row>
 				</v-card-subtitle>
