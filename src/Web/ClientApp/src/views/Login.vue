@@ -33,7 +33,7 @@
 					<v-row class="justify-center">
 						<p>
 							Did you forgot your password?
-							<router-link tag="a" to="Register" exact="exact">
+							<router-link id="href-fix" tag="a" to="Register" exact="exact">
 								Click here
 							</router-link>
 						</p>
@@ -63,4 +63,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+#href-fix {
+	text-decoration: none;
+	color: rgb(25, 131, 57);
+}
+</style>

@@ -9,10 +9,10 @@ namespace Web.Middleware
 {
     public class ExceptionsMiddleware
     {
-        private readonly ILogger _logger;
+        private readonly ILogger<ExceptionsMiddleware> _logger;
         private readonly RequestDelegate _next;
 
-        public ExceptionsMiddleware(ILogger logger, RequestDelegate next)
+        public ExceptionsMiddleware(ILogger<ExceptionsMiddleware> logger, RequestDelegate next)
         {
             _logger = logger;
             _next = next;

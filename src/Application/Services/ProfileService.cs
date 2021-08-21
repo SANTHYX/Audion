@@ -1,7 +1,6 @@
 ﻿using Application.Commons.Services;
 using Application.Dto.Profile;
 using Core.Commons.Repositories;
-using Core.Domain;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
@@ -24,8 +23,8 @@ namespace Application.Services
             _userRepository = userRepository;
             _profileRepository = profileRepository;
             _httpContextAccessor = httpContext;
-            userId = _httpContextAccessor.HttpContext.User.Identity.IsAuthenticated
-                ? Guid.Parse(_httpContextAccessor.HttpContext.User.Identity.Name) : Guid.Empty;
+            userId = _httpContextAccessor.HttpContext.User.Identity.IsAuthenticated ?
+                 Guid.Parse(_httpContextAccessor.HttpContext.User.Identity.Name) : Guid.Empty;
         }
 
         public async Task CreateAsync(CreateProfileDto model)
@@ -33,7 +32,7 @@ namespace Application.Services
             var user = await _userRepository.GetAsync(userId);
             if (user is null)
             {
-                throw new Exception("Invalid Creedentials");
+                throw new Exception("Invalid creedentials");
             }
             if (user.Profile is not null)
             {
@@ -55,7 +54,6 @@ namespace Application.Services
             {
                 throw new Exception("User dont own profile instance");
             }
-            //Editing logic
             await _profileRepository.UpdateAsync(user.Profile);
             _logger.LogInformation($"User {user.UserName} has updated profile at {DateTime.UtcNow}");
         }

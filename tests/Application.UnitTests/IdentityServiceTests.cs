@@ -137,22 +137,26 @@ namespace Application.UnitTests
             await refreshTokenAsyncTask.Should().ThrowAsync<Exception>();
         }
 
-        /* To END!!!!!!
         [Fact]
-        public async Task Is_RefreshTokenAsync_pass_when_refresh_is_active_()
+        public async Task Is_RefreshTokenAsync_pass_when_refresh_is_active()
         {
             string testRefresh = Guid.NewGuid().ToString("N");
+            var testUser = Mock.Of<User>();
+            var testToken = Mock.Of<Token>(obj => obj.User == testUser);
             RefreshTokenDto testModel = new()
             {
                 RefreshToken = testRefresh
             };
 
             _tokenRepositoryMock.Setup(x => x.GetAsync(testRefresh)) 
-                .ReturnsAsync(() => Mock.Of<Token>(xd => xd.User == Mock.Of<User>()));
-            _jwtHandlerMock.Setup(x => x.GenerateToken(Mock.Of<User>()))
-                .Returns(() => (Mock.Of<Token>(), "accesToken"));
+                .ReturnsAsync(() => testToken);
+            _jwtHandlerMock.Setup(x => x.GenerateToken(testUser))
+                .Returns(() => (testToken, "accesToken"));
+
+            var refreshToken = await _service.RefreshToken(testModel);
+
+            _tokenRepositoryMock.Verify(x => x.AddAsync(testToken), Times.Once);
         }
-        */
 
         [Fact]
         public async Task Is_RegisterAsync_throws_exception_when_user_with_passed_userName_exists()

@@ -1,7 +1,5 @@
 ﻿using Core.Commons.Repositories;
 using Core.Domain;
-using Microsoft.EntityFrameworkCore;
-using System;
 using System.Threading.Tasks;
 
 namespace Infrastructure.Persistance.Repositories
