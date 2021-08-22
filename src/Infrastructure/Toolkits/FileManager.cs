@@ -1,14 +1,27 @@
 ﻿using Application.Commons.Toolkits;
-using System.IO.Abstractions;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace Infrastructure.Toolkits
 {
     public class FileManager : IFileManager
     {
-        public Task SaveFileAsync(IFile file)
+        public async Task SaveFileAsync(IFormFile file)
         {
-            throw new System.NotImplementedException();
+            var path = "";
+            try
+            {
+                using (FileStream stream = new(path, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

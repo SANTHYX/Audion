@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Web</name>
+    </assembly>
+    <members>
+        <member name="M:Web.Controllers.IdentityController.Post(Application.Dto.User.LoginUserDto)">
+            <summary>
+            Endpoint handling user authentication.
+            If he pass proccess sucesfully, controller will return access token. 
+            </summary>
+            <param name="model">Object contains user creedentials</param>
+            <returns>Access token and metadata</returns>
+        </member>
+        <member name="M:Web.Controllers.IdentityController.Post(Application.Dto.User.RegisterUserDto)">
+            <summary>
+            Endpoint handling registering user in system
+            </summary>
+            <param name="model">Informations required to create user instance</param>
+            <returns></returns>
+        </member>
+        <member name="M:Web.Controllers.IdentityController.Post(Application.Dto.Identity.RefreshTokenDto)">
+            <summary>
+            
+            </summary>
+            <param name="model"></param>
+            <returns>Access token and metadata</returns>
+        </member>
+        <member name="M:Web.Controllers.IdentityController.Put(Application.Dto.Identity.RevokeTokenDto)">
+            <summary>
+            
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

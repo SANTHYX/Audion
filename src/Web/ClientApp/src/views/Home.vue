@@ -1,14 +1,17 @@
 <template>
-	<hello-world />
+	<div id="home">
+		<v-main>
+			<section id="hero">
+				<h2 class="display-2">Home Page</h2>
+			</section>
+		</v-main>
+	</div>
 </template>
 
 <script>
-import HelloWorld from '../components/HelloWorld';
-
 export default {
 	name: 'Home',
-	components: {
-		HelloWorld,
-	},
 };
 </script>
+
+<style scoped></style>

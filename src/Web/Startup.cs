@@ -8,7 +8,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System;
 using System.IO;
-using System.Reflection;
 using VueCliMiddleware;
 using Web.Extensions;
 
@@ -32,6 +31,8 @@ namespace Web
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Web", Version = "v1" });
+                var path = Path.Combine(AppContext.BaseDirectory,"audion-documentation.xml");
+                c.IncludeXmlComments(path,true);               
             });
             services.AddInfrastructureIoC(Configuration);
             services.AddApplicationIoC();

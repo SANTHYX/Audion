@@ -21,7 +21,9 @@ namespace Infrastructure.Persistance.Repositories
         }
 
         public async Task<Token> GetAsync(string token)
-            => await _context.Tokens.FirstOrDefaultAsync(x => x.RefreshToken == token);
+            => await _context.Tokens
+            .Include(x => x.User)
+            .FirstOrDefaultAsync(x => x.RefreshToken == token);
 
         public async Task UpdateAsync(Token token)
         {

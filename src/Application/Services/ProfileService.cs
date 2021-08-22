@@ -48,7 +48,7 @@ namespace Application.Services
             var user = await _userRepository.GetAsync(userId);
             if (user is null)
             {
-                throw new Exception("Invalid Creedentials");
+                throw new Exception("Invalid creedentials");
             }
             if (user.Profile is null)
             {

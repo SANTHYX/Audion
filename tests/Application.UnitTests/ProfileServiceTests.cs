@@ -65,7 +65,8 @@ namespace Application.UnitTests
                 .ReturnsAsync(Mock.Of<User>(x => x.Profile == Mock.Of<Profile>()));
 
             Func<Task> createAsyncTask = () => _service.CreateAsync(testModel);
-            await createAsyncTask.Should().ThrowAsync<Exception>();
+            await createAsyncTask.Should().ThrowAsync<Exception>()
+                .WithMessage("User already have instance of profile");
         }
 
         [Fact]
@@ -84,6 +85,60 @@ namespace Application.UnitTests
 
             Func<Task> createAsyncTask = () => _service.CreateAsync(testModel);
             await createAsyncTask.Should().NotThrowAsync<Exception>();
+        }
+
+        [Fact]
+        public async Task Is_UpdateAsync_throws_exception_where_user_is_not_existing()
+        {
+            UpdateProfileDto testModel = new()
+            {
+                City = "Krakow",
+                Country = "Poland",
+                FirstName = "Jacek",
+                LastName = "Brzęczyszczykiewicz"
+            };
+
+            _userRepositoryMock.Setup(x => x.GetAsync(It.IsAny<Guid>()))
+                .ReturnsAsync(() => null);
+
+            Func<Task> updateAsyncTask = () => _service.UpdateAsync(testModel);
+            await updateAsyncTask.Should().ThrowAsync<Exception>();
+        }
+
+        [Fact]
+        public async Task Is_UpdateAsync_throws_exception_where_user_dont_have_profile()
+        {
+            UpdateProfileDto testModel = new()
+            {
+                City = "Krakow",
+                Country = "Poland",
+                FirstName = "Jacek",
+                LastName = "Brzęczyszczykiewicz"
+            };
+
+            _userRepositoryMock.Setup(x => x.GetAsync(It.IsAny<Guid>()))
+                .ReturnsAsync(Mock.Of<User>(x => x.Profile == null));
+
+            Func<Task> updateAsyncTask = () => _service.UpdateAsync(testModel);
+            await updateAsyncTask.Should().ThrowAsync<Exception>();
+        }
+
+        [Fact] 
+        public async Task Is_UpdateAsync_pass_when_user_have_profile() 
+        {
+            UpdateProfileDto testModel = new()
+            {
+                City = "Krakow",
+                Country = "Poland",
+                FirstName = "Jacek",
+                LastName = "Brzęczyszczykiewicz"
+            };
+
+            _userRepositoryMock.Setup(x => x.GetAsync(It.IsAny<Guid>()))
+                .ReturnsAsync(Mock.Of<User>(x => x.Profile == Mock.Of<Profile>()));
+
+            Func<Task> updateAsyncTask = () => _service.UpdateAsync(testModel);
+            await updateAsyncTask.Should().NotThrowAsync<Exception>();
         }
     }
 }

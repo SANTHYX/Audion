@@ -3,7 +3,6 @@ using Application.Commons.Services;
 using Application.Dto.Identity;
 using Application.Dto.User;
 using Core.Commons.Repositories;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
@@ -28,7 +27,6 @@ namespace Application.Services
             _logger = logger;
         }
 
-        //Need to change names
         public async Task<GetJwtTokenDto> LoginAsync(LoginUserDto model)
         {
             var user = await _userRepository.GetAsync(model.UserName);
