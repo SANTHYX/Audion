@@ -1,5 +1,5 @@
 <template>
-	<div id="music"></div>
+	<v-container id="music"> </v-container>
 </template>
 
 <script>

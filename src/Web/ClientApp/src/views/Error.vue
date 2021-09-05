@@ -1,10 +1,13 @@
 <template>
-	<div></div>
+	<v-container></v-container>
 </template>
 
 <script>
 export default {
 	name: 'Error',
+	data: () => ({
+		message: '',
+	}),
 };
 </script>
 

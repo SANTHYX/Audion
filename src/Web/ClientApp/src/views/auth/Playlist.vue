@@ -1,5 +1,7 @@
 <template>
-	<div id="playlist"></div>
+	<v-container id="playlist"> 
+		
+	</v-container>
 </template>
 
 <script>
