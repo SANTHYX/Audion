@@ -41,7 +41,8 @@ namespace Application.Services
             return new()
             {
                 AccessToken = accessToken,
-                Refresh = token.RefreshToken
+                Refresh = token.RefreshToken,
+                UserName = user.UserName
             };
         }
 
@@ -64,7 +65,8 @@ namespace Application.Services
             return new()
             {
                 AccessToken = accessToken,
-                Refresh = newToken.RefreshToken
+                Refresh = newToken.RefreshToken,
+                UserName = token.User.UserName
             };
         }
 

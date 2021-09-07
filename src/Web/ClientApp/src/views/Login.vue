@@ -11,7 +11,7 @@
 						prepend-inner-icon="mdi-account"
 						outlined
 						dense
-						v-model="creedentials.login"
+						v-model="creedentials.userName"
 					/>
 					<v-text-field
 						label="Password"
@@ -49,7 +49,7 @@ export default {
 	name: 'Login',
 	data: () => ({
 		creedentials: {
-			login: '',
+			userName: '',
 			password: '',
 		},
 	}),

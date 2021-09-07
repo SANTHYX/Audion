@@ -11,7 +11,7 @@
 						prepend-inner-icon="mdi-account"
 						outlined
 						dense
-						v-model="user.login"
+						v-model="user.userName"
 					/>
 					<v-text-field
 						label="Password"
@@ -46,7 +46,7 @@ export default {
 	name: 'Register',
 	data: () => ({
 		user: {
-			login: '',
+			userName: '',
 			password: '',
 			email: '',
 		},

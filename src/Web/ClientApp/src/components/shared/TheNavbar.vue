@@ -38,6 +38,10 @@ export default {
 			type: Boolean,
 			required: true,
 		},
+		userName: {
+			type: String,
+			required: true,
+		},
 	},
 	data: () => ({
 		menuItems: {

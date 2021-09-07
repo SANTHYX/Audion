@@ -4,12 +4,14 @@ const identityStore = {
     namespaced: true,
 
     state: {
-        tokens: {},
+        tokens: identityService.getTokenObj(),
         error: {}
     },
 
     getters: {
+        isAuthenticated: (state) => state.tokens !== JSON.stringify('[]'),
 
+        userName: (state) => state.tokens.userName
     },
 
     mutations: {
