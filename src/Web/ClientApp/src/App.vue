@@ -1,6 +1,6 @@
 <template>
 	<v-app>
-		<v-navbar :authStatus="isAuthenticated" :userName="userName" />
+		<v-navbar :isAuthenticated="isAuthenticated" :userName="userName" />
 		<v-main>
 			<router-view />
 		</v-main>

@@ -3,6 +3,7 @@ using Application.Commons.Services;
 using Application.Dto.Identity;
 using Application.Dto.User;
 using Core.Commons.Repositories;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
@@ -15,16 +16,35 @@ namespace Application.Services
         private readonly ITokenRepository _tokenRepository;
         private readonly IEncryptor _encryptor;
         private readonly IJwtHandler _jwtHandler;
+        private readonly IHttpContextAccessor _contextAccessor;
         private readonly ILogger<IdentityService> _logger;
+        private readonly Guid userId;
 
         public IdentityService(IUserRepository userRepository, ITokenRepository tokenRepository,
-            IEncryptor encryptor, IJwtHandler jwtHandler, ILogger<IdentityService> logger)
+            IEncryptor encryptor, IJwtHandler jwtHandler, IHttpContextAccessor contextAccessor,
+            ILogger<IdentityService> logger)
         {
             _userRepository = userRepository;
             _tokenRepository = tokenRepository;
             _encryptor = encryptor;
             _jwtHandler = jwtHandler;
+            _contextAccessor = contextAccessor;
             _logger = logger;
+            userId = _contextAccessor.HttpContext.User.Identity.IsAuthenticated ? 
+                Guid.Parse(_contextAccessor.HttpContext.User.Identity.Name) : Guid.Empty;
+        }
+
+        public async Task ChangeCreedentials(ChangeCreedentialsDto model)
+        {
+            var user = await _userRepository.GetAsync(userId);
+            if (!_encryptor.IsValidPassword(user, model.OldPassword))
+            {
+                throw new UnauthorizedAccessException("Invalid creedentials");
+            }
+            var(hash, salt) = _encryptor.HashPassword(model.NewPassword);
+            user.SetPassword(hash);
+            user.SetSalt(salt);
+            _logger.LogInformation($"User: {user.UserName} has changed password at {DateTime.UtcNow}");
         }
 
         public async Task<GetJwtTokenDto> LoginAsync(LoginUserDto model)

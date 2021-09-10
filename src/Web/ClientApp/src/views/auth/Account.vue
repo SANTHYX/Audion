@@ -23,7 +23,7 @@
 				</v-navigation-drawer>
 			</v-card>
 			<v-col>
-				<router-view />
+				<router-view :user="user" :updateProfilePromise="updateProfile" />
 			</v-col>
 		</v-row>
 	</v-container>
@@ -35,11 +35,16 @@ import { mapGetters, mapActions } from 'vuex';
 export default {
 	name: 'Account',
 	computed: {
-		...mapGetters('identityStore', ['userName']),
+		...mapGetters({
+			userName: 'identityStore/userName',
+			user: 'userStore/GET_USER',
+		}),
 	},
 	methods: {
 		...mapActions({
 			getUser: 'userStore/GET_USER',
+			createProfile: 'profileStore/CREATE_PROFILE',
+			updateProfile: 'profileStore/UPDATE_PROFILE',
 		}),
 	},
 	async mounted() {

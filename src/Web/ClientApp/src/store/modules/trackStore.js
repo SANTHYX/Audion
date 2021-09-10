@@ -6,7 +6,6 @@ const trackStore = {
     state: {
         track: {},
         tracksCollection: {},
-        error: {}
     },
 
     getters: {
@@ -20,22 +19,17 @@ const trackStore = {
             state.track = trackObj;
         },
 
-        SET_ERROR: (state, errorObj) => {
-            state.error = errorObj
-        },
-
         SET_TRACKS_COLLECTION: (state, tracksCollectionObj) => {
             state.tracksCollection = tracksCollectionObj;
         }
     },
 
     actions: {
-        UPLOAD_TRACK: async ({ commit }, track) => {
+        UPLOAD_TRACK: async (track) => {
             try {
                 await trackService.uploadTrack(track);
             } catch (err) {
-                console.error(err.response.data.Message);
-                commit('SET_ERROR', err.response.data);
+                throw new Error(err.response.data.Message);
             }
         },
 
@@ -44,7 +38,7 @@ const trackStore = {
                 const response = await trackService.getTrack(title);
                 commit('SET_TRACK', response.data);
             } catch (err) {
-                console.error(err.response.data.Message);
+                throw new Error(err.response.data.Message);
             }
         },
 
@@ -53,7 +47,7 @@ const trackStore = {
                 const response = await trackService.browseTracks(tracksQuerry);
                 commit('SET_TRACKS_COLLECTION', response.data);
             } catch (err) {
-                console.error(err.response.data.Message);
+                throw new Error(err.response.data.Message);
             }
         }
     }

@@ -23,7 +23,7 @@ const userStore = {
                 const response = await userService.getUser(userName);
                 commit('SET_USER', response.data);
             } catch (err) {
-                console.error(err.response.data.Message);
+                throw new Error(err.response.data.Message);
             }
         }
     }

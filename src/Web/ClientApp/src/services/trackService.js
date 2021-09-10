@@ -3,6 +3,7 @@ import api from '../plugins/axios'
 const trackService = {
     uploadTrack: async (trackModel) => {
         const model = new FormData();
+        model.append('title', trackModel.title);
         await api.post('/tracks', model);
     },
 
@@ -16,7 +17,6 @@ const trackService = {
         const response = await api.get('/tracks', { params: { ...tracksQuery } });
 
         return response;
-
     }
 };
 

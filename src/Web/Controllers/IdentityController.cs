@@ -69,5 +69,18 @@ namespace Web.Controllers
 
             return Ok();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPut("change-creedentials")]
+        public async Task<IActionResult> Put([FromBody] ChangeCreedentialsDto model)
+        {
+            await _service.ChangeCreedentials(model);
+
+            return Ok();
+        }
     }
 }

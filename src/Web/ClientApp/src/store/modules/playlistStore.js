@@ -6,7 +6,6 @@ const playlistStore = {
     state: {
         playlist: {},
         playlistsCollection: {},
-        error: {}
     },
 
     getters: {
@@ -20,40 +19,33 @@ const playlistStore = {
             state.playlist = playlistObj
         },
 
-        SET_ERROR: (state, errorObj) => {
-            state.error = errorObj
-        },
-
         SET_PLAYLISTS_COLLECTION: (state, playlistsCollectionObj) => {
             state.playlistsCollection = playlistsCollectionObj
         }
     },
 
     actions: {
-        CREATE_PLAYLIST: async ({ commit }, playlistObj) => {
+        CREATE_PLAYLIST: async (playlistObj) => {
             try {
                 await playlistService.createPlaylist(playlistObj);
             } catch (err) {
-                console.error(err.response.data.Message);
-                commit('SET_ERROR', err.response.data);
+                throw new Error(err.response.data.Message);
             }
         },
 
-        UPDATE_PLAYLIST: async ({ commit }, playlistObj) => {
+        UPDATE_PLAYLIST: async (playlistObj) => {
             try {
                 await playlistService.updatePlaylist(playlistObj);
             } catch (err) {
-                console.error(err.response.data.Message);
-                commit('SET_ERROR', err.response.data);
+                throw new Error(err.response.data.Message);
             }
         },
 
-        DELETE_PLAYLIST: async ({ commit }, playlistObj) => {
+        DELETE_PLAYLIST: async (playlistObj) => {
             try {
                 await playlistService.deletePlaylist(playlistObj);
             } catch (err) {
-                console.error(err.response.data.Message);
-                commit('SET_ERROR', err.response.data);
+                throw new Error(err.response.data.Message);
             }
         },
 
@@ -62,7 +54,7 @@ const playlistStore = {
                 const response = await playlistService.getPlaylist(id);
                 commit('SET_PLAYLIST', response.data);
             } catch (err) {
-                console.error(err.response.data.Message);
+                throw new Error(err.response.data.Message);
             }
         },
 
@@ -71,7 +63,7 @@ const playlistStore = {
                 const response = await playlistService.browsePlaylists(playlistsQuerry);
                 commit('SET_PLAYLISTS_COLLECTION', response.data);
             } catch (err) {
-                console.error(err.response.data.Message);
+                throw new Error(err.response.data.Message);
             }
         }
     }

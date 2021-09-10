@@ -33,5 +33,12 @@
             <param name="model"></param>
             <returns></returns>
         </member>
+        <member name="M:Web.Controllers.IdentityController.Put(Application.Dto.Identity.ChangeCreedentialsDto)">
+            <summary>
+            
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>

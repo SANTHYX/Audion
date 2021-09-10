@@ -28,6 +28,11 @@
 <script>
 export default {
 	name: 'profile-form',
+	props: {
+		updateProfilePromise: {
+			required: true,
+		},
+	},
 	data: () => ({
 		profileObj: {
 			firstName: '',

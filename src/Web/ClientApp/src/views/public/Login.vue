@@ -24,9 +24,15 @@
 				</v-form>
 			</v-card-text>
 			<v-card-actions class="justify-center">
-				<v-btn class="success" width="120" @click="loginUser(creedentials)">
+				<v-btn
+					class="success"
+					width="120"
+					v-if="!isAwaiting"
+					@click="loginUser"
+				>
 					Login
 				</v-btn>
+				<v-progress-circular indeterminate color="green" v-else />
 			</v-card-actions>
 			<v-card-subtitle class="flex justify-center">
 				<v-row class="justify-center">
@@ -52,11 +58,22 @@ export default {
 			userName: '',
 			password: '',
 		},
+		error: {
+			message: '',
+		},
+		validationRules: [],
+		isAwaiting: false,
 	}),
 	methods: {
-		...mapActions({
-			loginUser: 'identityStore/LOGIN_USER',
-		}),
+		async loginUser() {
+			this.isAwaiting = true;
+			await this['identityStore/LOGIN_USER'](this.creedentials);
+		},
+		...mapActions(['identityStore/LOGIN_USER']),
+	},
+	errorCaptured(err) {
+		this.error.message = err.message;
+		this.isAwaiting = false;
 	},
 };
 </script>

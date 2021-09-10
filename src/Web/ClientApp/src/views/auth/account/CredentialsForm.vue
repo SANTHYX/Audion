@@ -27,15 +27,18 @@
 <script>
 export default {
 	name: 'Credentials',
+	props: {
+		changeCreedentials: {
+			required: true,
+		},
+	},
 	data: () => ({
 		creedentialsObj: {
 			oldPassword: '',
 			newPassword: '',
 		},
+		rules: [],
 	}),
-	methods: {
-		submit() {},
-	},
 };
 </script>
 

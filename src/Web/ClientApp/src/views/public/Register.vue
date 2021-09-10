@@ -31,9 +31,15 @@
 				</v-form>
 			</v-card-text>
 			<v-card-actions class="justify-center">
-				<v-btn class="success" width="120" @click="registerUser(user)">
+				<v-btn
+					class="success"
+					width="120"
+					@click="registerUser"
+					v-if="!isAwaiting"
+				>
 					Register
 				</v-btn>
+				<v-progress-circular indeterminate color="green" v-else />
 			</v-card-actions>
 		</v-card>
 	</v-container>
@@ -50,11 +56,22 @@ export default {
 			password: '',
 			email: '',
 		},
+		error: {
+			message: '',
+		},
+		validationRules: [],
+		isAwaiting: false,
 	}),
 	methods: {
-		...mapActions({
-			registerUser: 'identityStore/REGISTER_USER',
-		}),
+		async registerUser() {
+			this.isAwaiting = true;
+			await this['identityStore/REGISTER_USER'](this.user);
+		},
+		...mapActions(['identityStore/REGISTER_USER']),
+	},
+	errorCaptured(err) {
+		this.error.message = err.message;
+		this.isAwaiting = false;
 	},
 };
 </script>

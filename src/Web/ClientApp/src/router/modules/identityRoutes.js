@@ -2,12 +2,12 @@ const identityRoutes = [
     {
         path: '/login',
         name: 'Login',
-        component: () => import(/* webpackChunkName: "login" */ '@/views/Login.vue')
+        component: () => import(/* webpackChunkName: "login" */ '@/views/public/Login.vue')
     },
     {
         path: '/register',
         name: 'Register',
-        component: () => import(/* webpackChunkName: "register" */ '@/views/Register.vue')
+        component: () => import(/* webpackChunkName: "register" */ '@/views/public/Register.vue')
     },
     {
         path: '/account',
@@ -16,17 +16,20 @@ const identityRoutes = [
             {
                 path: '',
                 name: 'UserOverview',
-                component: () => import('@/views/auth/account/UserOverview.vue')
+                component: () => import('@/views/auth/account/UserOverview.vue'),
+                props: true
             },
             {
                 path: 'profile',
                 name: 'EditProfile',
-                component: () => import('@/views/auth/account/ProfileForm.vue')
+                component: () => import('@/views/auth/account/ProfileForm.vue'),
+                props: true
             },
             {
                 path: 'creedentials',
                 name: 'EditCreedentials',
-                component: () => import('@/views/auth/account/CredentialsForm.vue')
+                component: () => import('@/views/auth/account/CredentialsForm.vue'),
+                props: true
             }
         ]
     },

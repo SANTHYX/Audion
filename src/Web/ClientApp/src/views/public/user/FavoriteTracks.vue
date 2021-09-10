@@ -4,10 +4,13 @@
 
 <script>
 export default {
-	name: 'Error',
-	data: () => ({
-		message: '',
-	}),
+	name: 'FavoriteTracks',
+	props: {
+		tracksList: {
+			type: Object,
+			default: null,
+		},
+	},
 };
 </script>
 

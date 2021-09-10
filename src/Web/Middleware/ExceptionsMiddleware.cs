@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Application.Exceptions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Text.Json;
@@ -30,6 +31,7 @@ namespace Web.Middleware
                 response.ContentType = "application/json";
                 response.StatusCode = ex switch
                 {
+                    NotFoundException => StatusCodes.Status404NotFound,
                     UnauthorizedAccessException => StatusCodes.Status401Unauthorized,
                     _=> StatusCodes.Status500InternalServerError
                 };

@@ -1,32 +1,29 @@
 <template>
 	<v-app-bar app color="gray" dark flat>
-		<div class="d-flex align-center">
-			<v-img
-				alt="Vuetify Logo"
-				class="shrink mr-2"
-				contain
-				src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-				transition="scale-transition"
-				width="40"
-			/>
-			<v-img
-				alt="Vuetify Name"
-				class="shrink mt-1 hidden-sm-and-down"
-				contain
-				min-width="100"
-				src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-				width="100"
-			/>
-		</div>
 		<v-spacer></v-spacer>
-		<v-btn :to="{ name: 'Register' }" plain>
-			<v-icon left>mdi-account-plus</v-icon>
-			Register
-		</v-btn>
-		<v-btn :to="{ name: 'Login' }" plain>
-			<v-icon left>mdi-login</v-icon>
-			Login
-		</v-btn>
+		<!--rendering routes in menu based on reactive local data and authentication status-->
+		<div v-if="isAuthenticated">
+			<v-btn
+				v-for="route in routes.default"
+				:key="route.label"
+				:to="{ name: `${route.routeName}` }"
+				plain
+			>
+				<v-icon left>{{ route.icon }}</v-icon>
+				{{ route.label }}
+			</v-btn>
+		</div>
+		<div v-else>
+			<v-btn
+				v-for="route in routes.auth"
+				:key="route.label"
+				:to="{ name: `${route.routeName}` }"
+				plain
+			>
+				<v-icon left>{{ route.icon }}</v-icon>
+				{{ route.label }}
+			</v-btn>
+		</div>
 	</v-app-bar>
 </template>
 
@@ -34,19 +31,19 @@
 export default {
 	name: 'Navbar',
 	props: {
-		authStatus: {
+		isAuthenticated: {
 			type: Boolean,
 			required: true,
 		},
-		userName: {
-			type: String,
-			required: true,
-		},
+		userName: { type: String },
 	},
 	data: () => ({
-		menuItems: {
+		routes: {
 			auth: [],
-			default: [],
+			default: [
+				{ icon: 'mdi-login', routeName: 'Login', label: 'Login' },
+				{ icon: 'mdi-account-plus', routeName: 'Register', label: 'Register' },
+			],
 		},
 	}),
 };
