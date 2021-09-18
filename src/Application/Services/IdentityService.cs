@@ -44,7 +44,7 @@ namespace Application.Services
             var(hash, salt) = _encryptor.HashPassword(model.NewPassword);
             user.SetPassword(hash);
             user.SetSalt(salt);
-            _logger.LogInformation($"User: {user.UserName} has changed password at {DateTime.UtcNow}");
+            _logger.LogInformation($"User: '{user.UserName}' has changed password at {DateTime.UtcNow}");
         }
 
         public async Task<GetJwtTokenDto> LoginAsync(LoginUserDto model)
@@ -56,7 +56,7 @@ namespace Application.Services
             }
             var(token, accessToken) = _jwtHandler.GenerateToken(user);
             await _tokenRepository.AddAsync(token);
-            _logger.LogInformation($"User {model.UserName} has been logged at {DateTime.UtcNow}");
+            _logger.LogInformation($"User '{model.UserName}' has been logged at {DateTime.UtcNow}");
 
             return new()
             {
@@ -79,7 +79,7 @@ namespace Application.Services
             }
             var (newToken, accessToken) = _jwtHandler.GenerateToken(token.User);
             await _tokenRepository.AddAsync(newToken);
-            _logger.LogInformation($"Token for User: {token.User.UserName} " +
+            _logger.LogInformation($"Token for User: '{token.User.UserName}' " +
                 $"has been has been refreshed at {DateTime.UtcNow}");
 
             return new()
@@ -94,7 +94,7 @@ namespace Application.Services
         {
             if (await _userRepository.IsExist(model.UserName))
             {
-                throw new Exception($"User with this Username: {model.UserName} already exist");
+                throw new Exception($"User with this Username: '{model.UserName}' already exist");
             }
             var (hash, salt) = _encryptor.HashPassword(model.Password);
             await _userRepository.AddAsync(new(model.UserName, hash, salt, model.Email));
@@ -115,7 +115,7 @@ namespace Application.Services
             token.RevokeToken();
             await _tokenRepository.UpdateAsync(token);
             _logger.LogInformation($"Token {token.RefreshToken} " +
-                $"for {token.User.UserName} has been succesfully revoked {DateTime.UtcNow}");
+                $"for '{token.User.UserName}' has been succesfully revoked {DateTime.UtcNow}");
         }
     }
 }

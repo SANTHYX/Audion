@@ -28,7 +28,8 @@
 export default {
 	name: 'Credentials',
 	props: {
-		changeCreedentials: {
+		changeCreedentialsAction: {
+			type: Function,
 			required: true,
 		},
 	},

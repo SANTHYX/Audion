@@ -29,7 +29,8 @@
 export default {
 	name: 'profile-form',
 	props: {
-		updateProfilePromise: {
+		updateProfileAction: {
+			type: Function,
 			required: true,
 		},
 	},

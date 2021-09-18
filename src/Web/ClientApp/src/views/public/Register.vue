@@ -11,7 +11,7 @@
 						prepend-inner-icon="mdi-account"
 						outlined
 						dense
-						v-model="user.userName"
+						v-model="userObj.userName"
 					/>
 					<v-text-field
 						label="Password"
@@ -19,27 +19,36 @@
 						dense
 						prepend-inner-icon="mdi-form-textbox-password"
 						type="password"
-						v-model="user.password"
+						v-model="userObj.password"
 					/>
 					<v-text-field
 						label="E-mail"
 						prepend-inner-icon="mdi-email"
 						outlined
 						dense
-						v-model="user.email"
+						v-model="userObj.email"
 					/>
 				</v-form>
 			</v-card-text>
-			<v-card-actions class="justify-center">
-				<v-btn
-					class="success"
-					width="120"
-					@click="registerUser"
-					v-if="!isAwaiting"
-				>
-					Register
-				</v-btn>
-				<v-progress-circular indeterminate color="green" v-else />
+			<v-card-actions>
+				<v-col>
+					<v-row class="justify-center">
+						<v-alert v-model="error.isThrown" border="bottom" type="error">
+							{{ error.message }}
+						</v-alert>
+					</v-row>
+					<v-row class="justify-center">
+						<v-btn
+							class="success"
+							width="120"
+							@click="registerUser"
+							v-if="!isAwaiting"
+						>
+							Register
+						</v-btn>
+						<v-progress-circular indeterminate color="green" v-else />
+					</v-row>
+				</v-col>
 			</v-card-actions>
 		</v-card>
 	</v-container>
@@ -51,13 +60,14 @@ import { mapActions } from 'vuex';
 export default {
 	name: 'Register',
 	data: () => ({
-		user: {
+		userObj: {
 			userName: '',
 			password: '',
 			email: '',
 		},
 		error: {
-			message: '',
+			message: undefined,
+			isThrown: false,
 		},
 		validationRules: [],
 		isAwaiting: false,
@@ -65,12 +75,15 @@ export default {
 	methods: {
 		async registerUser() {
 			this.isAwaiting = true;
-			await this['identityStore/REGISTER_USER'](this.user);
+			this.error.isThrown = false;
+			await this['identityStore/REGISTER_USER'](this.userObj);
+			this.$router.push('/');
 		},
 		...mapActions(['identityStore/REGISTER_USER']),
 	},
 	errorCaptured(err) {
 		this.error.message = err.message;
+		this.error.isThrown = true;
 		this.isAwaiting = false;
 	},
 };

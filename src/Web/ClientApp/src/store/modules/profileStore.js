@@ -4,7 +4,7 @@ const profileStore = {
     namespaced: true,
 
     actions: {
-        CREATE_PROFILE: async (profileObj) => {
+        CREATE_PROFILE: async (context, profileObj) => {
             try {
                 await profileService.createProfile(profileObj);
             } catch (err) {
@@ -12,7 +12,7 @@ const profileStore = {
             }
         },
 
-        UPDATE_PROFILE: async (profileObj) => {
+        UPDATE_PROFILE: async (context, profileObj) => {
             try {
                 await profileService.updateProfile(profileObj);
             } catch (err) {

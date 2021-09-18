@@ -8,7 +8,11 @@ const identityStore = {
     },
 
     getters: {
-        isAuthenticated: (state) => state.tokens !== JSON.stringify('[]'),
+        isAuthenticated: (state) =>
+            !!state.tokens.userName &&
+            state.tokens.refresh &&
+            state.tokens.expiresAt !== null,
+
 
         userName: (state) => state.tokens.userName
     },
@@ -24,7 +28,7 @@ const identityStore = {
     },
 
     actions: {
-        REGISTER_USER: async (userModel) => {
+        REGISTER_USER: async (context, userModel) => {
             try {
                 await identityService.registerUser(userModel);
             } catch (err) {
@@ -32,25 +36,25 @@ const identityStore = {
             }
         },
 
-        LOGIN_USER: async ({ commit }, creedendialsObj) => {
+        LOGIN_USER: async (context, creedendialsObj) => {
             try {
                 const response = await identityService.loginUser(creedendialsObj);
-                commit('SET_IDENTITY', response.data);
+                context.commit('SET_IDENTITY', response.data);
             } catch (err) {
                 throw new Error(err.response.data.Message);
             }
         },
 
-        LOGOUT_USER: async ({ commit }, tokens) => {
+        LOGOUT_USER: async (context) => {
             try {
-                await identityService.revokeToken(tokens);
-                commit('CLEAR_IDENTITY');
+                await identityService.revokeToken({ refreshToken: context.state.tokens.refresh });
+                context.commit('CLEAR_IDENTITY');
             } catch (err) {
                 throw new Error(err.response.data.Message);
             }
         },
 
-        CHANGE_CREEDENTIALS: async (creedentialsObj) => {
+        CHANGE_CREEDENTIALS: async (context, creedentialsObj) => {
             try {
                 await identityService.changeCreedentials(creedentialsObj);
             } catch (err) {

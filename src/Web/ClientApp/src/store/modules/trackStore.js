@@ -25,7 +25,7 @@ const trackStore = {
     },
 
     actions: {
-        UPLOAD_TRACK: async (track) => {
+        UPLOAD_TRACK: async (context, track) => {
             try {
                 await trackService.uploadTrack(track);
             } catch (err) {
@@ -33,19 +33,19 @@ const trackStore = {
             }
         },
 
-        GET_TRACK: async ({ commit }, title) => {
+        GET_TRACK: async (context, title) => {
             try {
                 const response = await trackService.getTrack(title);
-                commit('SET_TRACK', response.data);
+                context.commit('SET_TRACK', response.data);
             } catch (err) {
                 throw new Error(err.response.data.Message);
             }
         },
 
-        BROWSE_TRACKS: async ({ commit }, tracksQuerry) => {
+        BROWSE_TRACKS: async (context, tracksQuerry) => {
             try {
                 const response = await trackService.browseTracks(tracksQuerry);
-                commit('SET_TRACKS_COLLECTION', response.data);
+                context.commit('SET_TRACKS_COLLECTION', response.data);
             } catch (err) {
                 throw new Error(err.response.data.Message);
             }

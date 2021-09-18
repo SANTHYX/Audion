@@ -5,6 +5,7 @@ import identityRoutes from './modules/identityRoutes'
 import userRoutes from './modules/userRoutes'
 import trackRoutes from './modules/trackRoutes'
 import playlistRoutes from './modules/playlistRoutes'
+import identityStore from '../store/modules/identityStore'
 
 Vue.use(VueRouter)
 
@@ -32,4 +33,17 @@ const router = new VueRouter({
   routes
 })
 
-export default router
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (identityStore.getters.isAuthenticated(identityStore.state)) {
+      next();
+      return;
+    } else {
+      next('*');
+    }
+  } else {
+    next();
+  }
+});
+
+export default router;

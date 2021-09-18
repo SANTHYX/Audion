@@ -17,21 +17,22 @@ const identityRoutes = [
                 path: '',
                 name: 'UserOverview',
                 component: () => import('@/views/auth/account/UserOverview.vue'),
-                props: true
+                props: true,
             },
             {
                 path: 'profile',
                 name: 'EditProfile',
                 component: () => import('@/views/auth/account/ProfileForm.vue'),
-                props: true
+                props: true,
             },
             {
                 path: 'creedentials',
                 name: 'EditCreedentials',
                 component: () => import('@/views/auth/account/CredentialsForm.vue'),
-                props: true
+                props: true,
             }
-        ]
+        ],
+        meta: { requiresAuth: true },
     },
 ];
 

@@ -8,7 +8,7 @@ const userStore = {
     },
 
     getters: {
-        GET_USER: (state) => state.user,
+        USER: (state) => state.user,
     },
 
     mutations: {
@@ -18,10 +18,10 @@ const userStore = {
     },
 
     actions: {
-        GET_USER: async ({ commit }, userName) => {
+        GET_USER: async (context, userName) => {
             try {
                 const response = await userService.getUser(userName);
-                commit('SET_USER', response.data);
+                context.commit('SET_USER', response.data);
             } catch (err) {
                 throw new Error(err.response.data.Message);
             }

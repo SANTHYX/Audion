@@ -25,7 +25,7 @@ const playlistStore = {
     },
 
     actions: {
-        CREATE_PLAYLIST: async (playlistObj) => {
+        CREATE_PLAYLIST: async (context, playlistObj) => {
             try {
                 await playlistService.createPlaylist(playlistObj);
             } catch (err) {
@@ -33,7 +33,7 @@ const playlistStore = {
             }
         },
 
-        UPDATE_PLAYLIST: async (playlistObj) => {
+        UPDATE_PLAYLIST: async (context, playlistObj) => {
             try {
                 await playlistService.updatePlaylist(playlistObj);
             } catch (err) {
@@ -41,7 +41,7 @@ const playlistStore = {
             }
         },
 
-        DELETE_PLAYLIST: async (playlistObj) => {
+        DELETE_PLAYLIST: async (context, playlistObj) => {
             try {
                 await playlistService.deletePlaylist(playlistObj);
             } catch (err) {
@@ -49,19 +49,19 @@ const playlistStore = {
             }
         },
 
-        GET_PLAYLIST: async ({ commit }, id) => {
+        GET_PLAYLIST: async (context, id) => {
             try {
                 const response = await playlistService.getPlaylist(id);
-                commit('SET_PLAYLIST', response.data);
+                context.commit('SET_PLAYLIST', response.data);
             } catch (err) {
                 throw new Error(err.response.data.Message);
             }
         },
 
-        BROWSE_PLAYLISTS: async ({ commit }, playlistsQuerry) => {
+        BROWSE_PLAYLISTS: async (context, playlistsQuerry) => {
             try {
                 const response = await playlistService.browsePlaylists(playlistsQuerry);
-                commit('SET_PLAYLISTS_COLLECTION', response.data);
+                context.commit('SET_PLAYLISTS_COLLECTION', response.data);
             } catch (err) {
                 throw new Error(err.response.data.Message);
             }

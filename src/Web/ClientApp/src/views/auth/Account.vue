@@ -23,7 +23,11 @@
 				</v-navigation-drawer>
 			</v-card>
 			<v-col>
-				<router-view :user="user" :updateProfilePromise="updateProfile" />
+				<router-view
+					:user="user"
+					:updateProfileAction="this['profileStore/UPDATE_PROFILE']"
+					:changeCreedentialsAction="this['identityStore/CHANGE_CREEDENTIALS']"
+				/>
 			</v-col>
 		</v-row>
 	</v-container>
@@ -37,18 +41,19 @@ export default {
 	computed: {
 		...mapGetters({
 			userName: 'identityStore/userName',
-			user: 'userStore/GET_USER',
+			user: 'userStore/USER',
 		}),
 	},
 	methods: {
-		...mapActions({
-			getUser: 'userStore/GET_USER',
-			createProfile: 'profileStore/CREATE_PROFILE',
-			updateProfile: 'profileStore/UPDATE_PROFILE',
-		}),
+		...mapActions([
+			'userStore/GET_USER',
+			'profileStore/CREATE_PROFILE',
+			'profileStore/UPDATE_PROFILE',
+			'identityStore/CHANGE_CREEDENTIALS',
+		]),
 	},
 	async mounted() {
-		await this.getUser(this.userName);
+		await this['userStore/GET_USER'](this.userName);
 	},
 };
 </script>

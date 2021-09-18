@@ -6,7 +6,6 @@ const identityService = {
         const accessToken = storage.getAccessToken();
         const refresh = storage.getRefresh();
         const userName = storage.getUserName();
-
         return { accessToken, refresh, userName }
     },
 

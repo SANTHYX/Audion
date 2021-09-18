@@ -23,16 +23,27 @@
 					/>
 				</v-form>
 			</v-card-text>
-			<v-card-actions class="justify-center">
-				<v-btn
-					class="success"
-					width="120"
-					v-if="!isAwaiting"
-					@click="loginUser"
-				>
-					Login
-				</v-btn>
-				<v-progress-circular indeterminate color="green" v-else />
+			<v-card-actions>
+				<v-col>
+					<!------------- ErrorsAlertRow -------------->
+					<v-row class="justify-center">
+						<v-alert v-model="error.isThrown" border="bottom" type="error">
+							{{ error.message }}
+						</v-alert>
+					</v-row>
+					<!------------- ButtonRow -------------->
+					<v-row class="justify-center">
+						<v-btn
+							class="success"
+							width="120"
+							@click="loginUser"
+							v-if="!isAwaiting"
+						>
+							Login
+						</v-btn>
+						<v-progress-circular indeterminate color="green" v-else />
+					</v-row>
+				</v-col>
 			</v-card-actions>
 			<v-card-subtitle class="flex justify-center">
 				<v-row class="justify-center">
@@ -59,7 +70,8 @@ export default {
 			password: '',
 		},
 		error: {
-			message: '',
+			message: undefined,
+			isThrown: false,
 		},
 		validationRules: [],
 		isAwaiting: false,
@@ -67,12 +79,15 @@ export default {
 	methods: {
 		async loginUser() {
 			this.isAwaiting = true;
+			this.error.isThrown = false;
 			await this['identityStore/LOGIN_USER'](this.creedentials);
+			this.$router.push(this.$route.query.redirect || '/');
 		},
 		...mapActions(['identityStore/LOGIN_USER']),
 	},
 	errorCaptured(err) {
 		this.error.message = err.message;
+		this.error.isThrown = true;
 		this.isAwaiting = false;
 	},
 };

@@ -1,6 +1,5 @@
 <template>
 	<v-container id="playlist"> 
-		
 	</v-container>
 </template>
 
