@@ -5,12 +5,13 @@
 				<h1 class="display-2">Login</h1>
 			</v-card-title>
 			<v-card-text>
-				<v-form class="mt-4">
+				<v-form class="mt-4" ref="form">
 					<v-text-field
 						label="Login"
 						prepend-inner-icon="mdi-account"
 						outlined
 						dense
+						:rules="[validationRules.isRequired]"
 						v-model="creedentials.userName"
 					/>
 					<v-text-field
@@ -18,6 +19,7 @@
 						prepend-inner-icon="mdi-form-textbox-password"
 						outlined
 						dense
+						:rules="[validationRules.isRequired]"
 						v-model="creedentials.password"
 						type="password"
 					/>
@@ -27,7 +29,7 @@
 				<v-col>
 					<!------------- ErrorsAlertRow -------------->
 					<v-row class="justify-center">
-						<v-alert v-model="error.isThrown" border="bottom" type="error">
+						<v-alert v-model="state.isThrown" border="bottom" type="error">
 							{{ error.message }}
 						</v-alert>
 					</v-row>
@@ -37,7 +39,7 @@
 							class="success"
 							width="120"
 							@click="loginUser"
-							v-if="!isAwaiting"
+							v-if="!state.isAwaiting"
 						>
 							Login
 						</v-btn>
@@ -71,24 +73,36 @@ export default {
 		},
 		error: {
 			message: undefined,
+		},
+		state: {
+			isAwaiting: false,
 			isThrown: false,
 		},
-		validationRules: [],
-		isAwaiting: false,
+		validationRules: {
+			isRequired: (v) => !!v || 'This field is required',
+		},
 	}),
 	methods: {
 		async loginUser() {
-			this.isAwaiting = true;
-			this.error.isThrown = false;
-			await this['identityStore/LOGIN_USER'](this.creedentials);
-			this.$router.push(this.$route.query.redirect || '/');
+			if (this.$refs.form.validate()) {
+				this.await();
+				await this['identity/LOGIN_USER'](this.creedentials);
+				this.$router.push(this.$route.query.redirect || '/');
+			} else return;
 		},
-		...mapActions(['identityStore/LOGIN_USER']),
+		await() {
+			this.state.isAwaiting = true;
+			this.state.isThrown = false;
+		},
+		throw() {
+			this.state.isAwaiting = false;
+			this.state.isThrown = true;
+		},
+		...mapActions(['identity/LOGIN_USER']),
 	},
 	errorCaptured(err) {
-		this.error.message = err.message;
-		this.error.isThrown = true;
-		this.isAwaiting = false;
+		this.error.message = err.message || 'Error has occured';
+		this.throw();
 	},
 };
 </script>

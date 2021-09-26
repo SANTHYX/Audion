@@ -15,6 +15,18 @@ const routes = [
     name: 'Home',
     component: Home
   },
+  {
+    path: '/search',
+    name: 'SearchResults',
+    props: true,
+    component: () => import('@/views/public/SearchResults.vue'),
+    beforeEnter: (to, from, next) => {
+      if (!Object.entries(to.query).length) {
+        next('*');
+        return;
+      } else next();
+    }
+  },
   ...identityRoutes,
   ...userRoutes,
   ...trackRoutes,

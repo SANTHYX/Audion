@@ -10,10 +10,10 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
-    identityStore,
-    profileStore,
-    userStore,
-    trackStore,
-    playlistStore
+    'identity': identityStore,
+    'profile': profileStore,
+    'user': userStore,
+    'track': trackStore,
+    'playlist': playlistStore
   }
 })

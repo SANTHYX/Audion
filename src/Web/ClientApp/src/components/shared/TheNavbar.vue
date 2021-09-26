@@ -1,6 +1,29 @@
 <template>
 	<v-app-bar app color="gray" dark flat>
 		<v-spacer></v-spacer>
+		<!----------------SearchBar---------------------->
+		<v-text-field
+			class="mt-6"
+			color="green"
+			placeholder="Search..."
+			v-model="searchPhrase"
+			filled
+			outlined
+			dense
+			@keypress.enter="
+				$router.push({ name: 'SearchResults', query: { phrase: searchPhrase } })
+			"
+		/>
+		<v-btn
+			color="blue"
+			:to="{ name: 'SearchResults', query: { phrase: searchPhrase } }"
+			replace
+		>
+			<v-icon>
+				mdi-magnify
+			</v-icon>
+		</v-btn>
+		<v-spacer></v-spacer>
 		<!--rendering routes in menu based on reactive local data and authentication status-->
 		<div v-if="!isAuthenticated">
 			<v-btn
@@ -14,6 +37,10 @@
 			</v-btn>
 		</div>
 		<div v-else>
+			<v-btn outlined>
+				<v-icon>mdi-plus</v-icon>
+				Upload
+			</v-btn>
 			<v-btn
 				v-for="route in routes.auth"
 				:key="route.label"
@@ -57,13 +84,16 @@ export default {
 			type: Boolean,
 			required: true,
 		},
-		userName: { type: String },
+		userName: {
+			type: String,
+		},
 		logoutAction: {
 			type: Function,
 			required: true,
 		},
 	},
 	data: () => ({
+		searchPhrase: '',
 		routes: {
 			auth: [{ icon: 'mdi-home', routeName: 'Home', label: 'Home' }],
 			default: [

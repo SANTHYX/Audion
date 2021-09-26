@@ -19,7 +19,9 @@
 				</v-form>
 			</v-card-text>
 			<v-card-actions class="justify-center">
-				<v-btn class="success">Confirm</v-btn>
+				<v-btn class="success" @click="updateProfileAction(profileObj)">
+					Confirm
+				</v-btn>
 			</v-card-actions>
 		</v-card>
 	</v-container>

@@ -3,10 +3,10 @@
 		<v-navbar
 			:isAuthenticated="isAuthenticated"
 			:userName="userName"
-			:logoutAction="this['identityStore/LOGOUT_USER']"
+			:logoutAction="this['identity/LOGOUT_USER']"
 		/>
 		<v-main>
-			<router-view />
+			<router-view :key="$route.fullPath" />
 		</v-main>
 		<v-footer />
 	</v-app>
@@ -14,16 +14,18 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
+// eslint-disable-next-line no-unused-vars
+import router from 'vue-router';
 import TheNavbar from './components/shared/TheNavbar.vue';
 import TheFooter from './components/shared/TheFooter.vue';
 
 export default {
 	name: 'App',
 	computed: {
-		...mapGetters('identityStore', ['userName', 'isAuthenticated']),
+		...mapGetters('identity', ['userName', 'isAuthenticated']),
 	},
 	methods: {
-		...mapActions(['identityStore/LOGOUT_USER']),
+		...mapActions(['identity/LOGOUT_USER']),
 	},
 	components: {
 		'v-navbar': TheNavbar,

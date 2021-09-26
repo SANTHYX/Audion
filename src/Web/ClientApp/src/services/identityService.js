@@ -21,19 +21,19 @@ const identityService = {
     },
 
     refreshToken: async (tokens) => {
-        const response = await api.post('identity/refresh-token', tokens);
+        const response = await api.post('/identity/refresh-token', tokens);
         storage.storeToken(response.data);
 
         return response;
     },
 
     revokeToken: async (tokens) => {
-        await api.put('identity/revoke-token', tokens);
+        await api.put('/identity/revoke-token', tokens);
         storage.removeToken();
     },
 
     changeCreedentials: async (userCreedentials) => {
-        await api.put('identity/change-creedentials', userCreedentials);
+        await api.put('/identity/change-creedentials', userCreedentials);
     }
 };
 

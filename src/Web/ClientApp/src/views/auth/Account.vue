@@ -24,9 +24,12 @@
 			</v-card>
 			<v-col>
 				<router-view
-					:user="user"
-					:updateProfileAction="this['profileStore/UPDATE_PROFILE']"
-					:changeCreedentialsAction="this['identityStore/CHANGE_CREEDENTIALS']"
+					:user="this['user/USER']"
+					:userName="this['identity/userName']"
+					:updateProfileAction="this['profile/UPDATE_PROFILE']"
+					:changeCreedentialsAction="this['identity/CHANGE_CREEDENTIALS']"
+					:fetchUserAction="this['user/GET_USER']"
+					:clearStateMutation="this['user/CLEAR_STATE']"
 				/>
 			</v-col>
 		</v-row>
@@ -34,26 +37,21 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters, mapMutations, mapActions } from 'vuex';
 
 export default {
 	name: 'Account',
 	computed: {
-		...mapGetters({
-			userName: 'identityStore/userName',
-			user: 'userStore/USER',
-		}),
+		...mapGetters(['identity/userName', 'user/USER']),
 	},
 	methods: {
 		...mapActions([
-			'userStore/GET_USER',
-			'profileStore/CREATE_PROFILE',
-			'profileStore/UPDATE_PROFILE',
-			'identityStore/CHANGE_CREEDENTIALS',
+			'user/GET_USER',
+			'profile/CREATE_PROFILE',
+			'profile/UPDATE_PROFILE',
+			'identity/CHANGE_CREEDENTIALS',
 		]),
-	},
-	async mounted() {
-		await this['userStore/GET_USER'](this.userName);
+		...mapMutations(['user/CLEAR_STATE']),
 	},
 };
 </script>

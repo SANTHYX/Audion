@@ -15,6 +15,8 @@ const userStore = {
         SET_USER: (state, userObj) => {
             state.user = userObj;
         },
+
+        CLEAR_STATE: (state) => state.user = {}
     },
 
     actions: {

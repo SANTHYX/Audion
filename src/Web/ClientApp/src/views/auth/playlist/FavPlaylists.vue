@@ -1,10 +1,11 @@
 <template>
-	<v-container id="playlist"> </v-container>
+	<v-container> </v-container>
 </template>
 
 <script>
 export default {
-	name: 'Playlist',
+	name: 'FavPlaylists',
+	props: ['favPlaylists'],
 };
 </script>
 

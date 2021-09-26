@@ -13,7 +13,6 @@ const identityStore = {
             state.tokens.refresh &&
             state.tokens.expiresAt !== null,
 
-
         userName: (state) => state.tokens.userName
     },
 

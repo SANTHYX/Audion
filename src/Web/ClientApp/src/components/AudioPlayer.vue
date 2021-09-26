@@ -1,5 +1,9 @@
 <template>
-	<div id="audio-player"></div>
+	<div id="audio-player">
+		<v-card>
+
+		</v-card>
+	</div>
 </template>
 
 <script>

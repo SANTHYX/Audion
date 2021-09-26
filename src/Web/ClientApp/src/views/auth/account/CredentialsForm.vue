@@ -18,7 +18,15 @@
 				/>
 			</v-card-text>
 			<v-card-actions class="justify-center">
-				<v-btn class="success" width="150" min-width="100" dark>Change</v-btn>
+				<v-btn
+					class="success"
+					width="150"
+					min-width="100"
+					dark
+					@click="changeCreedentialsAction(creedentialsObj)"
+				>
+					Change
+				</v-btn>
 			</v-card-actions>
 		</v-card>
 	</v-container>
