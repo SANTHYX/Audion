@@ -9,6 +9,7 @@ namespace Core.Commons.Repositories
         Task AddAsync(User user);
         Task<User> GetAsync(Guid id);
         Task<User> GetAsync(string userName);
+        Task<User> GetAggregateAsync(Guid id);
         Task<bool> IsExist(string userName);
         Task UpdateAsync(User user);
     }

@@ -21,15 +21,21 @@ namespace Infrastructure.Persistance.Repositories
             await _context.SaveChangesAsync();
         }
 
+        public async Task<User> GetAggregateAsync(Guid id)
+           => await _context.Users
+                .AsNoTracking()
+                .Include(x => x.Profile)
+                .FirstOrDefaultAsync(x => x.Id == id);
+
         public async Task<User> GetAsync(Guid id)
             => await _context.Users
-            .Include(x => x.Profile)
-            .FirstOrDefaultAsync(x => x.Id == id);
+                .Include(x => x.Profile)
+                .FirstOrDefaultAsync(x => x.Id == id);
 
         public async Task<User> GetAsync(string userName)
             => await _context.Users
-            .Include(x => x.Profile)
-            .FirstOrDefaultAsync(x => x.UserName == userName);
+                .Include(x => x.Profile)
+                .FirstOrDefaultAsync(x => x.UserName == userName);
 
         public async Task<bool> IsExist(string userName)
             => await _context.Users.AnyAsync(x => x.UserName == userName);

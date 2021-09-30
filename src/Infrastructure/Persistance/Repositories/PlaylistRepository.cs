@@ -1,7 +1,6 @@
 ﻿using Core.Commons.Pagination;
 using Core.Commons.Repositories;
 using Core.Domain;
-using Infrastructure.Commons.Pagination;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;

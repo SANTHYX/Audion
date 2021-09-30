@@ -4,6 +4,7 @@
 			:isAuthenticated="isAuthenticated"
 			:userName="userName"
 			:logoutAction="this['identity/LOGOUT_USER']"
+			:uploadTrackAction="this['track/UPLOAD_TRACK']"
 		/>
 		<v-main>
 			<router-view :key="$route.fullPath" />
@@ -25,7 +26,7 @@ export default {
 		...mapGetters('identity', ['userName', 'isAuthenticated']),
 	},
 	methods: {
-		...mapActions(['identity/LOGOUT_USER']),
+		...mapActions(['identity/LOGOUT_USER', 'track/UPLOAD_TRACK']),
 	},
 	components: {
 		'v-navbar': TheNavbar,
