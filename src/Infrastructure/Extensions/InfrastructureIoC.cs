@@ -1,11 +1,15 @@
 ﻿using Application.Commons.Identity;
+using Application.Commons.Toolkits;
 using Core.Commons.Pagination;
+using Core.Commons.Persistance;
 using Core.Commons.Repositories;
 using Infrastructure.Commons.Pagination;
+using Infrastructure.Commons.Persistance;
 using Infrastructure.Identity;
 using Infrastructure.Options;
 using Infrastructure.Persistance;
 using Infrastructure.Persistance.Repositories;
+using Infrastructure.Toolkits;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,14 +28,16 @@ namespace Infrastructure.Extensions
                     npgCfg => npgCfg.MigrationsAssembly("Infrastructure"));
                 opt.EnableDetailedErrors();
             });
-            services.AddSingleton(typeof(IPagedResponse<>), typeof(PagedResponse<>));
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IProfileRepository, ProfileRepository>();
             services.AddScoped<ITokenRepository, TokenRepository>();
             services.AddScoped<IPlaylistRepository, PlaylistRepository>();
             services.AddScoped<ITrackRepository, TrackRepository>();
+            services.AddScoped<IFileManager, FileManager>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddSingleton<IEncryptor, Encryptor>();
             services.AddSingleton<IJwtHandler, JwtHandler>();
+            services.AddSingleton(typeof(IPagedResponse<>), typeof(PagedResponse<>));
         }
     }
 }

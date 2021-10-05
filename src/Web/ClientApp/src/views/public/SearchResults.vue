@@ -1,6 +1,7 @@
 <template>
 	<v-container>
 		<h2>Results of searching phrase "{{ this.$route.query.phrase }}"</h2>
+		<v-divider />
 	</v-container>
 </template>
 

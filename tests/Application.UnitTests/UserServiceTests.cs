@@ -4,6 +4,7 @@ using Application.Services;
 using Core.Commons.Repositories;
 using Core.Domain;
 using FluentAssertions;
+using Microsoft.Extensions.Logging;
 using Moq;
 using System.Threading.Tasks;
 using Xunit;
@@ -12,15 +13,18 @@ namespace Application.UnitTests
 {
     public class UserServiceTests
     {
+        private readonly Mock<ILogger<UserService>> _loggerMock;
         private readonly Mock<IUserRepository> _repositoryMock;
         private readonly Mock<IUserMapper> _mapperMock;
         private readonly UserService _service;
 
         public UserServiceTests()
         {
+            _loggerMock = new();
             _repositoryMock = new();
             _mapperMock = new();
-            _service = new (_repositoryMock.Object, _mapperMock.Object);
+            _service = new (_loggerMock.Object ,_repositoryMock.Object,
+                _mapperMock.Object);
         }
 
         [Fact]
@@ -28,7 +32,7 @@ namespace Application.UnitTests
         {
             string name = "Jacck2344";
 
-            _repositoryMock.Setup(x => x.GetAsync(It.IsAny<string>()))
+            _repositoryMock.Setup(x => x.GetAggregateAsync(It.IsAny<string>()))
                 .ReturnsAsync(() => null);
             _mapperMock.Setup(x => x.MapTo(null))
                 .Returns(()=> null);
@@ -48,7 +52,7 @@ namespace Application.UnitTests
 
             User testUser = new(userName, password, salt, email);
 
-            _repositoryMock.Setup(x => x.GetAsync(userName))
+            _repositoryMock.Setup(x => x.GetAggregateAsync(userName))
                 .ReturnsAsync(testUser);
             _mapperMock.Setup(x => x.MapTo(testUser))
                 .Returns(new GetUserDto

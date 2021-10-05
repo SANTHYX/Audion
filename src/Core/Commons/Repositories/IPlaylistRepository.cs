@@ -1,4 +1,5 @@
 ﻿using Core.Commons.Pagination;
+using Core.Commons.Persistance;
 using Core.Domain;
 using System;
 using System.Linq.Expressions;
@@ -6,11 +7,9 @@ using System.Threading.Tasks;
 
 namespace Core.Commons.Repositories
 {
-    public interface IPlaylistRepository
+    public interface IPlaylistRepository : IGenericRepository<Playlist>
     {
-        Task AddAsync(Playlist playlist);
-        Task UpdateAsync(Playlist playlist);
-        Task RemoveAsync(Playlist playlist);
+        void Remove(Playlist playlist);
         Task<Playlist> GetAsync(Guid id);
         Task<Page<Playlist>> GetAllAsync
             (Expression<Func<Playlist, bool>> expression, PagedQuery pagedQuery);

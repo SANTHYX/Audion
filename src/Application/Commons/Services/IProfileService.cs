@@ -1,5 +1,4 @@
 ﻿using Application.Dto.Profile;
-using Core.Domain;
 using System.Threading.Tasks;
 
 namespace Application.Commons.Services
@@ -8,5 +7,6 @@ namespace Application.Commons.Services
     {
         Task CreateAsync(CreateProfileDto model);
         Task UpdateAsync(UpdateProfileDto model);
+        Task UploadAvatarAsync(UploadAvatarDto model);
     }
 }

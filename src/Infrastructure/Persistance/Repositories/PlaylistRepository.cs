@@ -1,6 +1,7 @@
 ﻿using Core.Commons.Pagination;
 using Core.Commons.Repositories;
 using Core.Domain;
+using Infrastructure.Commons.Persistance;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
@@ -9,21 +10,16 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Persistance.Repositories
 {
-    public class PlaylistRepository : IPlaylistRepository
+    public class PlaylistRepository : GenericRepository<Playlist>, IPlaylistRepository
     {
         private readonly DataContext _context;
         private readonly IPagedResponse<Playlist> _response;
 
-        public PlaylistRepository(DataContext context, IPagedResponse<Playlist> response)
+        public PlaylistRepository(DataContext context, IPagedResponse<Playlist> response) 
+            : base(context)
         {
             _context = context;
             _response = response;
-        }
-
-        public async Task AddAsync(Playlist playlist)
-        {
-            await _context.Playlists.AddAsync(playlist);
-            await _context.SaveChangesAsync();
         }
 
         public async Task<Page<Playlist>> GetAllAsync
@@ -36,16 +32,9 @@ namespace Infrastructure.Persistance.Repositories
         public async Task<Playlist> GetAsync(Guid id)
             => await _context.Playlists.FirstOrDefaultAsync(x => x.Id == id);
 
-        public async Task RemoveAsync(Playlist playlist)
+        public void Remove(Playlist playlist)
         {
             _context.Playlists.Remove(playlist);
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task UpdateAsync(Playlist playlist)
-        {
-            _context.Update(playlist);
-            await _context.SaveChangesAsync();
         }
     }
 }

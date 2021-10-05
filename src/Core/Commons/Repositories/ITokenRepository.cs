@@ -1,12 +1,11 @@
-﻿using Core.Domain;
+﻿using Core.Commons.Persistance;
+using Core.Domain;
 using System.Threading.Tasks;
 
 namespace Core.Commons.Repositories
 {
-    public interface ITokenRepository
+    public interface ITokenRepository : IGenericRepository<Token>
     {
-        Task AddAsync(Token token);
         Task<Token> GetAsync(string token);
-        Task UpdateAsync(Token token);
     }
 }

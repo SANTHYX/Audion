@@ -1,8 +1,8 @@
 <template>
 	<v-container id="account" fluid>
 		<v-row>
-			<v-card height="100vh">
-				<v-navigation-drawer>
+			<v-card>
+				<v-navigation-drawer height="100vh">
 					<v-list>
 						<v-list-item>
 							<v-btn :to="{ name: 'UserOverview' }" plain>

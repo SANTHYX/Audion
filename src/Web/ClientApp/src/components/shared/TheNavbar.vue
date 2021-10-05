@@ -3,7 +3,6 @@
 		<v-spacer />
 		<the-search-bar />
 		<v-spacer />
-		<!--rendering routes in menu based on reactive local data and authentication status-->
 		<div v-if="!isAuthenticated">
 			<v-btn
 				v-for="route in routes.default"
@@ -17,12 +16,13 @@
 		</div>
 		<div v-else>
 			<v-row align="center">
-				<v-btn outlined @click="modalVisibility = true">
+				<v-btn class="mr-3" outlined @click="modalVisibility = true">
 					<v-icon>mdi-plus</v-icon>
 					Upload
 				</v-btn>
 				<upload-modal
 					:visable="modalVisibility"
+					:uploadTrackAction="uploadTrackAction"
 					@upload-modal-visibility="disableVisibility"
 				/>
 				<v-btn

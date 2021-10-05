@@ -5,6 +5,8 @@ namespace Application.Commons.Toolkits
 {
     public interface IFileManager
     {
-        Task SaveFileAsync(IFormFile file);
+        Task SaveAudioFileAsync(IFormFile file);
+        Task SaveImageFileAsync(IFormFile file);
+        bool IsExist(string path);
     }
 }

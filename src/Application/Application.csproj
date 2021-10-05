@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <Folder Include="Dto\User\NestedModels\" />
+    <Folder Include="Extensions\Validations\" />
   </ItemGroup>
 
   <ItemGroup>

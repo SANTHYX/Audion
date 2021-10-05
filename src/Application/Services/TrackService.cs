@@ -1,9 +1,10 @@
 ﻿using Application.Commons.Mappers;
 using Application.Commons.Services;
+using Application.Commons.Toolkits;
 using Application.Dto;
 using Application.Dto.Track;
 using Core.Commons.Pagination;
-using Core.Commons.Repositories;
+using Core.Commons.Persistance;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
@@ -14,20 +15,21 @@ namespace Application.Services
     public class TrackService : ITrackService
     {
         private readonly ILogger<TrackService> _logger;
-        private readonly ITrackRepository _trackRepository;
-        private readonly IUserRepository _userRepository;
+        private readonly IUnitOfWork _unit;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ITrackMapper _mapper;
+        private readonly IFileManager _fileManager;
         private readonly Guid userId;
 
-        public TrackService(ILogger<TrackService> logger, ITrackRepository trackRepository, 
-            IUserRepository userRepository, IHttpContextAccessor httpContextAccessor, ITrackMapper mapper)
+        public TrackService(ILogger<TrackService> logger, IUnitOfWork unit,
+            IHttpContextAccessor httpContextAccessor,
+            ITrackMapper mapper, IFileManager fileManager)
         {
             _logger = logger;
-            _trackRepository = trackRepository;
-            _userRepository = userRepository;
+            _unit = unit;
             _httpContextAccessor = httpContextAccessor;
             _mapper = mapper;
+            _fileManager = fileManager;
             userId = _httpContextAccessor.HttpContext.User.Identity.IsAuthenticated ?
                 Guid.Parse(_httpContextAccessor.HttpContext.User.Identity.Name) : Guid.Empty;
         }
@@ -35,7 +37,7 @@ namespace Application.Services
         public async Task<PagedResponseDto<GetTracksDto>> BrowseAsync(PagedQuery query)
         {
             _logger.LogInformation("Fetching filtred data...");
-            var tracks = await _trackRepository.GetAllAsync(x => x.Title == "", query);
+            var tracks = await _unit.Track.GetAllAsync(x => x.Title == "", query);
 
             return _mapper.MapTo(tracks);
         }
@@ -43,16 +45,22 @@ namespace Application.Services
         public async Task<GetTrackDto> GetAsync(string title)
         {
             _logger.LogInformation("Fetching track...");
-            var track = await _trackRepository.GetAsync(title);
+            var track = await _unit.Track.GetAsync(title);
 
             return _mapper.MapTo(track);
         }
 
+        //TODO: Edit to working usecase and decompose to SOLID like scenario
         public async Task UploadAsync(UploadTrackDto model)
         {
-            var user = await _userRepository.GetAsync(userId);
-            //Need to add logic to send and store file
-            await _trackRepository.AddAsync(new(model.Title, user));
+            var user = await _unit.User.GetAsync(userId);
+            if (model.Track is null)
+            {
+                throw new ArgumentNullException(nameof(model.Track),"File is required");
+            }
+            await _fileManager.SaveAudioFileAsync(model.Track);
+            await _unit.Track.AddAsync(new(model.Title, user));
+            await _unit.CommitAsync();
         }
     }
 }

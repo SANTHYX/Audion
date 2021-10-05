@@ -1,11 +1,10 @@
-﻿using Core.Domain;
-using System.Threading.Tasks;
+﻿using Core.Commons.Persistance;
+using Core.Domain;
 
 namespace Core.Commons.Repositories
 {
-    public interface IProfileRepository
+    public interface IProfileRepository : IGenericRepository<Profile>
     {
-        Task AddAsync(Profile profile);
-        Task UpdateAsync(Profile profile);
+        
     }
 }

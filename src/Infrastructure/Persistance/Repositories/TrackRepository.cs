@@ -1,6 +1,7 @@
 ﻿using Core.Commons.Pagination;
 using Core.Commons.Repositories;
 using Core.Domain;
+using Infrastructure.Commons.Persistance;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
@@ -9,21 +10,16 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Persistance.Repositories
 {
-    public class TrackRepository : ITrackRepository
+    public class TrackRepository : GenericRepository<Track>, ITrackRepository
     {
         private readonly DataContext _context;
         private readonly IPagedResponse<Track> _response;
 
-        public TrackRepository(DataContext context, IPagedResponse<Track> response)
+        public TrackRepository(DataContext context, IPagedResponse<Track> response) 
+            : base(context)
         {
             _context = context;
             _response = response;
-        }
-
-        public async Task AddAsync(Track track)
-        {
-            await _context.Tracks.AddAsync(track);
-            await _context.SaveChangesAsync();
         }
 
         public async Task<Page<Track>> GetAllAsync
@@ -36,10 +32,9 @@ namespace Infrastructure.Persistance.Repositories
         public async Task<Track> GetAsync(string title)
             => await _context.Tracks.FirstOrDefaultAsync(x => x.Title == title);
 
-        public async Task RemoveAsync(Track track)
+        public void RemoveAsync(Track track)
         {
             _context.Tracks.Remove(track);
-            await _context.SaveChangesAsync();
         }
     }
 }
