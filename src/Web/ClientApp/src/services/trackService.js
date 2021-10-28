@@ -4,6 +4,7 @@ const trackService = {
     uploadTrack: async (trackModel) => {
         const model = new FormData();
         model.append('title', trackModel.title);
+        model.append('track', trackModel.track);
         await api.post('/tracks', model);
     },
 

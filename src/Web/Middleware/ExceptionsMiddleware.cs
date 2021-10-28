@@ -35,9 +35,12 @@ namespace Web.Middleware
                     UnauthorizedAccessException => StatusCodes.Status401Unauthorized,
                     _=> StatusCodes.Status500InternalServerError
                 };
+
                 var error = JsonSerializer.Serialize(
                     new ErrorResponse(response.StatusCode, ex.Message));
+
                 await response.WriteAsync(error);
+
                 _logger.LogError(ex.Message);
             }
         }

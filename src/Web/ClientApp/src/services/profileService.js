@@ -7,6 +7,13 @@ const profileService = {
 
     updateProfile: async (profileModel) => {
         await api.put('/profiles', profileModel)
+    },
+
+    uploadAvatar: async (avatarModel) => {
+        const avatarForm = new FormData();
+        avatarForm.append("avatar", avatarModel.avatar);
+
+        await api.put('/profiles/upload-avatar', avatarForm);
     }
 };
 

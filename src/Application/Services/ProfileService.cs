@@ -1,6 +1,11 @@
 ﻿using Application.Commons.Services;
+using Application.Commons.Toolkits.Files;
+using Application.Commons.Types;
 using Application.Dto.Profile;
+using Application.Extensions.Validations;
+using Application.Extensions.Validations.Profile;
 using Core.Commons.Persistance;
+using Core.Domain;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
@@ -13,14 +18,19 @@ namespace Application.Services
         private readonly ILogger<ProfileService> _logger;
         private readonly IUnitOfWork _unit;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IStaticFilesWriter<IImageFile> _writer;
         private readonly Guid userId;
 
-        public ProfileService(ILogger<ProfileService> logger, 
-            IUnitOfWork unit ,IHttpContextAccessor httpContext)
+        public ProfileService(
+            ILogger<ProfileService> logger, 
+            IUnitOfWork unit ,
+            IHttpContextAccessor httpContext,
+            IStaticFilesWriter<IImageFile> writer)
         {
             _logger = logger;
             _unit = unit;
             _httpContextAccessor = httpContext;
+            _writer = writer;
             userId = _httpContextAccessor.HttpContext.User.Identity.IsAuthenticated ?
                  Guid.Parse(_httpContextAccessor.HttpContext.User.Identity.Name) : Guid.Empty;
         }
@@ -28,47 +38,41 @@ namespace Application.Services
         public async Task CreateAsync(CreateProfileDto model)
         {
             var user = await _unit.User.GetAsync(userId);
-            if (user is null)
-            {
-                throw new Exception("Invalid creedentials");
-            }
-            if (user.Profile is not null)
-            {
-                throw new Exception("User already have instance of profile");
-            }
-            await _unit.Profile.AddAsync(new(model.FirstName,
-                model.LastName, model.Country, model.City, user));
+
+            user.NotNull().NotOwnProfile();
+
+            Profile profile = new(model.FirstName, 
+                model.LastName, model.Country, model.City, user);
+
+            await _unit.Profile.AddAsync(profile);
             await _unit.CommitAsync();
+
             _logger.LogInformation($"User {user.UserName} has created profile at {DateTime.UtcNow}");
         }
 
         public async Task UpdateAsync(UpdateProfileDto model)
         {
             var user = await _unit.User.GetAsync(userId);
-            if (user is null)
-            {
-                throw new Exception("Invalid creedentials");
-            }
-            if (user.Profile is null)
-            {
-                throw new Exception("User dont own profile instance");
-            }
+
+            user.NotNull().OwnProfile();
+
             _unit.Profile.Update(user.Profile);
             await _unit.CommitAsync();
+
             _logger.LogInformation($"User {user.UserName} has updated profile at {DateTime.UtcNow}");
         }
 
         public async Task UploadAvatarAsync(UploadAvatarDto model)
         {
             var user = await _unit.User.GetAsync(userId);
-            if (user is null)
-            {
-                throw new Exception("Invalid creedentials");
-            }
-            if (user.Profile is null)
-            {
-                throw new Exception("User dont own profile instance");
-            }
+
+            user.NotNull().OwnProfile();
+
+            var fileId = Guid.NewGuid().ToString();
+            await _writer.SaveAsync(model.Avatar, fileId);
+
+            user.Profile.SetImage(fileId);
+            await _unit.CommitAsync();
         }
     }
 }

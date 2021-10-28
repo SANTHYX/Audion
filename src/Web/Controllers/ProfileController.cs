@@ -31,5 +31,13 @@ namespace Web.Controllers
 
             return Ok();
         } 
+
+        [HttpPut("upload-avatar")]
+        public async Task<IActionResult> Put([FromForm] UploadAvatarDto model)
+        {
+            await _service.UploadAvatarAsync(model);
+
+            return Ok();
+        }
     }
 }

@@ -14,11 +14,14 @@ namespace Infrastructure.Commons.Pagination
         {
             page = page < 0 ? 0 : page;
             results = results <= 0 ? 5 : results;
+
             var totalResults = await context.CountAsync();
+
             if (totalResults == 0)
             {
                 return Empty();
             }
+
             var collection = await context
                 .Skip((page - 1) * results)
                 .Take(results)

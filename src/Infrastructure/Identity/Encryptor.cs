@@ -28,6 +28,7 @@ namespace Infrastructure.Identity
                 throw new ArgumentNullException(nameof(password), 
                     "Cannot generate salt becouse password is empty value");
             }
+
             var bytes = new byte[bytesNumber];
             var rng = RandomNumberGenerator.Create();
             rng.GetBytes(bytes);
@@ -47,6 +48,7 @@ namespace Infrastructure.Identity
                 throw new ArgumentNullException(nameof(salt),
                     "Cannot generate hash becouse salt is empty value");
             }
+
             var pkfd2 = new Rfc2898DeriveBytes(password, GetBytes(salt), derivesIterations);
 
             return Convert.ToBase64String(pkfd2.GetBytes(bytesNumber));

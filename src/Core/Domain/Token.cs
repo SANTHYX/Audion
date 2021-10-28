@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Core.Commons.Types;
+using System;
 
 namespace Core.Domain
 {
-    public class Token
+    public class Token : IEntity
     {
         public string RefreshToken { get; private set; }
         public DateTime CreatedAt { get; private set; }

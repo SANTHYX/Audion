@@ -9,6 +9,7 @@ namespace Core.Domain
         public string LastName { get; private set; }
         public string Country { get; private set; }
         public string City { get; private set; }
+        public string ImageId { get; private set; }
         public Guid UserId { get; private set; }
         public User User { get; private set; }
         public Stats Stats { get; private set; }
@@ -62,6 +63,12 @@ namespace Core.Domain
             }
 
             City = city;
+        }
+
+        public void SetImage(string imageId)
+        {
+            ImageId = imageId ?? throw new ArgumentNullException(nameof(imageId), 
+                "Passed empty value of image name");
         }
 
         public void AddUser(User user)

@@ -5,8 +5,8 @@ using Core.Domain;
 
 namespace Application.Commons.Mappers
 {
-    public interface IPlaylistMapper : IBaseMapper<GetPlaylistDto, Playlist>,
-        IBaseMapper<PagedResponseDto<GetPlaylistsDto>, Page<Playlist>>
+    public interface IPlaylistMapper : IMapper<GetPlaylistDto, Playlist>,
+        IMapper<PagedResponseDto<GetPlaylistsDto>, Page<Playlist>>
     {
     }
 }

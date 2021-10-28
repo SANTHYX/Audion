@@ -1,6 +1,6 @@
 ﻿namespace Application.Commons.Mappers
 {
-    public interface IBaseMapper<T, S>
+    public interface IMapper<T, S>
     {
         T MapTo(S source);
     }

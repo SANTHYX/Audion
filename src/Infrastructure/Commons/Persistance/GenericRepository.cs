@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Commons.Persistance
 {
-    public abstract class GenericRepository<T> where T: class
+    public abstract class GenericRepository<T> where T: class, IEntity
     {
         private readonly DataContext _context;
 
@@ -15,12 +15,12 @@ namespace Infrastructure.Commons.Persistance
 
         public async Task AddAsync(T entity)
         {
-            await _context.AddAsync<T>(entity);
+            await _context.AddAsync(entity);
         }
 
         public void Update(T entity)
         {
-            _context.Update<T>(entity);
+            _context.Update(entity);
         }
     }
 }

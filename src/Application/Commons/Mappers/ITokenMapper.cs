@@ -3,7 +3,7 @@ using Core.Domain;
 
 namespace Application.Commons.Mappers
 {
-    public interface ITokenMapper : IBaseMapper<GetJwtTokenDto, Token>
+    public interface ITokenMapper : IMapper<GetJwtTokenDto, Token>
     {
     }
 }

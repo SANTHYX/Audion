@@ -4,6 +4,6 @@ namespace Application.Dto.Profile
 {
     public record UploadAvatarDto
     {
-        IFormFile Avatar { get; set; }
+        public IFormFile Avatar { get; set; }
     }
 }

@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Dto\User\NestedModels\" />
-    <Folder Include="Extensions\Validations\" />
+    <Folder Include="Commons\Helpers\" />
+    <Folder Include="Extensions\Validations\Identity\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -14,6 +14,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
+    <PackageReference Include="Scrutor" Version="3.3.0" />
     <PackageReference Include="System.IO.Abstractions" Version="13.2.43" />
   </ItemGroup>
 

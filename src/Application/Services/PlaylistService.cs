@@ -4,6 +4,7 @@ using Application.Dto;
 using Application.Dto.Playlist;
 using Core.Commons.Pagination;
 using Core.Commons.Persistance;
+using Core.Domain;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Threading.Tasks;
@@ -37,7 +38,10 @@ namespace Application.Services
         public async Task CreateAsync(CreatePlaylistDto model)
         {
             var user = await _unit.User.GetAsync(userId);
-            await _unit.Playlist.AddAsync(new(model.Name, user));
+
+            Playlist playlist = new(model.Name, user);
+
+            await _unit.Playlist.AddAsync(playlist);
             await _unit.CommitAsync();
         }
 
@@ -51,6 +55,7 @@ namespace Application.Services
         public async Task RemoveAsync(Guid id)
         {
             var playlist = await _unit.Playlist.GetAsync(id);
+
             _unit.Playlist.Remove(playlist);
             await _unit.CommitAsync();
         }
@@ -58,7 +63,7 @@ namespace Application.Services
         public async Task UpdateAsync(UpdatePlaylistDto model)
         {
             var playlist = await _unit.Playlist.GetAsync(model.Id);
-            //Edit Logic and validation
+
             _unit.Playlist.Update(playlist);
             await _unit.CommitAsync();
         }
