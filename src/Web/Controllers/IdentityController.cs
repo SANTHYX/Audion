@@ -32,10 +32,9 @@ namespace Web.Controllers
         }
 
         /// <summary>
-        /// Endpoint handling registering user in system
+        /// Endpoint handling registration user instance to system 
         /// </summary>
         /// <param name="model">Informations required to create user instance</param>
-        /// <returns></returns>
         [HttpPost("register")]
         public async Task<IActionResult> Post([FromBody] RegisterUserDto model)
         {
@@ -45,10 +44,10 @@ namespace Web.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Endpoint handling generation of new access tokens for sign-in users after expire
         /// </summary>
         /// <param name="model"></param>
-        /// <returns>Access token and metadata</returns>
+        /// <returns>Object wit access token and metadata</returns>
         [HttpPost("refresh-token")]
         public async Task<IActionResult> Post([FromBody] RefreshTokenDto model)
         {

@@ -10,7 +10,6 @@ namespace Infrastructure.Persistance.Configurations
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Title)
-                .HasMaxLength(30)
                 .IsRequired();
         }
     }

@@ -21,9 +21,8 @@
 					Upload
 				</v-btn>
 				<upload-modal
-					:visable="modalVisibility"
 					:uploadTrackAction="uploadTrackAction"
-					@upload-modal-visibility="disableVisibility"
+					v-model="modalVisibility"
 				/>
 				<v-btn
 					v-for="route in routes.auth"
@@ -36,8 +35,8 @@
 				</v-btn>
 				<drop-menu
 					:userName="userName"
-					:logoutAction="logoutAction"
 					:dropdownRoutes="dropdownRoutes"
+					@handle="logoutAction"
 				/>
 			</v-row>
 		</div>
@@ -47,7 +46,6 @@
 <script>
 import TheSearchBar from './TheSearchBar.vue';
 import DropMenu from './auth/DropMenu.vue';
-import UploadModal from './auth/UploadModal.vue';
 
 export default {
 	name: 'Navbar',
@@ -59,26 +57,39 @@ export default {
 	},
 	data: () => ({
 		routes: {
-			auth: [{ icon: 'mdi-home', routeName: 'Home', label: 'Home' }],
+			auth: [
+				{
+					icon: 'mdi-home',
+					routeName: 'Home',
+					label: 'Home',
+				},
+			],
 			default: [
-				{ icon: 'mdi-login', routeName: 'Login', label: 'Login' },
-				{ icon: 'mdi-account-plus', routeName: 'Register', label: 'Register' },
+				{
+					icon: 'mdi-login',
+					routeName: 'Login',
+					label: 'Login',
+				},
+				{
+					icon: 'mdi-account-plus',
+					routeName: 'Register',
+					label: 'Register',
+				},
 			],
 		},
 		dropdownRoutes: [
-			{ icon: 'mdi-account', routeName: 'UserOverview', label: 'Account' },
+			{
+				icon: 'mdi-account',
+				routeName: 'UserOverview',
+				label: 'Account',
+			},
 		],
 		modalVisibility: false,
 	}),
-	methods: {
-		disableVisibility(val) {
-			this.modalVisibility = val;
-		},
-	},
 	components: {
 		TheSearchBar,
 		DropMenu,
-		UploadModal,
+		UploadModal: () => import('./auth/UploadModal.vue'),
 	},
 };
 </script>

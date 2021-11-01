@@ -58,6 +58,10 @@ namespace Infrastructure.Persistance.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("character varying(30)");
 
+                    b.Property<string>("ImageId")
+                        .HasMaxLength(30)
+                        .HasColumnType("character varying(30)");
+
                     b.Property<string>("LastName")
                         .HasMaxLength(35)
                         .HasColumnType("character varying(35)");
@@ -113,6 +117,9 @@ namespace Infrastructure.Persistance.Migrations
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("character varying(30)");
+
+                    b.Property<string>("TrackId")
+                        .HasColumnType("text");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");

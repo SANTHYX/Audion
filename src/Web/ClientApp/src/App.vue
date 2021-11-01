@@ -7,9 +7,7 @@
 			:uploadTrackAction="this['track/UPLOAD_TRACK']"
 		/>
 		<v-main>
-			<v-fade-transition>
-				<router-view :key="$route.fullPath" />
-			</v-fade-transition>
+			<router-view :key="$route.fullPath" />
 		</v-main>
 		<v-footer />
 	</v-app>

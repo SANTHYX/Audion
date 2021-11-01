@@ -36,7 +36,7 @@ namespace Application.Services
             _accessor = accessor;
             _mapper = mapper;
             _writer = writer;
-            userId = _accessor.HttpContext.User.Identity.IsAuthenticated ?
+            userId = _accessor.HttpContext.User?.Identity.IsAuthenticated is true ?
                 Guid.Parse(_accessor.HttpContext.User.Identity.Name) : Guid.Empty;
         }
 
@@ -65,7 +65,12 @@ namespace Application.Services
             var user = await _unit.User.GetAsync(userId);
 
             var trackId = Guid.NewGuid().ToString();
+
+            _logger.LogInformation("Uploading has started...");
+
             await _writer.SaveAsync(model.Track, trackId);
+
+            _logger.LogInformation("File has been uploaded completly");
             
             Track track = new(model.Title, trackId, user);
 

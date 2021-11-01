@@ -388,3 +388,8 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+#Static files
+*.mp3
+*.wav
+*.jpeg

@@ -89,8 +89,8 @@ export default {
 			} else return;
 		},
 		await() {
-			this.state.isAwaiting = false;
-			this.state.isThrown = true;
+			this.state.isAwaiting = true;
+			this.state.isThrown = false;
 		},
 		throw() {
 			this.state.isAwaiting = false;

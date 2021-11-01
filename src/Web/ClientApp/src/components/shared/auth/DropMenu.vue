@@ -18,7 +18,7 @@
 				</v-list-item-icon>
 				<v-list-item-title>{{ route.label }}</v-list-item-title>
 			</v-list-item>
-			<v-list-item class="pointer" @click="logoutAction">
+			<v-list-item class="pointer" @click="logout">
 				<v-list-item-icon>
 					<v-icon>mdi-logout</v-icon>
 				</v-list-item-icon>
@@ -31,6 +31,11 @@
 <script>
 export default {
 	name: 'DropMenu',
-	props: ['userName', 'logoutAction', 'dropdownRoutes'],
+	props: ['userName', 'dropdownRoutes'],
+	methods: {
+		logout() {
+			this.$emit('handle');
+		},
+	},
 };
 </script>

@@ -1,10 +1,12 @@
 ﻿using Application.Commons.Services;
 using Application.Dto.Profile;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace Web.Controllers
 {
+    [Authorize]
     [Route("[controller]")]
     [ApiController]
     public class ProfileController : ControllerBase

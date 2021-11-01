@@ -14,7 +14,7 @@ namespace Application.Mappers
         public GetTrackDto MapTo(Track source)
             => source is null ? null : new()
             {
-
+                
             };
 
         public PagedResponseDto<GetTracksDto> MapTo(Page<Track> source, HttpContext context)
@@ -22,7 +22,7 @@ namespace Application.Mappers
             {
                 Page = source.CurrentPage,
                 Results = source.Results,
-                Collection = source.Collection.Select(x => new GetTracksDto
+                Collection = source.Collection?.Select(x => new GetTracksDto
                 {
                     Title = x.Title,
                     TrackURL = new Uri($"{ context.Request.Host.Value }/Track/{ x.Id }")

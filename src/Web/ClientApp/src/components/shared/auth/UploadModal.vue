@@ -1,5 +1,5 @@
 <template>
-	<v-dialog v-model="visable" max-width="700px" persistent>
+	<v-dialog :value="visable" max-width="700px" persistent>
 		<v-card
 			min-height="370px"
 			@drop.prevent="retriveTrack"
@@ -7,26 +7,36 @@
 			@dragleave="state.isDraged = false"
 		>
 			<v-card-title>
-				<h2>Upload Track</h2>
+				<h2>
+					Upload Track
+				</h2>
 				<v-spacer />
-				<v-icon @click="disableModal" color="red">mdi-close</v-icon>
+				<v-icon :value="visable" @click="disableModal" color="red">
+					mdi-close
+				</v-icon>
 			</v-card-title>
 			<v-divider />
-			<v-card-text v-if="!track.file" id="drag-interface">
+			<v-card-text v-if="isTrackNull" id="drag-interface">
 				<v-row justify="center" class="mt-5 pa-5 dotted">
 					<v-col>
 						<p class="overline font-italic text-center">
 							Drag soundtrack that you wanna upload on server
 						</p>
 						<v-row justify="center" align="center">
-							<v-icon size="120px">mdi-file</v-icon>
-							<h1 class="justify-center">UploadFile</h1>
+							<v-icon size="120px">
+								mdi-file
+							</v-icon>
+							<h1 class="justify-center">
+								UploadFile
+							</h1>
 						</v-row>
 					</v-col>
 				</v-row>
 			</v-card-text>
 			<v-card-text v-else>
-				<h2 class="mt-3 text-center">{{ track.name }}</h2>
+				<h2 class="mt-3 text-center">
+					{{ track.title }}
+				</h2>
 				<v-row justify="center" class="mt-2">
 					<v-img
 						dark
@@ -59,7 +69,7 @@ export default {
 	props: ['visable', 'uploadTrackAction'],
 	data: () => ({
 		track: {
-			name: '',
+			title: '',
 			file: null,
 		},
 		state: {
@@ -67,6 +77,15 @@ export default {
 			isDraged: false,
 		},
 	}),
+	model: {
+		prop: 'visable',
+		event: 'show',
+	},
+	computed: {
+		isTrackNull() {
+			return !this.track.file;
+		},
+	},
 	methods: {
 		retriveTrack(e) {
 			this.state.isDraged = false;
@@ -80,16 +99,19 @@ export default {
 			this.state.isThrow = false;
 		},
 		setTrack(file) {
-			this.track.name = file.name;
+			this.track.title = file.name;
 			this.track.file = file;
 		},
 		isValidType(file) {
 			return file.type === 'audio/mpeg' || file.type === 'audio/wav';
 		},
 		disableModal() {
-			this.$emit('upload-modal-visibility', false);
 			this.state.isThrow = false;
-			this.track = {};
+			this.track = {
+				name: '',
+				file: null,
+			};
+			this.$emit('show', !this.visable);
 		},
 	},
 };

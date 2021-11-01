@@ -17,7 +17,8 @@ namespace Infrastructure.Toolkits.File
 
             CreateDirectoryIfNotExist(directory);
 
-            var path = Path.Combine(directory,fileName);
+            var filename = $"{fileName}.{Path.GetExtension(file.FileName)}";
+            var path = Path.Combine(directory, filename);
 
             NotEmpty(file);
             ValidFileType(file);
@@ -27,9 +28,11 @@ namespace Infrastructure.Toolkits.File
 
         protected override void ValidFileType(IFormFile file)
         {
-            if (Path.GetExtension(file.FileName) is not ".mp3" or ".wav")
+            var extension = Path.GetExtension(file.FileName);
+
+            if (extension != ".mp3" && extension != ".wav")
             {
-                throw new Exception("Not supported image file, service accept only '.jpg' files");
+                throw new Exception("Not supported audio file, service accept only '.wav' or '.mp3' files");
             }
         }
     }

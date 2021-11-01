@@ -9,10 +9,7 @@
 			outlined
 			dense
 			@keypress.enter="
-				$router.push({
-					name: 'SearchResults',
-					query: { phrase: searchPhrase },
-				})
+				$router.push({ name: 'SearchResults', query: { phrase: searchPhrase } })
 			"
 		/>
 		<v-btn

@@ -1,6 +1,7 @@
 ﻿using Application.Commons.Services;
 using Application.Dto.Playlist;
 using Core.Commons.Pagination;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -26,6 +27,7 @@ namespace Web.Controllers
         public async Task<IActionResult> Get([FromQuery] PagedQuery query)
             => Ok(await _service.BrowseAsync(query));
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreatePlaylistDto model)
         {
@@ -34,6 +36,7 @@ namespace Web.Controllers
             return Ok();
         }
 
+        [Authorize]
         [HttpPut]
         public async Task<IActionResult> Put([FromBody] UpdatePlaylistDto model)
         {
@@ -42,6 +45,7 @@ namespace Web.Controllers
             return Ok();
         }
 
+        [Authorize]
         [HttpDelete("id")]
         public async Task<IActionResult> Delete([FromBody] DeletePlaylistDto model)
         {

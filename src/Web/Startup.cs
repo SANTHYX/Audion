@@ -56,6 +56,8 @@ namespace Web
 
             app.UseExceptionMiddleware();
 
+            app.UseAuthentication();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

@@ -50,12 +50,8 @@ router.beforeEach((to, from, next) => {
     if (identityStore.getters.isAuthenticated(identityStore.state)) {
       next();
       return;
-    } else {
-      next('*');
-    }
-  } else {
-    next();
-  }
+    } else next('*');
+  } else next();
 });
 
 export default router;

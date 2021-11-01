@@ -14,17 +14,16 @@
         </member>
         <member name="M:Web.Controllers.IdentityController.Post(Application.Dto.User.RegisterUserDto)">
             <summary>
-            Endpoint handling registering user in system
+            Endpoint handling registration user instance to system 
             </summary>
             <param name="model">Informations required to create user instance</param>
-            <returns></returns>
         </member>
         <member name="M:Web.Controllers.IdentityController.Post(Application.Dto.Identity.RefreshTokenDto)">
             <summary>
-            
+            Endpoint handling generation of new access tokens for sign-in users after expire
             </summary>
             <param name="model"></param>
-            <returns>Access token and metadata</returns>
+            <returns>Object wit access token and metadata</returns>
         </member>
         <member name="M:Web.Controllers.IdentityController.Put(Application.Dto.Identity.RevokeTokenDto)">
             <summary>

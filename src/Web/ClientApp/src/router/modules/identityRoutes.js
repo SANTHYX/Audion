@@ -16,19 +16,19 @@ const identityRoutes = [
             {
                 path: '',
                 name: 'UserOverview',
-                component: () => import('@/views/auth/account/UserOverview.vue'),
+                component: () => import('@/views/auth/sub-routes/account/UserOverview.vue'),
                 props: true,
             },
             {
                 path: 'profile',
                 name: 'EditProfile',
-                component: () => import('@/views/auth/account/ProfileForm.vue'),
+                component: () => import('@/views/auth/sub-routes/account/ProfileForm.vue'),
                 props: true,
             },
             {
                 path: 'creedentials',
                 name: 'EditCreedentials',
-                component: () => import('@/views/auth/account/CredentialsForm.vue'),
+                component: () => import('@/views/auth/sub-routes/account/CredentialsForm.vue'),
                 props: true,
             }
         ],

@@ -27,6 +27,7 @@ const trackStore = {
     actions: {
         UPLOAD_TRACK: async (context, track) => {
             try {
+                console.log(track);
                 await trackService.uploadTrack(track);
             } catch (err) {
                 throw new Error(err.response.data.Message);

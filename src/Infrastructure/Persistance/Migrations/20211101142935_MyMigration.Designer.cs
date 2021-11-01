@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.Persistance.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210807210046_MyMigration")]
+    [Migration("20211101142935_MyMigration")]
     partial class MyMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -57,6 +57,10 @@ namespace Infrastructure.Persistance.Migrations
                         .HasColumnType("character varying(15)");
 
                     b.Property<string>("FirstName")
+                        .HasMaxLength(30)
+                        .HasColumnType("character varying(30)");
+
+                    b.Property<string>("ImageId")
                         .HasMaxLength(30)
                         .HasColumnType("character varying(30)");
 
@@ -115,6 +119,9 @@ namespace Infrastructure.Persistance.Migrations
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("character varying(30)");
+
+                    b.Property<string>("TrackId")
+                        .HasColumnType("text");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");

@@ -1,6 +1,7 @@
 ﻿using Application.Commons.Services;
 using Application.Dto.Track;
 using Core.Commons.Pagination;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -26,6 +27,7 @@ namespace Web.Controllers
         public async Task<IActionResult> Get([FromQuery] PagedQuery query)
             => Ok(await _service.BrowseAsync(query));
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Post([FromForm] UploadTrackDto model)
         {

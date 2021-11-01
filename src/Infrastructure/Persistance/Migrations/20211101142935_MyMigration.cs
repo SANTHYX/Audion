@@ -50,6 +50,7 @@ namespace Infrastructure.Persistance.Migrations
                     LastName = table.Column<string>(type: "character varying(35)", maxLength: 35, nullable: true),
                     Country = table.Column<string>(type: "character varying(15)", maxLength: 15, nullable: true),
                     City = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: true),
+                    ImageId = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: true),
                     UserId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
@@ -90,6 +91,7 @@ namespace Infrastructure.Persistance.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Title = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
+                    TrackId = table.Column<string>(type: "text", nullable: true),
                     UserId = table.Column<Guid>(type: "uuid", nullable: false),
                     PlaylistId = table.Column<Guid>(type: "uuid", nullable: true)
                 },
