@@ -31,7 +31,16 @@
 <script>
 export default {
 	name: 'DropMenu',
-	props: ['userName', 'dropdownRoutes'],
+	props: {
+		userName: {
+			type: String,
+			required: true,
+		},
+		dropdownRoutes: {
+			type: Array,
+			required: true,
+		},
+	},
 	methods: {
 		logout() {
 			this.$emit('handle');

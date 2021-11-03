@@ -21,8 +21,8 @@
 					Upload
 				</v-btn>
 				<upload-modal
-					:uploadTrackAction="uploadTrackAction"
 					v-model="modalVisibility"
+					@upload="uploadTrackAction($event)"
 				/>
 				<v-btn
 					v-for="route in routes.auth"

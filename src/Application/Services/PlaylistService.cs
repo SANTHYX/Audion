@@ -30,7 +30,9 @@ namespace Application.Services
         public async Task<PagedResponseDto<GetPlaylistsDto>> BrowseAsync(PagedQuery query)
         {
             var playlists = await _unit.Playlist
-                .GetAllAsync(x => x.Name == "x",query);
+                .GetAllAsync(x => 
+                    x.Name.Contains(query.Name),
+                query);
 
             return _mapper.MapTo(playlists);
         }
@@ -40,7 +42,6 @@ namespace Application.Services
             var user = await _unit.User.GetAsync(userId);
 
             Playlist playlist = new(model.Name, user);
-
             await _unit.Playlist.AddAsync(playlist);
             await _unit.CommitAsync();
         }

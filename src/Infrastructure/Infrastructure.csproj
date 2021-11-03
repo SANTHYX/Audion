@@ -17,8 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Files\" />
     <Folder Include="Externals\" />
+    <Folder Include="Files\" />
   </ItemGroup>
 
 </Project>

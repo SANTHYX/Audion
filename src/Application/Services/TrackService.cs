@@ -65,15 +65,9 @@ namespace Application.Services
             var user = await _unit.User.GetAsync(userId);
 
             var trackId = Guid.NewGuid().ToString();
-
-            _logger.LogInformation("Uploading has started...");
-
             await _writer.SaveAsync(model.Track, trackId);
-
-            _logger.LogInformation("File has been uploaded completly");
-            
+   
             Track track = new(model.Title, trackId, user);
-
             await _unit.Track.AddAsync(track);
             await _unit.CommitAsync();
         }

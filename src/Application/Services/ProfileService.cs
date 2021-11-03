@@ -43,7 +43,6 @@ namespace Application.Services
 
             Profile profile = new(model.FirstName, 
                 model.LastName, model.Country, model.City, user);
-
             await _unit.Profile.AddAsync(profile);
             await _unit.CommitAsync();
 

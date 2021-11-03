@@ -2,8 +2,8 @@
 using Application.Commons.Types;
 using Infrastructure.Commons.Helpers;
 using Infrastructure.Commons.Toolkits;
+using Infrastructure.Exceptions;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
 using System;
 using System.IO;
 using System.Threading.Tasks;
@@ -18,6 +18,7 @@ namespace Infrastructure.Toolkits.File
 
             CreateDirectoryIfNotExist(directory);
 
+            var newFileName = $"{fileName}{Path.GetExtension(file.FileName)}";
             var path = Path.Combine(directory, fileName);
 
             NotEmpty(file);
@@ -30,7 +31,7 @@ namespace Infrastructure.Toolkits.File
         {
             if (Path.GetExtension(file.FileName) is not ".jpg")
             {
-                throw new Exception("Not supported image file, service accept only '.jpg' files");
+                throw new InvalidFileFormatException("Not supported image file, service accept only '.jpg' files");
             }
         }
 

@@ -9,6 +9,7 @@ namespace Core.Commons.Repositories
     {
         Task<User> GetAsync(Guid id);
         Task<User> GetAsync(string userName);
+        Task<User> GetRelationalAsync(Guid id);
         Task<User> GetAggregateAsync(string userName);
         Task<bool> IsExist(string userName);
     }

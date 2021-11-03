@@ -2,7 +2,7 @@
 	<v-dialog :value="visable" max-width="700px" persistent>
 		<v-card
 			min-height="370px"
-			@drop.prevent="retriveTrack"
+			@drop.prevent="setTrack($event.dataTransfer.files[0])"
 			@dragover.prevent="state.isDraged = true"
 			@dragleave="state.isDraged = false"
 		>
@@ -46,7 +46,7 @@
 					/>
 				</v-row>
 				<v-row justify="center" class="mt-7">
-					<v-btn class="success" @click="uploadTrackAction(track)">
+					<v-btn class="success" @click="upload">
 						Upload
 					</v-btn>
 				</v-row>
@@ -66,7 +66,7 @@
 <script>
 export default {
 	name: 'UploadModal',
-	props: ['visable', 'uploadTrackAction'],
+	props: ['visable'],
 	data: () => ({
 		track: {
 			title: '',
@@ -87,31 +87,27 @@ export default {
 		},
 	},
 	methods: {
-		retriveTrack(e) {
+		setTrack(file) {
 			this.state.isDraged = false;
-			let file = e.dataTransfer.files[0];
 			if (this.isValidType(file)) {
-				this.setTrack(file);
+				this.track.file = file;
+				this.track.title = file.name;
 			} else {
 				this.state.isThrow = true;
 				return;
 			}
 			this.state.isThrow = false;
 		},
-		setTrack(file) {
-			this.track.title = file.name;
-			this.track.file = file;
-		},
 		isValidType(file) {
 			return file.type === 'audio/mpeg' || file.type === 'audio/wav';
 		},
 		disableModal() {
 			this.state.isThrow = false;
-			this.track = {
-				name: '',
-				file: null,
-			};
+			this.track = { name: '', file: null };
 			this.$emit('show', !this.visable);
+		},
+		upload() {
+			this.$emit('upload', this.track);
 		},
 	},
 };

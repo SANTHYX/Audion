@@ -43,7 +43,6 @@ namespace Application.Services
             }
 
             var(hash, salt) = _encryptor.HashPassword(model.NewPassword);
-
             user.SetPassword(hash);
             user.SetSalt(salt);
 
@@ -63,7 +62,6 @@ namespace Application.Services
             }
 
             var(token, accessToken) = _jwtHandler.GenerateToken(user);
-
             await _unit.Token.AddAsync(token);
             await _unit.CommitAsync();
 
@@ -91,7 +89,6 @@ namespace Application.Services
             }
 
             var (newToken, accessToken) = _jwtHandler.GenerateToken(token.User);
-
             await _unit.Token.AddAsync(newToken);
             await _unit.CommitAsync();
 
@@ -114,9 +111,7 @@ namespace Application.Services
             }
 
             var (hash, salt) = _encryptor.HashPassword(model.Password);
-
             User user = new(model.UserName, hash, salt, model.Email);
-
             await _unit.User.AddAsync(user);
             await _unit.CommitAsync();
 
@@ -133,7 +128,6 @@ namespace Application.Services
             }
 
             token.RevokeToken();
-
             _unit.Token.Update(token);
             await _unit.CommitAsync();
 

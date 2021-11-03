@@ -21,6 +21,14 @@ const trackStore = {
 
         SET_TRACKS_COLLECTION: (state, tracksCollectionObj) => {
             state.tracksCollection = tracksCollectionObj;
+        },
+
+        REMOVE_TRACK: (state) => {
+            state.track = {}
+        },
+
+        REMOVE_TRACKS_COLLECTION: (state) => {
+            state.tracksCollection = {}
         }
     },
 
