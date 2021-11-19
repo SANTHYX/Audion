@@ -32,7 +32,7 @@ namespace Application.Services
 
             _logger.LogInformation($"User with userName: {user.UserName} has been fetched");
 
-            return _mapper.MapTo(user,_accessor.HttpContext);
+            return _mapper.MapTo(user);
         }
     }
 }

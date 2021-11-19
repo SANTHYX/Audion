@@ -1,11 +1,9 @@
-﻿using Application.Dto;
-using Application.Dto.User;
-using Core.Commons.Pagination;
+﻿using Application.Dto.User;
 using Core.Domain;
 
 namespace Application.Commons.Mappers
 {
-    public interface IUserMapper : IMapperWithRequestAccess<GetUserDto, User>
+    public interface IUserMapper : IMapper<GetUserDto, User>
     {
     }
 }

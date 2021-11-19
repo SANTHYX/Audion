@@ -5,13 +5,18 @@
 <script>
 export default {
 	name: 'DefaultBrowse',
+	computed: {
+		collection() {
+			return this.defaultCollection.collection;
+		},
+	},
 	props: {
 		browseDefaultAction: {
 			type: Function,
 			required: true,
 		},
 		defaultCollection: {
-			type: Function,
+			type: Object,
 		},
 	},
 	async mounted() {

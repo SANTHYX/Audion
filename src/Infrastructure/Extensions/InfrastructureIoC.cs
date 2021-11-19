@@ -1,16 +1,16 @@
-﻿using Application.Commons.Identity;
+﻿using Application.Commons.Helpers;
+using Application.Commons.Identity;
 using Application.Commons.Toolkits.Files;
-using Application.Commons.Types;
 using Core.Commons.Pagination;
 using Core.Commons.Persistance;
 using Core.Commons.Repositories;
+using Infrastructure.Commons.Helpers;
 using Infrastructure.Commons.Pagination;
 using Infrastructure.Commons.Persistance;
 using Infrastructure.Identity;
 using Infrastructure.Options;
 using Infrastructure.Persistance;
 using Infrastructure.Persistance.Repositories;
-using Infrastructure.Toolkits.File;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -28,20 +28,48 @@ namespace Infrastructure.Extensions
             //Infrastructure IoC Container Space
             services.Configure<SecuritySettings>(configuration.GetSection("Security"));
 
-            services.AddDbContext<DataContext>(opt => 
+            services.AddDatabaseModule(configuration);
+            services.AddAuthenticationModule(configuration);
+            services.AddRepositoriesModule();
+            services.AddStaticFileWriterModule();
+
+            services.AddSingleton<IEncryptor, Encryptor>();
+            services.AddSingleton<IJwtHandler, JwtHandler>();
+            services.AddSingleton<IServerDetails, ServerDetails>();
+            services.AddSingleton<IUserProvider, UserProvider>();
+            services.AddSingleton(typeof(IPagedResponse<>), typeof(PagedResponse<>));
+        }
+
+        private static void AddRepositoriesModule(this IServiceCollection services)
+        {
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IProfileRepository, ProfileRepository>();
+            services.AddScoped<ITokenRepository, TokenRepository>();
+            services.AddScoped<IPlaylistRepository, PlaylistRepository>();
+            services.AddScoped<ITrackRepository, TrackRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+        }
+
+        private static void AddDatabaseModule(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddDbContext<DataContext>(opt =>
             {
                 opt.UseNpgsql(configuration.GetConnectionString("DefaultConnection"),
                     npgCfg => npgCfg.MigrationsAssembly("Infrastructure"));
-                opt.EnableDetailedErrors(); 
+                opt.EnableDetailedErrors();
             });
 
+        }
+
+        private static void AddAuthenticationModule(this IServiceCollection services, IConfiguration configuration)
+        {
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
                 x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             })
-                .AddJwtBearer(x => 
+                .AddJwtBearer(x =>
                 {
                     x.TokenValidationParameters = new TokenValidationParameters
                     {
@@ -50,22 +78,20 @@ namespace Infrastructure.Extensions
                         ValidateIssuerSigningKey = true,
                         RequireExpirationTime = true,
                         ValidateLifetime = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration.GetSection("Security:Key").Value)),
+                        IssuerSigningKey = new SymmetricSecurityKey(
+                            Encoding.UTF8.GetBytes(configuration.GetSection("Security:Key").Value)),
                         ClockSkew = TimeSpan.Zero
                     };
                 });
+        }
 
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IProfileRepository, ProfileRepository>();
-            services.AddScoped<ITokenRepository, TokenRepository>();
-            services.AddScoped<IPlaylistRepository, PlaylistRepository>();
-            services.AddScoped<ITrackRepository, TrackRepository>();
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddSingleton<IEncryptor, Encryptor>();
-            services.AddSingleton<IJwtHandler, JwtHandler>();
-            services.AddSingleton(typeof(IPagedResponse<>), typeof(PagedResponse<>));
-            services.AddSingleton(typeof(IStaticFilesWriter<IImageFile>), typeof(ImageStaticFileWriter));
-            services.AddSingleton(typeof(IStaticFilesWriter<IAudioFile>), typeof(AudioStaticFileWriter));
+        private static void AddStaticFileWriterModule(this IServiceCollection services)
+        {
+            services.Scan(x => x.FromApplicationDependencies()
+                .AddClasses(y => y.AssignableTo(typeof(IStaticFilesWriter<>)))
+                .AsImplementedInterfaces()
+                .WithSingletonLifetime());
+              
         }
     }
 }

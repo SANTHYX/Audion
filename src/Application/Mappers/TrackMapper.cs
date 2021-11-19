@@ -1,4 +1,5 @@
-﻿using Application.Commons.Mappers;
+﻿using Application.Commons.Helpers;
+using Application.Commons.Mappers;
 using Application.Dto;
 using Application.Dto.Track;
 using Core.Commons.Pagination;
@@ -11,13 +12,20 @@ namespace Application.Mappers
 {
     public class TrackMapper : ITrackMapper
     {
+        private readonly IServerDetails _server;
+
+        public TrackMapper(IServerDetails server)
+        {
+            _server = server;
+        }
+
         public GetTrackDto MapTo(Track source)
             => source is null ? null : new()
             {
                 
             };
 
-        public PagedResponseDto<GetTracksDto> MapTo(Page<Track> source, HttpContext context)
+        public PagedResponseDto<GetTracksDto> MapTo(Page<Track> source)
             => new()
             {
                 Page = source.CurrentPage,
@@ -25,7 +33,7 @@ namespace Application.Mappers
                 Collection = source.Collection?.Select(x => new GetTracksDto
                 {
                     Title = x.Title,
-                    TrackURL = new Uri($"{ context.Request.Host.Value }/Track/{ x.Id }")
+                    Track = new Uri($"{ _server.GetServerURL() }/Track/{ x.Id }")
                 }),
                 TotalResults = source.TotalResults,
                 TotalPages = source.TotalPages

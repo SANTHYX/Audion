@@ -1,4 +1,5 @@
-﻿using Application.Commons.Mappers;
+﻿using Application.Commons.Helpers;
+using Application.Commons.Mappers;
 using Application.Commons.Services;
 using Application.Mappers;
 using Application.Services;
@@ -11,16 +12,27 @@ namespace Application.Extensions
     {
         public static void AddApplicationIoC(this IServiceCollection services)
         {
+            services.AddServices();
+            services.AddMappers();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+        }
+
+        private static void AddMappers(this IServiceCollection services)
+        {
+            services.AddSingleton<IUserMapper, UserMapper>();
+            services.AddSingleton<ITokenMapper, TokenMapper>();
+            services.AddSingleton<IPlaylistMapper, PlaylistMapper>();
+            services.AddSingleton<ITrackMapper, TrackMapper>();
+        }
+
+        private static void AddServices(this IServiceCollection services)
+        { 
             services.AddScoped<IIdentityService, IdentityService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IProfileService, ProfileService>();
             services.AddScoped<IPlaylistService, PlaylistService>();
             services.AddScoped<ITrackService, TrackService>();
-            services.AddSingleton<IUserMapper, UserMapper>();
-            services.AddSingleton<ITokenMapper, TokenMapper>();
-            services.AddSingleton<IPlaylistMapper, PlaylistMapper>();
-            services.AddSingleton<ITrackMapper, TrackMapper>();
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
+
     }
 }

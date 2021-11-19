@@ -20,8 +20,11 @@ namespace Application.Services
         private readonly ILogger<IdentityService> _logger;
         private readonly Guid userId;
 
-        public IdentityService(IUnitOfWork unit, IEncryptor encryptor, 
-            IJwtHandler jwtHandler, IHttpContextAccessor contextAccessor,
+        public IdentityService(
+            IUnitOfWork unit,
+            IEncryptor encryptor, 
+            IJwtHandler jwtHandler, 
+            IHttpContextAccessor contextAccessor,
             ILogger<IdentityService> logger)
         {
             _unit = unit;

@@ -46,7 +46,7 @@ namespace Application.Services
 
             var tracks = await _unit.Track.GetAllAsync(x => x.Title == "", query);
 
-            return _mapper.MapTo(tracks, _accessor.HttpContext);
+            return _mapper.MapTo(tracks);
         }
 
         public async Task<GetTrackDto> GetAsync(string title)

@@ -1,14 +1,21 @@
-﻿using Application.Commons.Mappers;
+﻿using Application.Commons.Helpers;
+using Application.Commons.Mappers;
 using Application.Dto.User;
 using Core.Domain;
-using Microsoft.AspNetCore.Http;
 using System;
 
 namespace Application.Mappers
 {
     public class UserMapper : IUserMapper
     {
-        public GetUserDto MapTo(User source, HttpContext context)
+        private readonly IServerDetails _server;
+
+        public UserMapper(IServerDetails server)
+        {
+            _server = server;
+        }
+
+        public GetUserDto MapTo(User source)
             => source is null ? null :new()
             {
                 UserName = source.UserName,
@@ -19,8 +26,8 @@ namespace Application.Mappers
                     LastName = source.Profile.LastName,
                     City = source.Profile.City,
                     Country = source.Profile.Country,
-                    ImageId = source.Profile.ImageId is null ? null : 
-                        new Uri($"{ context.Request.Host }/Images/{ source.Profile.ImageId }")
+                    Avatar = source.Profile.ImageId is null ? null 
+                        : new Uri($"{ _server.GetServerURL() }/Images/{ source.Profile.ImageId }")
                 }
             };      
     }

@@ -5,6 +5,11 @@
 <script>
 export default {
 	name: 'PlaylistBrowse',
+	computed: {
+		collection() {
+			return this.playlistsCollection.collection;
+		},
+	},
 	props: {
 		browsePlaylistAction: {
 			type: Function,
@@ -15,7 +20,7 @@ export default {
 			required: true,
 		},
 		playlistsCollection: {
-			type: Function,
+			type: Object,
 		},
 	},
 	async mounted() {

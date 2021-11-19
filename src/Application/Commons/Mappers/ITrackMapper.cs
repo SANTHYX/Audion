@@ -6,7 +6,7 @@ using Core.Domain;
 namespace Application.Commons.Mappers
 {
     public interface ITrackMapper : IMapper<GetTrackDto, Track>, 
-        IMapperWithRequestAccess<PagedResponseDto<GetTracksDto>, Page<Track>>
+        IMapper<PagedResponseDto<GetTracksDto>, Page<Track>>
     {
         
     }

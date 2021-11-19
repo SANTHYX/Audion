@@ -5,6 +5,11 @@
 <script>
 export default {
 	name: 'TrackBrowse',
+	computed: {
+		collection() {
+			return this.tracksCollection.collection;
+		},
+	},
 	props: {
 		browseTrackAction: {
 			type: Function,
@@ -15,7 +20,7 @@ export default {
 			required: true,
 		},
 		tracksCollection: {
-			type: Function,
+			type: Object,
 		},
 	},
 	async mounted() {

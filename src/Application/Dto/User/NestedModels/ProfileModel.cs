@@ -8,6 +8,6 @@ namespace Application.Dto.User.NestedModels
         public string LastName { get; set; }
         public string Country { get; set; }
         public string City { get; set; }
-        public Uri ImageId { get; set; }
+        public Uri Avatar { get; set; }
     }
 }
