@@ -17,8 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Extensions\Modules\" />
-    <Folder Include="Externals\" />
     <Folder Include="Files\" />
   </ItemGroup>
 

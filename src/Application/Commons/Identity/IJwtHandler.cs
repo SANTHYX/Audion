@@ -1,4 +1,5 @@
-﻿using Core.Domain;
+﻿using Core.Commons.Identity;
+using Core.Domain;
 
 namespace Application.Commons.Identity
 {

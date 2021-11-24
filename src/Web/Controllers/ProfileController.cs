@@ -19,7 +19,7 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] CreateProfileDto model)
+        public async Task<IActionResult> CreateAsync([FromBody] CreateProfileDto model)
         {
             await _service.CreateAsync(model);
 
@@ -27,7 +27,7 @@ namespace Web.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put([FromBody] UpdateProfileDto model)
+        public async Task<IActionResult> UpdateAsync([FromBody] UpdateProfileDto model)
         {
             await _service.UpdateAsync(model);
 
@@ -35,7 +35,7 @@ namespace Web.Controllers
         } 
 
         [HttpPut("upload-avatar")]
-        public async Task<IActionResult> Put([FromForm] UploadAvatarDto model)
+        public async Task<IActionResult> UploadAvatarAsync([FromForm] UploadAvatarDto model)
         {
             await _service.UploadAvatarAsync(model);
 

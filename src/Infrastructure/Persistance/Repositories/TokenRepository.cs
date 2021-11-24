@@ -1,4 +1,5 @@
-﻿using Core.Commons.Repositories;
+﻿using Core.Commons.Identity;
+using Core.Commons.Persistance.Repositories;
 using Core.Domain;
 using Infrastructure.Commons.Persistance;
 using Microsoft.EntityFrameworkCore;
@@ -17,7 +18,7 @@ namespace Infrastructure.Persistance.Repositories
 
         public async Task<Token> GetAsync(string token)
             => await _context.Tokens
-            .Include(x => x.User)
-            .FirstOrDefaultAsync(x => x.RefreshToken == token);
+                .Include(x => x.User)
+                .FirstOrDefaultAsync(x => x.RefreshToken == token);
     }
 }

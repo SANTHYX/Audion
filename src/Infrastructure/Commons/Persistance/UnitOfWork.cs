@@ -1,9 +1,11 @@
 ﻿using Core.Commons.Pagination;
 using Core.Commons.Persistance;
-using Core.Commons.Repositories;
+using Core.Commons.Persistance.Repositories;
 using Core.Domain;
 using Infrastructure.Persistance;
 using Infrastructure.Persistance.Repositories;
+using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Infrastructure.Commons.Persistance
@@ -17,7 +19,7 @@ namespace Infrastructure.Commons.Persistance
         public IPlaylistRepository Playlist { get; set; }
         private readonly DataContext _context;
 
-        public UnitOfWork(DataContext context, IPagedResponse<Track> _trackResponse,
+        public UnitOfWork(DataContext context, IPagedResponse<Track> _trackResponse, 
             IPagedResponse<Playlist> _playlistResponse)
         {
             _context = context;
@@ -26,6 +28,11 @@ namespace Infrastructure.Commons.Persistance
             Token = new TokenRepository(context);
             Track = new TrackRepository(context,_trackResponse);
             Playlist = new PlaylistRepository(context, _playlistResponse);
+        }
+
+        public async Task CommitAsync(CancellationToken token)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task CommitAsync()

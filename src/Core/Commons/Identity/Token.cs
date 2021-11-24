@@ -1,7 +1,8 @@
 ﻿using Core.Commons.Types;
+using Core.Domain;
 using System;
 
-namespace Core.Domain
+namespace Core.Commons.Identity
 {
     public class Token : IEntity
     {
@@ -17,7 +18,7 @@ namespace Core.Domain
         public Token(DateTime expiresAt, User user)
         {
             RefreshToken = Guid.NewGuid().ToString("N");
-            CreatedAt = DateTime.UtcNow;
+            CreatedAt = DateTime.UtcNow; 
             ExpiresAt = expiresAt;
             IsRevoked = false;
             User = user ?? throw new Exception("Cannot generate token for non existing user");

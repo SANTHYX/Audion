@@ -1,7 +1,7 @@
 ﻿namespace Application.Commons.Mappers
 {
-    public interface IMapper<T, S>
+    public interface IMapper<TOutput, TInput>
     {
-        T MapTo(S source);
+        TOutput MapTo<TOut>(TInput source) where TOut : TOutput;
     }
 }

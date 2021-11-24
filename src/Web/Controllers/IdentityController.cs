@@ -2,6 +2,7 @@
 using Application.Dto.Identity;
 using Application.Dto.User;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace Web.Controllers
@@ -24,7 +25,7 @@ namespace Web.Controllers
         /// <param name="model">Object contains user creedentials</param>
         /// <returns>Access token and metadata</returns>
         [HttpPost("login")]
-        public async Task<IActionResult> Post([FromBody] LoginUserDto model)
+        public async Task<IActionResult> LoginUser([FromBody] LoginUserDto model)
         {
             var token = await _service.LoginAsync(model);
 
@@ -36,7 +37,7 @@ namespace Web.Controllers
         /// </summary>
         /// <param name="model">Informations required to create user instance</param>
         [HttpPost("register")]
-        public async Task<IActionResult> Post([FromBody] RegisterUserDto model)
+        public async Task<IActionResult> RegisterAsync([FromBody] RegisterUserDto model)
         {
             await _service.RegisterAsync(model);
 
@@ -49,7 +50,7 @@ namespace Web.Controllers
         /// <param name="model"></param>
         /// <returns>Object wit access token and metadata</returns>
         [HttpPost("refresh-token")]
-        public async Task<IActionResult> Post([FromBody] RefreshTokenDto model)
+        public async Task<IActionResult> RefreshTokenAsync([FromBody] RefreshTokenDto model)
         {
             var refreshToken = await _service.RefreshToken(model);
 
@@ -59,10 +60,38 @@ namespace Web.Controllers
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        [HttpPost("recovery-password")]
+        public async Task<IActionResult> RecoveryPasswordAsync([FromBody] string email)
+        {
+            await _service.CreateRecoveryPasswordThreadAsync(email);
+
+            return Ok();
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="recoveryId"></param>
+        /// <param name="newPassword"></param>
+        /// <returns></returns>
+        [HttpPut("recovery-password/{ recoveryId }")]
+        public async Task<IActionResult> ChangePasswordAtRecoveryAsync([FromBody] Guid recoveryId, [FromBody]string newPassword)
+        {
+            await _service.ChangePasswordAtRecoveryAsync(recoveryId, newPassword);
+
+            return Ok();
+        }
+
+        /// <summary>
+        /// Endpoint handling process of expiration refresh tokens, 
+        /// after invoke this operation if user will try to generate 
+        /// new token from expired refresh in session he will recive exception 
+        /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPut("revoke-token")]
-        public async Task<IActionResult> Put([FromBody] RevokeTokenDto model)
+        public async Task<IActionResult> RevokeTokenAsync([FromBody] RevokeTokenDto model)
         {
             await _service.RevokeTokenAsync(model);
 
@@ -75,7 +104,7 @@ namespace Web.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPut("change-creedentials")]
-        public async Task<IActionResult> Put([FromBody] ChangeCreedentialsDto model)
+        public async Task<IActionResult> ChangeCreedentialsAsync([FromBody] ChangeCreedentialsDto model)
         {
             await _service.ChangeCreedentials(model);
 

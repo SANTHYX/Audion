@@ -15,7 +15,7 @@ namespace Application.Mappers
             _server = server;
         }
 
-        public GetUserDto MapTo(User source)
+        public GetUserDto MapTo<TOut>(User source) where TOut : GetUserDto
             => source is null ? null :new()
             {
                 UserName = source.UserName,

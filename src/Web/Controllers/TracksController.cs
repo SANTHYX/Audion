@@ -19,17 +19,17 @@ namespace Web.Controllers
             _service = service;
         }
 
-        [HttpGet("{title}")]
-        public async Task<IActionResult> Get(string title)
+        [HttpGet("{ title }")]
+        public async Task<IActionResult> GetAsync(string title)
             => Ok(await _service.GetAsync(title));
 
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] PagedQuery query)
+        public async Task<IActionResult> BrowseAsync([FromQuery] PagedQuery query)
             => Ok(await _service.BrowseAsync(query));
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> Post([FromForm] UploadTrackDto model)
+        public async Task<IActionResult> UploadAsync([FromForm] UploadTrackDto model)
         {
             await _service.UploadAsync(model);
 

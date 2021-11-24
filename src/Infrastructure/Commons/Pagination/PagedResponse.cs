@@ -26,6 +26,7 @@ namespace Infrastructure.Commons.Pagination
                 .Skip((page - 1) * results)
                 .Take(results)
                 .ToListAsync();
+
             var totalPages = (int)Math.Ceiling((double)(totalResults / results));
 
             return new(page, results,

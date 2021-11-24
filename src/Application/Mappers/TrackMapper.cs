@@ -4,7 +4,6 @@ using Application.Dto;
 using Application.Dto.Track;
 using Core.Commons.Pagination;
 using Core.Domain;
-using Microsoft.AspNetCore.Http;
 using System;
 using System.Linq;
 
@@ -19,13 +18,14 @@ namespace Application.Mappers
             _server = server;
         }
 
-        public GetTrackDto MapTo(Track source)
+        public GetTrackDto MapTo<TOut>(Track source) where TOut : GetTrackDto
             => source is null ? null : new()
             {
                 
             };
 
-        public PagedResponseDto<GetTracksDto> MapTo(Page<Track> source)
+        public PagedResponseDto<GetTracksDto> MapTo<TOut>(Page<Track> source) 
+            where TOut : PagedResponseDto<GetTracksDto>
             => new()
             {
                 Page = source.CurrentPage,

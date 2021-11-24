@@ -32,7 +32,7 @@ namespace Core.Domain
 
         public void AddUser(User user)
         {
-            User = user ?? throw new Exception("Cannot bind newly Track with empty user");
+            User = user ?? throw new Exception("Cannot bind Track with empty User");
         }
     }
 }

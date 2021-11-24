@@ -4,8 +4,9 @@ using System.Threading.Tasks;
 
 namespace Application.Commons.Toolkits.Files
 {
-    public interface IStaticFilesWriter<T> where T : IStaticFile
+    public interface IStaticFileManager<T> where T : IStaticFile
     {
         public Task SaveAsync(IFormFile file, string fileName);
+        public void Remove(string fileId);
     }
 }

@@ -1,6 +1,8 @@
-﻿using Core.Commons.Repositories;
+﻿using Core.Commons.Persistance.Repositories;
 using Core.Domain;
 using Infrastructure.Commons.Persistance;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Threading.Tasks;
 
 namespace Infrastructure.Persistance.Repositories
@@ -13,5 +15,8 @@ namespace Infrastructure.Persistance.Repositories
         {
             _context = context;
         }
+
+        public async Task<Profile> GetAsync(Guid userId)
+            => await _context.Profile.FirstOrDefaultAsync(x => x.UserId == userId);
     }
 }

@@ -4,13 +4,12 @@ using Infrastructure.Commons.Helpers;
 using Infrastructure.Commons.Toolkits;
 using Infrastructure.Exceptions;
 using Microsoft.AspNetCore.Http;
-using System;
 using System.IO;
 using System.Threading.Tasks;
 
 namespace Infrastructure.Toolkits.File
 {
-    public class ImageStaticFileWriter : StaticFileWriter, IStaticFilesWriter<IImageFile>
+    public class ImageStaticFileManager : StaticFileManager, IStaticFileManager<IImageFile>
     {
         public override async Task SaveAsync(IFormFile file, string fileName)
         {
@@ -18,11 +17,11 @@ namespace Infrastructure.Toolkits.File
 
             CreateDirectoryIfNotExist(directory);
 
-            var newFileName = $"{fileName}{Path.GetExtension(file.FileName)}";
-            var path = Path.Combine(directory, fileName);
-
             NotEmpty(file);
             ValidFileType(file);
+
+            var newFileName = $"{ fileName }{ Path.GetExtension(file.FileName) }";
+            var path = Path.Combine(directory, newFileName);
 
             await base.SaveAsync(file, path);
         }

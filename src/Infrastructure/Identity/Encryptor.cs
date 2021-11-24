@@ -19,13 +19,13 @@ namespace Infrastructure.Identity
         }
 
         public bool IsValidPassword(User user, string password)
-            => user is not null && user.Password == GenerateHash(password,user.Salt);
+            => user is not null && user.Password == GenerateHash(password, user.Salt);
 
         private string GenerateSalt(string password)
         {
             if (string.IsNullOrWhiteSpace(password))
             {
-                throw new ArgumentNullException(nameof(password), 
+                throw new ArgumentNullException(nameof(password),
                     "Cannot generate salt becouse password is empty value");
             }
 

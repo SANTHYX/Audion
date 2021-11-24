@@ -19,17 +19,17 @@ namespace Web.Controllers
             _service = service;
         }
 
-        [HttpGet("id")]
-        public async Task<IActionResult> Get(Guid id)
+        [HttpGet("{ id }")]
+        public async Task<IActionResult> GetAsync(Guid id)
             => Ok(await _service.GetAsync(id));
 
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] PagedQuery query)
+        public async Task<IActionResult> BrowseAsync([FromQuery] PagedQuery query)
             => Ok(await _service.BrowseAsync(query));
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] CreatePlaylistDto model)
+        public async Task<IActionResult> CreateAsync([FromBody] CreatePlaylistDto model)
         {
             await _service.CreateAsync(model);
 
@@ -38,7 +38,7 @@ namespace Web.Controllers
 
         [Authorize]
         [HttpPut]
-        public async Task<IActionResult> Put([FromBody] UpdatePlaylistDto model)
+        public async Task<IActionResult> UpdateAsync([FromBody] UpdatePlaylistDto model)
         {
             await _service.UpdateAsync(model);
 
@@ -46,9 +46,10 @@ namespace Web.Controllers
         }
 
         [Authorize]
-        [HttpDelete("id")]
-        public async Task<IActionResult> Delete([FromBody] DeletePlaylistDto model)
+        [HttpDelete("{ id }")]
+        public async Task<IActionResult> DeleteAsync([FromRoute] DeletePlaylistDto model)
         {
+            await _service.RemoveAsync(model.Id);
             return Ok();
         }
     }

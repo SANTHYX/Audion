@@ -1,4 +1,5 @@
 ﻿using Application.Commons.Identity;
+using Core.Commons.Identity;
 using Core.Domain;
 using Infrastructure.Options;
 using Microsoft.Extensions.Options;
@@ -31,8 +32,10 @@ namespace Infrastructure.Identity
                 new Claim(JwtRegisteredClaimNames.Email, user.Email),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
+
             var securityToken = new JwtSecurityToken(null,null,
                 claim,DateTime.Now,expiresAt,signingCredentials);
+
             var accessToken = new JwtSecurityTokenHandler().WriteToken(securityToken);
 
             return(new(expiresAt, user), accessToken);

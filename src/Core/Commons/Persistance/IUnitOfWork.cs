@@ -1,4 +1,5 @@
-﻿using Core.Commons.Repositories;
+﻿using Core.Commons.Persistance.Repositories;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Core.Commons.Persistance
@@ -10,6 +11,8 @@ namespace Core.Commons.Persistance
         ITokenRepository Token { get; set; }
         ITrackRepository Track { get; set; }
         IPlaylistRepository Playlist { get; set; }
+        Task CommitAsync(CancellationToken token);
         Task CommitAsync();
+
     }
 }

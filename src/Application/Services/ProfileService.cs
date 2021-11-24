@@ -1,4 +1,5 @@
-﻿using Application.Commons.Services;
+﻿using Application.Commons.Identity;
+using Application.Commons.Services;
 using Application.Commons.Toolkits.Files;
 using Application.Commons.Types;
 using Application.Dto.Profile;
@@ -6,7 +7,6 @@ using Application.Extensions.Validations;
 using Application.Extensions.Validations.Profile;
 using Core.Commons.Persistance;
 using Core.Domain;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
@@ -16,61 +16,66 @@ namespace Application.Services
     public class ProfileService : IProfileService
     {
         private readonly ILogger<ProfileService> _logger;
+        private readonly IUserProvider _provider;
         private readonly IUnitOfWork _unit;
-        private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly IStaticFilesWriter<IImageFile> _writer;
-        private readonly Guid userId;
+        private readonly IStaticFileManager<IImageFile> _fileManager;
+        private readonly Guid _userId;
 
         public ProfileService(
-            ILogger<ProfileService> logger, 
+            ILogger<ProfileService> logger,
+            IUserProvider provider,
             IUnitOfWork unit ,
-            IHttpContextAccessor httpContext,
-            IStaticFilesWriter<IImageFile> writer)
+            IStaticFileManager<IImageFile> fileManager)
         {
             _logger = logger;
+            _provider = provider;
             _unit = unit;
-            _httpContextAccessor = httpContext;
-            _writer = writer;
-            userId = _httpContextAccessor.HttpContext.User.Identity.IsAuthenticated ?
-                 Guid.Parse(_httpContextAccessor.HttpContext.User.Identity.Name) : Guid.Empty;
+            _fileManager = fileManager;
+            _userId = _provider.CurrentUserId;
         }
 
         public async Task CreateAsync(CreateProfileDto model)
         {
-            var user = await _unit.User.GetAsync(userId);
+            var user = await _unit.User.GetRelationalAsync(_userId);
 
             user.NotNull().NotOwnProfile();
 
-            Profile profile = new(model.FirstName, 
-                model.LastName, model.Country, model.City, user);
+            Profile profile = new(
+                model.FirstName, 
+                model.LastName,
+                model.Country,
+                model.City,
+                user);
             await _unit.Profile.AddAsync(profile);
             await _unit.CommitAsync();
 
-            _logger.LogInformation($"User {user.UserName} has created profile at {DateTime.UtcNow}");
+            _logger.LogInformation($"User with Id { _userId } has created profile at { DateTime.UtcNow }");
         }
 
         public async Task UpdateAsync(UpdateProfileDto model)
         {
-            var user = await _unit.User.GetAsync(userId);
+            var profile = await _unit.Profile.GetAsync(_userId);
 
-            user.NotNull().OwnProfile();
+            profile.NotNull();
 
-            _unit.Profile.Update(user.Profile);
+            _unit.Profile.Update(profile);
             await _unit.CommitAsync();
 
-            _logger.LogInformation($"User {user.UserName} has updated profile at {DateTime.UtcNow}");
+            _logger.LogInformation($"User with Id { _userId } has updated profile at { DateTime.UtcNow }");
         }
 
         public async Task UploadAvatarAsync(UploadAvatarDto model)
         {
-            var user = await _unit.User.GetAsync(userId);
+            var profile = await _unit.Profile.GetAsync(_userId);
 
-            user.NotNull().OwnProfile();
+            profile.NotNull();
 
             var fileId = Guid.NewGuid().ToString();
-            await _writer.SaveAsync(model.Avatar, fileId);
+            await _fileManager.SaveAsync(model.Avatar, fileId);
 
-            user.Profile.SetImage(fileId);
+            profile.SetImage(fileId);
+
+            _unit.Profile.Update(profile);
             await _unit.CommitAsync();
         }
     }

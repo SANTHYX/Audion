@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Application.Commons.Services
 {
-    public interface IProfileService
+    public interface IProfileService : IService
     {
         Task CreateAsync(CreateProfileDto model);
         Task UpdateAsync(UpdateProfileDto model);

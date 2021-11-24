@@ -4,24 +4,25 @@ using Infrastructure.Commons.Helpers;
 using Infrastructure.Commons.Toolkits;
 using Infrastructure.Exceptions;
 using Microsoft.AspNetCore.Http;
+using System;
 using System.IO;
 using System.Threading.Tasks;
 
 namespace Infrastructure.Toolkits.File
 {
-    public class AudioStaticFileWriter : StaticFileWriter, IStaticFilesWriter<IAudioFile>
+    public class AudioStaticFileManager : StaticFileManager, IStaticFileManager<IAudioFile>
     {
         public override async Task SaveAsync(IFormFile file, string fileName)
         {
-            var directory = DirectoriesStore.AudioStoreDirectory;
+            var rootDirectory = DirectoriesStore.AudioStoreDirectory;
 
-            CreateDirectoryIfNotExist(directory);
-
-            var newFileName = $"{fileName}{Path.GetExtension(file.FileName)}";
-            var path = Path.Combine(directory, newFileName);
+            CreateDirectoryIfNotExist(rootDirectory);
 
             NotEmpty(file);
             ValidFileType(file);
+
+            var newFileName = $"{ fileName }{ Path.GetExtension(file.FileName) }";
+            var path = Path.Combine(rootDirectory, newFileName);
 
             await base.SaveAsync(file, path);
         }

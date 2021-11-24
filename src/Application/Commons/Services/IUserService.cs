@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Application.Commons.Services
 {
-    public interface IUserService
+    public interface IUserService : IService
     {
         Task<GetUserDto> GetAsync(string userName);
     }

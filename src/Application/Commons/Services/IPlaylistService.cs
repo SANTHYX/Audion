@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Application.Commons.Services
 {
-    public interface IPlaylistService
+    public interface IPlaylistService : IService
     {
+        Task<GetPlaylistDto> GetAsync(Guid id);
+        Task<PagedResponseDto<GetPlaylistsDto>> BrowseAsync(PagedQuery query);
         Task CreateAsync(CreatePlaylistDto model);
         Task UpdateAsync(UpdatePlaylistDto model);
         Task RemoveAsync(Guid id);
-        Task<PagedResponseDto<GetPlaylistsDto>> BrowseAsync(PagedQuery query);
-        Task<GetPlaylistDto> GetAsync(Guid id);
     }
 }

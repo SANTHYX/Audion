@@ -27,7 +27,9 @@
         </member>
         <member name="M:Web.Controllers.IdentityController.Put(Application.Dto.Identity.RevokeTokenDto)">
             <summary>
-            
+            Endpoint handling process of expiration refresh tokens, 
+            after invoke this operation if user will try to generate 
+            new token from expired refresh in session he will recive exception 
             </summary>
             <param name="model"></param>
             <returns></returns>

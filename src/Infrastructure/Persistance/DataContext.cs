@@ -1,6 +1,7 @@
 ﻿using Core.Domain;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
+using Core.Commons.Identity;
 
 namespace Infrastructure.Persistance
 {

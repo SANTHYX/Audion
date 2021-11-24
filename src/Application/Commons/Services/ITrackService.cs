@@ -5,10 +5,11 @@ using System.Threading.Tasks;
 
 namespace Application.Commons.Services
 {
-    public interface ITrackService
+    public interface ITrackService : IService
     {
-        Task UploadAsync(UploadTrackDto model);
         Task<GetTrackDto> GetAsync(string title);
         Task<PagedResponseDto<GetTracksDto>> BrowseAsync(PagedQuery query);
+        Task UploadAsync(UploadTrackDto model);
+        Task RemoveAsync(RemoveTrackDto model);
     }
 }

@@ -1,5 +1,5 @@
 ﻿using Core.Commons.Pagination;
-using Core.Commons.Repositories;
+using Core.Commons.Persistance.Repositories;
 using Core.Domain;
 using Infrastructure.Commons.Persistance;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +22,12 @@ namespace Infrastructure.Persistance.Repositories
             _response = response;
         }
 
+        public async Task<Track> GetAsync(string title)
+            => await _context.Tracks.FirstOrDefaultAsync(x => x.Title == title);
+
+        public async Task<Track> GetAsync(Guid id)
+            => await _context.Tracks.FirstOrDefaultAsync(x => x.Id == id);
+
         public async Task<Page<Track>> GetAllAsync
             (Expression<Func<Track, bool>> expression, PagedQuery pagedQuery)
             => await _response.GetPagedResponse(
@@ -29,10 +35,7 @@ namespace Infrastructure.Persistance.Repositories
                 pagedQuery.Page,
                 pagedQuery.Results);
 
-        public async Task<Track> GetAsync(string title)
-            => await _context.Tracks.FirstOrDefaultAsync(x => x.Title == title);
-
-        public void RemoveAsync(Track track)
+        public void Remove(Track track)
         {
             _context.Tracks.Remove(track);
         }
