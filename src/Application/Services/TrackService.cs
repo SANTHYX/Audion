@@ -78,7 +78,7 @@ namespace Application.Services
         {
             var track = await _unit.Track.GetAsync(model.Id);
 
-            track.NotNull().OwnedByUser(_userId);
+            track.NotNull().OwnedByCurrentUser(_userId);
 
             _fileManager.Remove(track.TrackId);
 

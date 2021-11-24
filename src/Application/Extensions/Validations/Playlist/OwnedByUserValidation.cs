@@ -4,7 +4,7 @@ namespace Application.Extensions.Validations.Playlist
 {
     public static class OwnedByUserValidation
     {
-        public static Core.Domain.Playlist OwnedByUser(this Core.Domain.Playlist playlist, Guid userId)
+        public static Core.Domain.Playlist OwnedByCurrentUser(this Core.Domain.Playlist playlist, Guid userId)
         {
             if (playlist.UserId != userId)
             {

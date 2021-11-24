@@ -1,6 +1,7 @@
 ﻿using Application.Commons.Services;
 using Application.Dto.Identity;
 using Application.Dto.User;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -69,16 +70,19 @@ namespace Web.Controllers
 
             return Ok();
         }
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="recoveryId"></param>
-        /// <param name="newPassword"></param>
+        /// <param name="model"></param>
         /// <returns></returns>
-        [HttpPut("recovery-password/{ recoveryId }")]
-        public async Task<IActionResult> ChangePasswordAtRecoveryAsync([FromBody] Guid recoveryId, [FromBody]string newPassword)
+        [HttpPut("recovery-password/{recoveryId}")]
+        public async Task<IActionResult> ChangePasswordAtRecoveryAsync
+            ([FromRoute] Guid recoveryId, [FromBody]ChangePasswordAtRecoveryDto model)
         {
-            await _service.ChangePasswordAtRecoveryAsync(recoveryId, newPassword);
+            model.RecoveryId = recoveryId;
+            await _service.ChangePasswordAtRecoveryAsync(model);
 
             return Ok();
         }
@@ -90,6 +94,7 @@ namespace Web.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
+        [Authorize]
         [HttpPut("revoke-token")]
         public async Task<IActionResult> RevokeTokenAsync([FromBody] RevokeTokenDto model)
         {
@@ -103,6 +108,7 @@ namespace Web.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
+        [Authorize]
         [HttpPut("change-creedentials")]
         public async Task<IActionResult> ChangeCreedentialsAsync([FromBody] ChangeCreedentialsDto model)
         {

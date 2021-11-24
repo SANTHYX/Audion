@@ -1,4 +1,4 @@
-﻿namespace Application.Commons.Services
+﻿namespace Application.Commons.Types
 {
     public interface IService
     {

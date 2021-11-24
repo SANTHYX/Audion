@@ -1,4 +1,4 @@
-﻿using Application.Commons.Mappers;
+﻿using Application.Commons.Types;
 using Scrutor;
 
 namespace Application.Extensions.Modules

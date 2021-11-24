@@ -69,7 +69,7 @@ namespace Application.Services
         {
             var playlist = await _unit.Playlist.GetAsync(model.Id);
 
-            playlist.NotNull().OwnedByUser(_userId);
+            playlist.NotNull().OwnedByCurrentUser(_userId);
 
             _unit.Playlist.Update(playlist);
             await _unit.CommitAsync();
@@ -79,7 +79,7 @@ namespace Application.Services
         {
             var playlist = await _unit.Playlist.GetAsync(id);
 
-            playlist.NotNull().OwnedByUser(_userId);
+            playlist.NotNull().OwnedByCurrentUser(_userId);
 
             _unit.Playlist.Remove(playlist);
             await _unit.CommitAsync();

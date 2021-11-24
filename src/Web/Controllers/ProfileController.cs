@@ -18,6 +18,11 @@ namespace Web.Controllers
             _service = service;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> CreateAsync([FromBody] CreateProfileDto model)
         {
@@ -26,14 +31,24 @@ namespace Web.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPut]
         public async Task<IActionResult> UpdateAsync([FromBody] UpdateProfileDto model)
         {
             await _service.UpdateAsync(model);
 
             return Ok();
-        } 
-
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPut("upload-avatar")]
         public async Task<IActionResult> UploadAvatarAsync([FromForm] UploadAvatarDto model)
         {

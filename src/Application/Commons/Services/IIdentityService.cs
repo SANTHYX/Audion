@@ -1,4 +1,5 @@
-﻿using Application.Dto.Identity;
+﻿using Application.Commons.Types;
+using Application.Dto.Identity;
 using Application.Dto.User;
 using System;
 using System.Threading.Tasks;
@@ -13,6 +14,6 @@ namespace Application.Commons.Services
         Task ChangeCreedentials(ChangeCreedentialsDto model);
         Task RevokeTokenAsync(RevokeTokenDto model);
         Task CreateRecoveryPasswordThreadAsync(string email);
-        Task ChangePasswordAtRecoveryAsync(Guid recoveryId, string newPassword);
+        Task ChangePasswordAtRecoveryAsync(ChangePasswordAtRecoveryDto model);
     }
 }

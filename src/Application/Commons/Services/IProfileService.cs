@@ -1,4 +1,5 @@
-﻿using Application.Dto.Profile;
+﻿using Application.Commons.Types;
+using Application.Dto.Profile;
 using System.Threading.Tasks;
 
 namespace Application.Commons.Services

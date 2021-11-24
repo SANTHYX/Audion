@@ -73,10 +73,14 @@ namespace Application.Services
             var fileId = Guid.NewGuid().ToString();
             await _fileManager.SaveAsync(model.Avatar, fileId);
 
+            _logger.LogInformation("File has been uploaded on server");
+
             profile.SetImage(fileId);
 
             _unit.Profile.Update(profile);
             await _unit.CommitAsync();
+
+            _logger.LogInformation("Task have been finished sucessfully");
         }
     }
 }

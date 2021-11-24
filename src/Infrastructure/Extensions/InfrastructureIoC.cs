@@ -1,5 +1,7 @@
 ﻿using Application.Commons.Helpers;
 using Application.Commons.Identity;
+using Application.Commons.Toolkits.Mail;
+using Core.Commons.Identity;
 using Core.Commons.Persistance;
 using Infrastructure.Commons.Helpers;
 using Infrastructure.Commons.Persistance;
@@ -7,12 +9,15 @@ using Infrastructure.Extensions.Modules;
 using Infrastructure.Identity;
 using Infrastructure.Options;
 using Infrastructure.Persistance;
+using Infrastructure.Toolkits.Mail;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 
 namespace Infrastructure.Extensions
@@ -36,7 +41,10 @@ namespace Infrastructure.Extensions
             services.AddSingleton<IJwtHandler, JwtHandler>();
             services.AddSingleton<IServerDetails, ServerDetails>();
             services.AddSingleton<IUserProvider, UserProvider>();
+            services.AddSingleton<IRecoveryIdentityStorage, RecoveryIdentityStorage>();
+            services.AddSingleton<ICollection<RecoveryIdentity>, Collection<RecoveryIdentity>>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IMailSender, MailSender>();
         }
 
         private static void AddDatabaseModule(this IServiceCollection services, IConfiguration configuration)

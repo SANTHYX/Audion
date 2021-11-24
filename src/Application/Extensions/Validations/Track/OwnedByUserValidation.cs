@@ -4,7 +4,7 @@ namespace Application.Extensions.Validations.Track
 {
     public static class OwnedByUserValidation
     {
-        public static Core.Domain.Track OwnedByUser(this Core.Domain.Track track, Guid userId)
+        public static Core.Domain.Track OwnedByCurrentUser(this Core.Domain.Track track, Guid userId)
         {
             if (track.UserId != userId)
             {

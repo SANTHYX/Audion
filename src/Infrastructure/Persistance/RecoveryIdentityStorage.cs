@@ -9,9 +9,9 @@ namespace Infrastructure.Persistance
     {
         public ICollection<RecoveryIdentity> RecoveryIdentities { get; }
 
-        public RecoveryIdentityStorage(ICollection<RecoveryIdentity> _recoveryIdentities)
+        public RecoveryIdentityStorage(ICollection<RecoveryIdentity> recoveryIdentities)
         {
-            RecoveryIdentities = _recoveryIdentities;
+            RecoveryIdentities = recoveryIdentities;
         }
     }
 }

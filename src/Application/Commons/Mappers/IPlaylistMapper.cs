@@ -1,4 +1,5 @@
-﻿using Application.Dto;
+﻿using Application.Commons.Types;
+using Application.Dto;
 using Application.Dto.Playlist;
 using Core.Commons.Pagination;
 using Core.Domain;

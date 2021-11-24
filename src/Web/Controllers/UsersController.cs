@@ -15,7 +15,12 @@ namespace Web.Controllers
             _service = service;
         }
 
-        [HttpGet("{ userName }")]
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
+        [HttpGet("{userName}")]
         public async Task<IActionResult> GetAsync(string userName)
             => Ok(await _service.GetAsync(userName));
     }

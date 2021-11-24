@@ -1,4 +1,5 @@
-﻿using Application.Dto.User;
+﻿using Application.Commons.Types;
+using Application.Dto.User;
 using Core.Domain;
 
 namespace Application.Commons.Mappers

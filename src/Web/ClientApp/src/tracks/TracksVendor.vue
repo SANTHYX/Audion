@@ -1,3 +1,3 @@
 <template>
-	<v-container> </v-container>
+	<router-view />
 </template>

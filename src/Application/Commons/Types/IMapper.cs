@@ -1,4 +1,4 @@
-﻿namespace Application.Commons.Mappers
+﻿namespace Application.Commons.Types
 {
     public interface IMapper<TOutput, TInput>
     {

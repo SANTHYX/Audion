@@ -130,14 +130,14 @@ namespace Application.Services
             //TODO:Send email with link to perform changing password
         }
 
-        public async Task ChangePasswordAtRecoveryAsync(Guid recoveryId, string newPassword)
+        public async Task ChangePasswordAtRecoveryAsync(ChangePasswordAtRecoveryDto model)
         {
-            var recoveryThread = _recoveryIdentity.Get(recoveryId);
+            var recoveryThread = _recoveryIdentity.Get(model.RecoveryId);
             var user = await _unit.User.GetAsync(recoveryThread.UserId);
 
             recoveryThread.NotNull();
 
-            var(hash, salt) = _encryptor.HashPassword(newPassword);
+            var(hash, salt) = _encryptor.HashPassword(model.NewPassword);
 
             user.SetPassword(hash);
             user.SetSalt(salt);

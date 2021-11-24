@@ -4,7 +4,7 @@
         <name>Web</name>
     </assembly>
     <members>
-        <member name="M:Web.Controllers.IdentityController.Post(Application.Dto.User.LoginUserDto)">
+        <member name="M:Web.Controllers.IdentityController.LoginUser(Application.Dto.User.LoginUserDto)">
             <summary>
             Endpoint handling user authentication.
             If he pass proccess sucesfully, controller will return access token. 
@@ -12,20 +12,35 @@
             <param name="model">Object contains user creedentials</param>
             <returns>Access token and metadata</returns>
         </member>
-        <member name="M:Web.Controllers.IdentityController.Post(Application.Dto.User.RegisterUserDto)">
+        <member name="M:Web.Controllers.IdentityController.RegisterAsync(Application.Dto.User.RegisterUserDto)">
             <summary>
             Endpoint handling registration user instance to system 
             </summary>
             <param name="model">Informations required to create user instance</param>
         </member>
-        <member name="M:Web.Controllers.IdentityController.Post(Application.Dto.Identity.RefreshTokenDto)">
+        <member name="M:Web.Controllers.IdentityController.RefreshTokenAsync(Application.Dto.Identity.RefreshTokenDto)">
             <summary>
             Endpoint handling generation of new access tokens for sign-in users after expire
             </summary>
             <param name="model"></param>
             <returns>Object wit access token and metadata</returns>
         </member>
-        <member name="M:Web.Controllers.IdentityController.Put(Application.Dto.Identity.RevokeTokenDto)">
+        <member name="M:Web.Controllers.IdentityController.RecoveryPasswordAsync(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="email"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Web.Controllers.IdentityController.ChangePasswordAtRecoveryAsync(System.Guid,Application.Dto.Identity.ChangePasswordAtRecoveryDto)">
+            <summary>
+            
+            </summary>
+            <param name="recoveryId"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Web.Controllers.IdentityController.RevokeTokenAsync(Application.Dto.Identity.RevokeTokenDto)">
             <summary>
             Endpoint handling process of expiration refresh tokens, 
             after invoke this operation if user will try to generate 
@@ -34,11 +49,104 @@
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="M:Web.Controllers.IdentityController.Put(Application.Dto.Identity.ChangeCreedentialsDto)">
+        <member name="M:Web.Controllers.IdentityController.ChangeCreedentialsAsync(Application.Dto.Identity.ChangeCreedentialsDto)">
             <summary>
             
             </summary>
             <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Web.Controllers.PlaylistsController.GetAsync(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Web.Controllers.PlaylistsController.BrowseAsync(Core.Commons.Pagination.PagedQuery)">
+            <summary>
+            
+            </summary>
+            <param name="query"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Web.Controllers.PlaylistsController.CreateAsync(Application.Dto.Playlist.CreatePlaylistDto)">
+            <summary>
+            
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Web.Controllers.PlaylistsController.UpdateAsync(Application.Dto.Playlist.UpdatePlaylistDto)">
+            <summary>
+            
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Web.Controllers.PlaylistsController.DeleteAsync(System.Guid,Application.Dto.Playlist.DeletePlaylistDto)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Web.Controllers.ProfileController.CreateAsync(Application.Dto.Profile.CreateProfileDto)">
+            <summary>
+            
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Web.Controllers.ProfileController.UpdateAsync(Application.Dto.Profile.UpdateProfileDto)">
+            <summary>
+            
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Web.Controllers.ProfileController.UploadAvatarAsync(Application.Dto.Profile.UploadAvatarDto)">
+            <summary>
+            
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Web.Controllers.TracksController.GetAsync(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="title"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Web.Controllers.TracksController.BrowseAsync(Core.Commons.Pagination.PagedQuery)">
+            <summary>
+            
+            </summary>
+            <param name="query"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Web.Controllers.TracksController.UploadAsync(Application.Dto.Track.UploadTrackDto)">
+            <summary>
+            
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Web.Controllers.TracksController.RemoveAsync(System.Guid,Application.Dto.Track.RemoveTrackDto)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Web.Controllers.UsersController.GetAsync(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="userName"></param>
             <returns></returns>
         </member>
     </members>
