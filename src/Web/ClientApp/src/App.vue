@@ -17,8 +17,8 @@
 import { mapGetters, mapActions } from 'vuex';
 // eslint-disable-next-line no-unused-vars
 import router from 'vue-router';
-import TheNavbar from './components/shared/TheNavbar.vue';
-import TheFooter from './components/shared/TheFooter.vue';
+import TheNavbar from './commons/components/shared/TheNavbar.vue';
+import TheFooter from './commons/components/shared/TheFooter.vue';
 
 export default {
 	name: 'App',
