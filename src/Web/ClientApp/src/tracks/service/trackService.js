@@ -5,6 +5,7 @@ const trackService = {
         const model = new FormData();
         model.append('Title', trackModel.title);
         model.append('Track', trackModel.file);
+
         await api.post('/tracks', model);
     },
 
@@ -18,6 +19,10 @@ const trackService = {
         const response = await api.get('/tracks', { params: { ...tracksQuery } });
 
         return response;
+    },
+
+    removeTrack: async (id) => {
+        await api.delete(`track/${id}`);
     }
 };
 

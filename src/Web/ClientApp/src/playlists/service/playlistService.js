@@ -9,8 +9,8 @@ const playlistService = {
         await api.put('/playlists', playlistModel);
     },
 
-    deletePlaylist: async (playlistModel) => {
-        await api.delete('/playlists', playlistModel);
+    deletePlaylist: async (id) => {
+        await api.delete(`playlists/${id}`);
     },
 
     getPlaylist: async (id) => {

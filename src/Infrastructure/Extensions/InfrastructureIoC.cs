@@ -27,7 +27,8 @@ namespace Infrastructure.Extensions
         public static void AddInfrastructureIoC(this IServiceCollection services, IConfiguration configuration)
         {
             //Infrastructure IoC Container Space
-            services.Configure<SecuritySettings>(configuration.GetSection("Security"));
+            services.Configure<SecuritySettings>(configuration.GetSection(SecuritySettings.Section));
+            services.Configure<MailingBotSettings>(configuration.GetSection(MailingBotSettings.Section));
 
             services.AddDatabaseModule(configuration);
             services.AddAuthenticationModule(configuration);

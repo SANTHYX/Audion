@@ -1,7 +1,10 @@
-﻿namespace Application.Commons.Toolkits.Mail
+﻿using System.IO.Abstractions;
+using System.Threading.Tasks;
+
+namespace Application.Commons.Toolkits.Mail
 {
     public interface IMailSender
     {
-        void SendEmail();
+        Task SendEmailAsync(string email, IFile template);
     }
 }

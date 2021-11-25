@@ -49,9 +49,9 @@ const playlistStore = {
             }
         },
 
-        DELETE_PLAYLIST: async (context, playlistObj) => {
+        DELETE_PLAYLIST: async (context, id) => {
             try {
-                await playlistService.deletePlaylist(playlistObj);
+                await playlistService.deletePlaylist(id);
             } catch (err) {
                 throw new Error(err.response.data.Message);
             }

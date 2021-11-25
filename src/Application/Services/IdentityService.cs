@@ -1,5 +1,6 @@
 ﻿using Application.Commons.Identity;
 using Application.Commons.Services;
+using Application.Commons.Toolkits.Mail;
 using Application.Dto.Identity;
 using Application.Dto.User;
 using Application.Extensions.Validations;
@@ -22,6 +23,7 @@ namespace Application.Services
         private readonly IRecoveryIdentityRepository _recoveryIdentity;
         private readonly IEncryptor _encryptor;
         private readonly IJwtHandler _jwtHandler;
+        private readonly IMailSender _sender;
         private readonly Guid _userId;
 
         public IdentityService(
@@ -29,7 +31,8 @@ namespace Application.Services
             IUserProvider provider,
             IUnitOfWork unit,
             IRecoveryIdentityRepository recoveryIdentity,
-            IEncryptor encryptor, 
+            IEncryptor encryptor,
+            IMailSender sender,
             IJwtHandler jwtHandler)
         {
             _logger = logger;
@@ -37,7 +40,9 @@ namespace Application.Services
             _unit = unit;
             _recoveryIdentity = recoveryIdentity;
             _encryptor = encryptor;
+            _sender = sender;
             _jwtHandler = jwtHandler;
+
             _userId = _provider.CurrentUserId;
         }
 
@@ -128,6 +133,7 @@ namespace Application.Services
             _recoveryIdentity.Add(recovery);
 
             //TODO:Send email with link to perform changing password
+
         }
 
         public async Task ChangePasswordAtRecoveryAsync(ChangePasswordAtRecoveryDto model)
@@ -142,8 +148,9 @@ namespace Application.Services
             user.SetPassword(hash);
             user.SetSalt(salt);
 
-            _unit.User.Update(user);
             _recoveryIdentity.Remove(recoveryThread);
+
+            _unit.User.Update(user);
             await _unit.CommitAsync();
         }
 

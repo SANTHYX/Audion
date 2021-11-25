@@ -58,6 +58,14 @@ const trackStore = {
             } catch (err) {
                 throw new Error(err.response.data.Message);
             }
+        },
+
+        REMOVE_TRACK: async (context, id) => {
+            try {
+                await trackService.removeTrack(id);
+            } catch (err) {
+                throw new Error(err.response.data.Message);
+            }
         }
     }
 }
