@@ -1,23 +1,32 @@
 ﻿using Application.Commons.Toolkits.Mail;
+using FluentEmail.Core;
 using Infrastructure.Options;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Options;
-using System.IO.Abstractions;
 using System.Threading.Tasks;
 
 namespace Infrastructure.Toolkits.Mail
 {
     public class MailSender : IMailSender
     {
+        private readonly IFluentEmailFactory _emailFactory;
         private readonly MailingBotSettings _settings;
 
-        public MailSender(IOptions<MailingBotSettings> settings)
+        public MailSender(IFluentEmailFactory emailFactory, IOptions<MailingBotSettings> settings)
         {
+            _emailFactory = emailFactory;
             _settings = settings.Value;
         }
 
-        public async Task SendEmailAsync(string targetMail, IFile template)
+        public async Task SendEmailAsync<T>(string templateName, string targetEmail, string subject, T model) where T : new()
         {
-            throw new System.NotImplementedException();
+            var mail = _emailFactory.Create()
+                .SetFrom(_settings.Address)
+                .To(targetEmail)
+                .Subject(subject)
+                .UsingTemplateFromFile(templateName,model);
+
+            await mail.SendAsync();
         }
     }
 }

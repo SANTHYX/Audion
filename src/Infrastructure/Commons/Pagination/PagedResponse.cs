@@ -10,7 +10,7 @@ namespace Infrastructure.Commons.Pagination
 {
     public class PagedResponse<T> : IPagedResponse<T> where T: Entity
     {
-        public async Task<Page<T>> GetPagedResponse(IQueryable<T> context, int page, int results)
+        public async Task<Page<T>> GetPagedResponse(IQueryable<T> context, int page = 1, int results = 5)
         {
             page = page < 0 ? 0 : page;
             results = results <= 0 ? 5 : results;

@@ -1,5 +1,6 @@
 ﻿using Application.Commons.Identity;
 using Application.Commons.Services;
+using Application.Dto.Comment;
 using Core.Commons.Persistance;
 using Microsoft.Extensions.Logging;
 using System;
@@ -22,14 +23,14 @@ namespace Application.Services
             _userId = _provider.CurrentUserId;
         }
 
-        public async Task AddCommentAsync()
+        public async Task AddCommentAsync(AddCommentDto model)
         {
-
+            var user = _unit.User.GetRelationalAsync(_userId);
         }
         
-        public async Task EditCommentAsync()
+        public async Task EditCommentAsync(EditCommentDto model)
         {
-
+            var user = _unit.User.GetRelationalAsync(_userId);
         }
     }
 }

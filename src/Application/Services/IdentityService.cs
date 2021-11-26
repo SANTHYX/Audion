@@ -1,4 +1,5 @@
-﻿using Application.Commons.Identity;
+﻿using Application.Commons.Helpers;
+using Application.Commons.Identity;
 using Application.Commons.Services;
 using Application.Commons.Toolkits.Mail;
 using Application.Dto.Identity;
@@ -24,6 +25,7 @@ namespace Application.Services
         private readonly IEncryptor _encryptor;
         private readonly IJwtHandler _jwtHandler;
         private readonly IMailSender _sender;
+        private readonly IServerDetails _server;
         private readonly Guid _userId;
 
         public IdentityService(
@@ -33,6 +35,7 @@ namespace Application.Services
             IRecoveryIdentityRepository recoveryIdentity,
             IEncryptor encryptor,
             IMailSender sender,
+            IServerDetails server,
             IJwtHandler jwtHandler)
         {
             _logger = logger;
@@ -42,7 +45,7 @@ namespace Application.Services
             _encryptor = encryptor;
             _sender = sender;
             _jwtHandler = jwtHandler;
-
+            _server = server;
             _userId = _provider.CurrentUserId;
         }
 
@@ -132,8 +135,8 @@ namespace Application.Services
             RecoveryIdentity recovery = new(user);
             _recoveryIdentity.Add(recovery);
 
-            //TODO:Send email with link to perform changing password
-
+            await _sender.SendEmailAsync("RecoveryResource.cshtml", email,
+                "Password recovery", new { RecoveryId = recovery.Id });
         }
 
         public async Task ChangePasswordAtRecoveryAsync(ChangePasswordAtRecoveryDto model)

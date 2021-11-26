@@ -5,11 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Files\Templates\RecoveryResource.cshtml" />
+    <None Remove="Templates\RecoveryResource.cshtml" />
+    <None Remove="Templates\Shared\_Layout.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Files\Templates\RecoveryResource.cshtml">
+    <Content Include="Templates\RecoveryResource.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Templates\Shared\_Layout.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
