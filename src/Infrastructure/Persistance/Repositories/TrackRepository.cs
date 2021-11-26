@@ -28,8 +28,7 @@ namespace Infrastructure.Persistance.Repositories
         public async Task<Track> GetAsync(Guid id)
             => await _context.Tracks.FirstOrDefaultAsync(x => x.Id == id);
 
-        public async Task<Page<Track>> GetAllAsync
-            (Expression<Func<Track, bool>> expression, PagedQuery pagedQuery)
+        public async Task<Page<Track>> GetAllAsync(Expression<Func<Track, bool>> expression, PagedQuery pagedQuery)
             => await _response.GetPagedResponse(
                 _context.Tracks.Where(expression),
                 pagedQuery.Page,

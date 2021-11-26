@@ -7,14 +7,15 @@
 			<v-card-text>
 				<v-form class="mt-4" ref="form">
 					<v-text-field
-						v-model="email"
-						:rules="[validationRules.isEmail]"
+						v-model="newPassword"
+						:rules="[validationRules.isRequired]"
+						type="password"
 						dense
 					/>
 				</v-form>
 			</v-card-text>
 			<v-card-actions>
-				<v-btn @click="recoveryPassword">Recover Password</v-btn>
+				<v-btn @click="changePassword">Change</v-btn>
 			</v-card-actions>
 		</v-card>
 	</v-container>
@@ -24,25 +25,31 @@
 import { mapActions } from 'vuex';
 
 export default {
-	name: 'PasswordRecovery',
+	name: 'ChangePasswordAtRecovery',
+	props: {
+		recoveryId: {
+			type: String,
+			required: true,
+		},
+	},
 	data: () => ({
-		email: '',
+		newPassword: '',
 		validationRules: {
-			isEmail: (v) => v.includes('@') || 'Value is not valid email',
+			isRequired: (v) => !!v || 'This field is required',
 		},
 	}),
 	methods: {
-		async recoveryPassword() {
+		async changePassword() {
 			if (this.$refs.form.validate()) {
-				const emailObj = {
-					email: this.email,
+				const recoveryObj = {
+					recoveryId: this.recoveryId,
+					newPassword: this.newPassword,
 				};
-				await this['identity/RECOVERY_PASSWORD'](emailObj);
+				await this['identity/SET_PASSWORD_AT_RECOVERY'](recoveryObj);
 			} else return;
 		},
-		...mapActions(['identity/RECOVERY_PASSWORD']),
+
+		...mapActions(['identity/SET_PASSWORD_AT_RECOVERY']),
 	},
 };
 </script>
-
-<style></style>

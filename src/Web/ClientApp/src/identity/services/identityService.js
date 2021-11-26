@@ -36,8 +36,8 @@ const identityService = {
         await api.put('/identity/change-creedentials', userCreedentials);
     },
 
-    recoveryPassword: async (email) => {
-        await api.post('/identity/recovery-password', email);
+    recoveryPassword: async (emailObj) => {
+        await api.post('/identity/recovery-password', emailObj);
     },
 
     setPasswordAtRecovery: async (recoveryObj) => {

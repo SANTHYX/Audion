@@ -59,6 +59,22 @@ const identityStore = {
             } catch (err) {
                 throw new Error(err.response.data.Message);
             }
+        },
+
+        SET_PASSWORD_AT_RECOVERY: async (context, recoveryObj) => {
+            try {
+                await identityService.setPasswordAtRecovery(recoveryObj)
+            } catch (err) {
+                throw new Error(err.response.data.Message);
+            }
+        },
+
+        RECOVERY_PASSWORD: async (context, emailObj) => {
+            try {
+                await identityService.recoveryPassword(emailObj)
+            } catch (err) {
+                throw new Error(err.response.data.Message);
+            }
         }
     }
 }
