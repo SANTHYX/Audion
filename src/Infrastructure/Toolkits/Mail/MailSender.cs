@@ -1,7 +1,6 @@
 ﻿using Application.Commons.Toolkits.Mail;
 using FluentEmail.Core;
 using Infrastructure.Options;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Options;
 using System.Threading.Tasks;
 
@@ -18,7 +17,7 @@ namespace Infrastructure.Toolkits.Mail
             _settings = settings.Value;
         }
 
-        public async Task SendEmailAsync<T>(string templateName, string targetEmail, string subject, T model) where T : new()
+        public async Task SendEmailAsync<T>(string templateName, string targetEmail, string subject, T model)
         {
             var mail = _emailFactory.Create()
                 .SetFrom(_settings.Address)

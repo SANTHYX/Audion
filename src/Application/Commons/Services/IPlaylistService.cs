@@ -13,6 +13,6 @@ namespace Application.Commons.Services
         Task<PagedResponseDto<GetPlaylistsDto>> BrowseAsync(PagedQuery query);
         Task CreateAsync(CreatePlaylistDto model);
         Task UpdateAsync(UpdatePlaylistDto model);
-        Task RemoveAsync(Guid id);
+        Task RemoveAsync(RemovePlaylistDto model);
     }
 }

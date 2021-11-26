@@ -24,7 +24,7 @@ namespace Web.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet("{ id }")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetAsync(Guid id)
             => Ok(await _service.GetAsync(id));
 
@@ -69,14 +69,13 @@ namespace Web.Controllers
         /// 
         /// </summary>
         /// <param name="id"></param>
-        /// <param name="model"></param>
         /// <returns></returns>
         [Authorize]
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAsync([FromRoute] Guid id ,[FromRoute] DeletePlaylistDto model)
+        public async Task<IActionResult> DeleteAsync([FromRoute] Guid id)
         {
-            model.Id = id;
-            await _service.RemoveAsync(model.Id);
+            RemovePlaylistDto model = new() { Id = id };
+            await _service.RemoveAsync(model);
 
             return Ok();
         }

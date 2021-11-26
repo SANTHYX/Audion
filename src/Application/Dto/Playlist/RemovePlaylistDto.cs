@@ -3,9 +3,8 @@ using System.Text.Json.Serialization;
 
 namespace Application.Dto.Playlist
 {
-    public record DeletePlaylistDto
+    public record RemovePlaylistDto
     {
-        [JsonIgnore]
         public Guid Id { get; set; }
     }
 }

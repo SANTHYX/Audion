@@ -75,9 +75,9 @@ namespace Application.Services
             await _unit.CommitAsync();
         }
 
-        public async Task RemoveAsync(Guid id)
+        public async Task RemoveAsync(RemovePlaylistDto model)
         {
-            var playlist = await _unit.Playlist.GetAsync(id);
+            var playlist = await _unit.Playlist.GetAsync(model.Id);
 
             playlist.NotNull().OwnedByCurrentUser(_userId);
 

@@ -55,13 +55,12 @@ namespace Web.Controllers
         /// 
         /// </summary>
         /// <param name="id"></param>
-        /// <param name="model"></param>
         /// <returns></returns>
         [Authorize]
         [HttpDelete("{id}")]
-        public async Task<IActionResult> RemoveAsync([FromRoute] Guid id, [FromBody] RemoveTrackDto model)
+        public async Task<IActionResult> RemoveAsync([FromRoute] Guid id)
         {
-            model.Id = id;
+            RemoveTrackDto model = new() { Id = id };
             await _service.RemoveAsync(model);
 
             return Ok();

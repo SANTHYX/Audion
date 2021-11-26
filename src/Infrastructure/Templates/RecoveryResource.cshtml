@@ -1,9 +1,10 @@
 ﻿@{
     Layout = "./Shared/_Layout";
+
     var request = Context.Request;
     var baseUrl = $"{ request.Scheme }://{ request.Host }/identity/recovery-password/";
 }
 
 <h2>Click in button below to set a new password</h2>
 
-<a href="@baseUrl+@Model.RecoveryId" class="msg-btn">Set Password</a>
+<a href="@baseUrl+@Model.RecoveryId" class="msg-btn">Set New Password</a>
