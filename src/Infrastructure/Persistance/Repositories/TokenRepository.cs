@@ -16,9 +16,9 @@ namespace Infrastructure.Persistance.Repositories
             _context = context;
         }
 
-        public async Task<Token> GetAsync(string token)
+        public async Task<Token> GetByRefreshAsync(string refresh)
             => await _context.Tokens
                 .Include(x => x.User)
-                .FirstOrDefaultAsync(x => x.RefreshToken == token);
+                .FirstOrDefaultAsync(x => x.RefreshToken == refresh);
     }
 }

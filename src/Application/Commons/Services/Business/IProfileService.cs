@@ -2,7 +2,7 @@
 using Application.Dto.Profile;
 using System.Threading.Tasks;
 
-namespace Application.Commons.Services
+namespace Application.Commons.Services.Business
 {
     public interface IProfileService : IService
     {

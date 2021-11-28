@@ -17,7 +17,7 @@ namespace Infrastructure.Commons.Helpers
         {
             var request = _accessor.HttpContext.Request;
 
-            return new($"{ request.Scheme }:// { request.Host }");
+            return new($"{ request.Scheme }://{ request.Host.ToUriComponent() }");
         }
     }
 }

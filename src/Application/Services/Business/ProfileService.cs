@@ -1,5 +1,5 @@
 ﻿using Application.Commons.Identity;
-using Application.Commons.Services;
+using Application.Commons.Services.Business;
 using Application.Commons.Toolkits.Files;
 using Application.Commons.Types;
 using Application.Dto.Profile;
@@ -11,7 +11,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 
-namespace Application.Services
+namespace Application.Services.Business
 {
     public class ProfileService : IProfileService
     {
@@ -36,7 +36,7 @@ namespace Application.Services
 
         public async Task CreateAsync(CreateProfileDto model)
         {
-            var user = await _unit.User.GetRelationalAsync(_userId);
+            var user = await _unit.User.GetByIdAsync(_userId);
 
             user.NotNull().NotOwnProfile();
 
@@ -54,7 +54,7 @@ namespace Application.Services
 
         public async Task UpdateAsync(UpdateProfileDto model)
         {
-            var profile = await _unit.Profile.GetAsync(_userId);
+            var profile = await _unit.Profile.GetByUserIdAsync(_userId);
 
             profile.NotNull();
 
@@ -66,7 +66,7 @@ namespace Application.Services
 
         public async Task UploadAvatarAsync(UploadAvatarDto model)
         {
-            var profile = await _unit.Profile.GetAsync(_userId);
+            var profile = await _unit.Profile.GetByUserIdAsync(_userId);
 
             profile.NotNull();
 

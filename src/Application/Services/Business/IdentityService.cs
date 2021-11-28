@@ -1,7 +1,6 @@
-﻿using Application.Commons.Helpers;
-using Application.Commons.Identity;
-using Application.Commons.Services;
-using Application.Commons.Toolkits.Mail;
+﻿using Application.Commons.Identity;
+using Application.Commons.Services.Business;
+using Application.Commons.Services.System.Mailing;
 using Application.Dto.Identity;
 using Application.Dto.User;
 using Application.Extensions.Validations;
@@ -14,7 +13,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 
-namespace Application.Services
+namespace Application.Services.Business
 {
     public class IdentityService : IIdentityService
     {
@@ -24,8 +23,7 @@ namespace Application.Services
         private readonly IRecoveryIdentityRepository _recoveryIdentity;
         private readonly IEncryptor _encryptor;
         private readonly IJwtHandler _jwtHandler;
-        private readonly IMailSender _sender;
-        private readonly IServerDetails _server;
+        private readonly IIdentityCommunicatesService _communicatesService;
         private readonly Guid _userId;
 
         public IdentityService(
@@ -34,24 +32,22 @@ namespace Application.Services
             IUnitOfWork unit,
             IRecoveryIdentityRepository recoveryIdentity,
             IEncryptor encryptor,
-            IMailSender sender,
-            IServerDetails server,
-            IJwtHandler jwtHandler)
+            IJwtHandler jwtHandler,
+            IIdentityCommunicatesService communicatesService)
         {
             _logger = logger;
             _provider = provider;
             _unit = unit;
             _recoveryIdentity = recoveryIdentity;
             _encryptor = encryptor;
-            _sender = sender;
             _jwtHandler = jwtHandler;
-            _server = server;
+            _communicatesService = communicatesService;
             _userId = _provider.CurrentUserId;
         }
 
         public async Task<GetJwtTokenDto> LoginAsync(LoginUserDto model)
         {
-            var user = await _unit.User.GetAsync(model.UserName);
+            var user = await _unit.User.GetByUsernameAsync(model.UserName);
 
             ValidateCreedentials(user, model.Password);
 
@@ -66,7 +62,7 @@ namespace Application.Services
 
         public async Task<GetJwtTokenDto> RefreshToken(RefreshTokenDto model)
         {
-            var token = await _unit.Token.GetAsync(model.RefreshToken);
+            var token = await _unit.Token.GetByRefreshAsync(model.RefreshToken);
 
             token.NotNull().NotRevoked();
 
@@ -96,7 +92,7 @@ namespace Application.Services
 
         public async Task ChangeCreedentials(ChangeCreedentialsDto model)
         {
-            var user = await _unit.User.GetAsync(_userId);
+            var user = await _unit.User.GetByIdAsync(_userId);
 
             ValidateCreedentials(user, model.OldPassword);
            
@@ -113,7 +109,7 @@ namespace Application.Services
 
         public async Task RevokeTokenAsync(RevokeTokenDto model)
         {
-            var token = await _unit.Token.GetAsync(model.RefreshToken);
+            var token = await _unit.Token.GetByRefreshAsync(model.RefreshToken);
 
             token.NotNull();
 
@@ -126,35 +122,33 @@ namespace Application.Services
                 $"for '{ token.User.UserName }' has been succesfully revoked { DateTime.UtcNow }");
         }
 
-        public async Task CreateRecoveryPasswordThreadAsync(string email)
+        public async Task CreateRecoveryPasswordThreadAsync(RecoveryPasswordDto model)
         {
-            var user = await _unit.User.GetRelationalAsync(email);
+            var user = await _unit.User.GetByEmailAsync(model.Email);
 
             user.NotNull();
 
             RecoveryIdentity recovery = new(user);
             _recoveryIdentity.Add(recovery);
 
-            await _sender.SendEmailAsync("RecoveryResource.cshtml", email,
-                "Password recovery", new { RecoveryId = recovery.Id });
+            await _communicatesService.SendMailWithRecoveryPageLinkAsync(model.Email, recovery.Id);
         }
 
         public async Task ChangePasswordAtRecoveryAsync(ChangePasswordAtRecoveryDto model)
         {
             var recoveryThread = _recoveryIdentity.Get(model.RecoveryId);
-            var user = await _unit.User.GetAsync(recoveryThread.UserId);
 
             recoveryThread.NotNull();
 
             var(hash, salt) = _encryptor.HashPassword(model.NewPassword);
 
-            user.SetPassword(hash);
-            user.SetSalt(salt);
+            recoveryThread.User.SetPassword(hash);
+            recoveryThread.User.SetSalt(salt);
+
+            _unit.User.Update(recoveryThread.User);
+            await _unit.CommitAsync();
 
             _recoveryIdentity.Remove(recoveryThread);
-
-            _unit.User.Update(user);
-            await _unit.CommitAsync();
         }
 
         private void ValidateCreedentials(User user, string password)

@@ -51,7 +51,12 @@
 				<v-row class="justify-center">
 					<p>
 						Did you forgot your password?
-						<router-link id="href-fix" tag="a" to="Register" exact="exact">
+						<router-link
+							id="href-fix"
+							tag="a"
+							to="RecoveryPassword"
+							exact="exact"
+						>
 							Click here
 						</router-link>
 					</p>

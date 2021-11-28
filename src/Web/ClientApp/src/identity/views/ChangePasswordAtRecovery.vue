@@ -15,7 +15,9 @@
 				</v-form>
 			</v-card-text>
 			<v-card-actions>
-				<v-btn @click="changePassword">Change</v-btn>
+				<v-row justify="center">
+					<v-btn @click="changePassword">Change</v-btn>
+				</v-row>
 			</v-card-actions>
 		</v-card>
 	</v-container>

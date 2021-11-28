@@ -12,7 +12,5 @@ namespace Infrastructure.Persistance.Repositories
         {
             _context = context;
         }
-
-
     }
 }

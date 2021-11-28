@@ -14,7 +14,11 @@
 				</v-form>
 			</v-card-text>
 			<v-card-actions>
-				<v-btn @click="recoveryPassword">Recover Password</v-btn>
+				<v-row justify="center">
+					<v-btn @click="recoveryPassword" class="success"
+						>Recover Password</v-btn
+					>
+				</v-row>
 			</v-card-actions>
 		</v-card>
 	</v-container>

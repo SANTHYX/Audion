@@ -7,6 +7,6 @@ namespace Core.Commons.Persistance.Repositories
 {
     public interface IProfileRepository : IRepository, IGenericRepository<Profile>
     {
-        Task<Profile> GetAsync(Guid userId);
+        Task<Profile> GetByUserIdAsync(Guid userId);
     }
 }

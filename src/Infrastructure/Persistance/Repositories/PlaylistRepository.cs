@@ -22,7 +22,7 @@ namespace Infrastructure.Persistance.Repositories
             _response = response;
         }
 
-        public async Task<Playlist> GetAsync(Guid id)
+        public async Task<Playlist> GetByIdAsync(Guid id)
             => await _context.Playlists.FirstOrDefaultAsync(x => x.Id == id);
 
         public async Task<Page<Playlist>> GetAllAsync(Expression<Func<Playlist, bool>> expression, PagedQuery pagedQuery)

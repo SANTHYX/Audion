@@ -1,6 +1,6 @@
 ﻿using Application.Commons.Identity;
 using Application.Commons.Mappers;
-using Application.Commons.Services;
+using Application.Commons.Services.Business;
 using Application.Commons.Toolkits.Files;
 using Application.Commons.Types;
 using Application.Dto;
@@ -14,7 +14,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 
-namespace Application.Services
+namespace Application.Services.Business
 {
     public class TrackService : ITrackService
     {
@@ -44,7 +44,7 @@ namespace Application.Services
         {
             _logger.LogInformation($"Fetching object with Title '{ title }'...");
 
-            var track = await _unit.Track.GetAsync(title);
+            var track = await _unit.Track.GetByTitleAsync(title);
 
             track.NotNull();
 
@@ -62,7 +62,7 @@ namespace Application.Services
 
         public async Task UploadAsync(UploadTrackDto model)
         {
-            var user = await _unit.User.GetRelationalAsync(_userId);
+            var user = await _unit.User.GetByIdAsync(_userId);
 
             user.NotNull();
 
@@ -76,7 +76,7 @@ namespace Application.Services
 
         public async Task RemoveAsync(RemoveTrackDto model)
         {
-            var track = await _unit.Track.GetAsync(model.Id);
+            var track = await _unit.Track.GetByIdAsync(model.Id);
 
             track.NotNull().OwnedByCurrentUser(_userId);
 

@@ -21,10 +21,11 @@ namespace Infrastructure.Extensions
         {
             services.Configure<SecuritySettings>(configuration.GetSection(SecuritySettings.Section));
             services.Configure<MailingBotSettings>(configuration.GetSection(MailingBotSettings.Section));
+            services.Configure<SmtpOptions>(configuration.GetSection(SmtpOptions.Section));
 
             services.AddDatabaseModule(configuration);
             services.AddAuthenticationModule(configuration);
-            services.AddMailingModule();
+            services.AddMailingModule(configuration);
 
             services.Scan(scn => scn.FromApplicationDependencies()
             .AddRepositoriesModule()

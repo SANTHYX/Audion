@@ -1,6 +1,6 @@
 ﻿using Application.Commons.Identity;
 using Application.Commons.Mappers;
-using Application.Commons.Services;
+using Application.Commons.Services.Business;
 using Application.Dto;
 using Application.Dto.Playlist;
 using Application.Extensions.Validations;
@@ -12,7 +12,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 
-namespace Application.Services
+namespace Application.Services.Business
 {
     public class PlaylistService : IPlaylistService
     {
@@ -39,7 +39,7 @@ namespace Application.Services
         {
             _logger.LogInformation($"Fetching object with Id '{ id }'...");
 
-            var playlist = await _unit.Playlist.GetAsync(id);
+            var playlist = await _unit.Playlist.GetByIdAsync(id);
 
             return _mapper.MapTo<GetPlaylistDto>(playlist);
         }
@@ -58,7 +58,7 @@ namespace Application.Services
 
         public async Task CreateAsync(CreatePlaylistDto model)
         {
-            var user = await _unit.User.GetRelationalAsync(_userId);
+            var user = await _unit.User.GetByIdAsync(_userId);
 
             Playlist playlist = new(model.Name, user);
             await _unit.Playlist.AddAsync(playlist);
@@ -67,7 +67,7 @@ namespace Application.Services
 
         public async Task UpdateAsync(UpdatePlaylistDto model)
         {
-            var playlist = await _unit.Playlist.GetAsync(model.Id);
+            var playlist = await _unit.Playlist.GetByIdAsync(model.Id);
 
             playlist.NotNull().OwnedByCurrentUser(_userId);
 
@@ -77,7 +77,7 @@ namespace Application.Services
 
         public async Task RemoveAsync(RemovePlaylistDto model)
         {
-            var playlist = await _unit.Playlist.GetAsync(model.Id);
+            var playlist = await _unit.Playlist.GetByIdAsync(model.Id);
 
             playlist.NotNull().OwnedByCurrentUser(_userId);
 

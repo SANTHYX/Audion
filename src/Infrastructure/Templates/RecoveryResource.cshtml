@@ -1,10 +1,15 @@
-﻿@{
-    Layout = "./Shared/_Layout";
+﻿<!DOCTYPE html>
 
-    var request = Context.Request;
-    var baseUrl = $"{ request.Scheme }://{ request.Host }/identity/recovery-password/";
-}
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Templates/Shared/styles.css" rel="stylesheet" />
+</head>
+<body>
+    <div>
+        <h2>Click in button below to set a new password</h2>
 
-<h2>Click in button below to set a new password</h2>
-
-<a href="@baseUrl+@Model.RecoveryId" class="msg-btn">Set New Password</a>
+        <a href="@($"{ Model.BaseUrl }recovery-password/{ Model.RecoveryId }")" class="msg-btn">Set New Password</a>
+    </div>
+</body>
+</html>

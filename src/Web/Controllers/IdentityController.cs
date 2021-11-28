@@ -1,4 +1,4 @@
-﻿using Application.Commons.Services;
+﻿using Application.Commons.Services.Business;
 using Application.Dto.Identity;
 using Application.Dto.User;
 using Microsoft.AspNetCore.Authorization;
@@ -48,7 +48,7 @@ namespace Web.Controllers
         /// <summary>
         /// Endpoint handling generation of new access tokens for sign-in users after expire
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="model">Object with refresh token</param>
         /// <returns>Object wit access token and metadata</returns>
         [HttpPost("refresh-token")]
         public async Task<IActionResult> RefreshTokenAsync([FromBody] RefreshTokenDto model)
@@ -59,23 +59,24 @@ namespace Web.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Endpoint handle making recovery thread, after that service will send email message
+        /// to user with link to route handling change password operation
         /// </summary>
-        /// <param name="email"></param>
+        /// <param name="model">Object including mail</param>
         /// <returns></returns>
         [HttpPost("recovery-password")]
-        public async Task<IActionResult> RecoveryPasswordAsync([FromBody] string email)
+        public async Task<IActionResult> RecoveryPasswordAsync([FromBody] RecoveryPasswordDto model)
         {
-            await _service.CreateRecoveryPasswordThreadAsync(email);
+            await _service.CreateRecoveryPasswordThreadAsync(model);
 
             return Ok();
         }
 
         /// <summary>
-        /// 
+        /// Endpoint handle operation to set new user password at recovery
         /// </summary>
-        /// <param name="recoveryId"></param>
-        /// <param name="model"></param>
+        /// <param name="recoveryId">Id of created thread</param>
+        /// <param name="model">New user password</param>
         /// <returns></returns>
         [HttpPut("recovery-password/{recoveryId}")]
         public async Task<IActionResult> ChangePasswordAtRecoveryAsync
@@ -92,7 +93,7 @@ namespace Web.Controllers
         /// after invoke this operation if user will try to generate 
         /// new token from expired refresh in session he will recive exception 
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="model">Object containing refresh token</param>
         /// <returns></returns>
         [Authorize]
         [HttpPut("revoke-token")]
@@ -104,9 +105,9 @@ namespace Web.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Endpoint handle setting new password for authenticated user
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="model">Object with old and new password</param>
         /// <returns></returns>
         [Authorize]
         [HttpPut("change-creedentials")]

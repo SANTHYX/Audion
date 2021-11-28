@@ -6,7 +6,6 @@ namespace Core.Commons.Identity
 {
     public class RecoveryIdentity : Entity
     {
-        public Guid UserId { get; private set; }
         public User User { get; private set; }
 
         protected RecoveryIdentity()

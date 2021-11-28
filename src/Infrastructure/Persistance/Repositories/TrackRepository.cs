@@ -22,10 +22,10 @@ namespace Infrastructure.Persistance.Repositories
             _response = response;
         }
 
-        public async Task<Track> GetAsync(string title)
+        public async Task<Track> GetByTitleAsync(string title)
             => await _context.Tracks.FirstOrDefaultAsync(x => x.Title == title);
 
-        public async Task<Track> GetAsync(Guid id)
+        public async Task<Track> GetByIdAsync(Guid id)
             => await _context.Tracks.FirstOrDefaultAsync(x => x.Id == id);
 
         public async Task<Page<Track>> GetAllAsync(Expression<Func<Track, bool>> expression, PagedQuery pagedQuery)

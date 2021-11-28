@@ -4,6 +4,7 @@ namespace Application.Commons.Toolkits.Mail
 {
     public interface IMailSender
     {
-        Task SendEmailAsync<T>(string templateName, string targetEmail, string subject, T model);
+        Task SendTemplatedEmailAsync<T>(string templateName, string targetEmail, string subject, T model);
+        Task SendEmailAsync<T>(string targetEmail, string subject, string body);
     }
 }

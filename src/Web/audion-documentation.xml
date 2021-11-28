@@ -22,22 +22,23 @@
             <summary>
             Endpoint handling generation of new access tokens for sign-in users after expire
             </summary>
-            <param name="model"></param>
+            <param name="model">Object with refresh token</param>
             <returns>Object wit access token and metadata</returns>
         </member>
-        <member name="M:Web.Controllers.IdentityController.RecoveryPasswordAsync(System.String)">
+        <member name="M:Web.Controllers.IdentityController.RecoveryPasswordAsync(Application.Dto.Identity.RecoveryPasswordDto)">
             <summary>
-            
+            Endpoint handle making recovery thread, after that service will send email message
+            to user with link to route handling change password operation
             </summary>
-            <param name="email"></param>
+            <param name="model">Object including mail</param>
             <returns></returns>
         </member>
         <member name="M:Web.Controllers.IdentityController.ChangePasswordAtRecoveryAsync(System.Guid,Application.Dto.Identity.ChangePasswordAtRecoveryDto)">
             <summary>
-            
+            Endpoint handle operation to set new user password at recovery
             </summary>
-            <param name="recoveryId"></param>
-            <param name="model"></param>
+            <param name="recoveryId">Id of created thread</param>
+            <param name="model">New user password</param>
             <returns></returns>
         </member>
         <member name="M:Web.Controllers.IdentityController.RevokeTokenAsync(Application.Dto.Identity.RevokeTokenDto)">
@@ -46,14 +47,14 @@
             after invoke this operation if user will try to generate 
             new token from expired refresh in session he will recive exception 
             </summary>
-            <param name="model"></param>
+            <param name="model">Object containing refresh token</param>
             <returns></returns>
         </member>
         <member name="M:Web.Controllers.IdentityController.ChangeCreedentialsAsync(Application.Dto.Identity.ChangeCreedentialsDto)">
             <summary>
-            
+            Endpoint handle setting new password for authenticated user
             </summary>
-            <param name="model"></param>
+            <param name="model">Object with old and new password</param>
             <returns></returns>
         </member>
         <member name="M:Web.Controllers.PlaylistsController.GetAsync(System.Guid)">

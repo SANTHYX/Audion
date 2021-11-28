@@ -1,7 +1,9 @@
 ﻿using Application.Commons.Toolkits.Mail;
 using FluentEmail.Core;
+using Infrastructure.Commons.Helpers;
 using Infrastructure.Options;
 using Microsoft.Extensions.Options;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace Infrastructure.Toolkits.Mail
@@ -16,16 +18,29 @@ namespace Infrastructure.Toolkits.Mail
             _emailFactory = emailFactory;
             _settings = settings.Value;
         }
+        public async Task SendTemplatedEmailAsync<T>(string templateName, string targetEmail, string subject, T model)
+        {
+            var templatePath = Path.Combine(DirectoriesStore.EmailTemplatesStoreDirectory,templateName);
 
-        public async Task SendEmailAsync<T>(string templateName, string targetEmail, string subject, T model)
+            var mail = _emailFactory.Create()
+                .SetFrom(_settings.Address)
+                .To(targetEmail)
+                .Subject(subject)
+                .UsingTemplateFromFile(templatePath,model);
+
+            await mail.SendAsync();
+        }
+
+        public async Task SendEmailAsync<T>(string targetEmail, string subject, string body)
         {
             var mail = _emailFactory.Create()
                 .SetFrom(_settings.Address)
                 .To(targetEmail)
                 .Subject(subject)
-                .UsingTemplateFromFile(templateName,model);
+                .Body(body);
 
             await mail.SendAsync();
         }
+
     }
 }

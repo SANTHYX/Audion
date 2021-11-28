@@ -3,7 +3,6 @@ using Core.Domain;
 using Infrastructure.Commons.Persistance;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Infrastructure.Persistance.Repositories
@@ -17,33 +16,24 @@ namespace Infrastructure.Persistance.Repositories
             _context = context;
         }
 
-        public async Task<User> GetAsync(Guid id)
+        public async Task<User> GetByIdAsync(Guid id)
             => await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
 
-        public async Task<User> GetAsync(string userName)
+        public async Task<User> GetByUsernameAsync(string userName)
             => await _context.Users.FirstOrDefaultAsync(x => x.UserName == userName);
 
-        public async Task<User> GetWithProfileAsync(Guid id)
+        public async Task<User> GetByEmailAsync(string email)
+            => await _context.Users.FirstOrDefaultAsync(x => x.Email == email);
+
+        public async Task<User> GetWithProfileByIdAsync(Guid id)
           => await _context.Users
               .Include(x => x.Profile)
               .FirstOrDefaultAsync(x => x.Id == id);
 
-        public async Task<User> GetWithProfileAsync(string userName)
+        public async Task<User> GetWithProfileByUsernameAsync(string userName)
             => await _context.Users
                 .Include(x => x.Profile)
                 .FirstOrDefaultAsync(x => x.UserName == userName);
-
-        public async Task<User> GetRelationalAsync(Guid id)
-            => await _context.Users
-                .Select(x => new { x.Id })
-                .Cast<User>()
-                .FirstOrDefaultAsync(y => y.Id == id);
-
-        public async Task<User> GetRelationalAsync(string email)
-            => await _context.Users
-                .Select(x => new { x.Id })
-                .Cast<User>()
-                .FirstOrDefaultAsync(y => y.Email == email);
 
         public async Task<User> GetAggregateAsync(string userName)
             => await _context.Users
