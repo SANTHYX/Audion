@@ -4,6 +4,41 @@
         <name>Web</name>
     </assembly>
     <members>
+        <member name="M:Web.Controllers.CommentsController.CommentTrackAsync(Application.Dto.Comment.AddCommentDto)">
+            <summary>
+            
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Web.Controllers.CommentsController.CommentPlaylistAsync(Application.Dto.Comment.AddCommentDto)">
+            <summary>
+            
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Web.Controllers.CommentsController.EditTrackCommentAsync(Application.Dto.Comment.EditCommentDto)">
+            <summary>
+            
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Web.Controllers.CommentsController.EditPlaylistCommentAsync(Application.Dto.Comment.EditCommentDto)">
+            <summary>
+            
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Web.Controllers.CommentsController.ReplyToCommentAsync(System.Guid,Application.Dto.Comment.ReplyCommentDto)">
+            <summary>
+            
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
         <member name="M:Web.Controllers.IdentityController.LoginUser(Application.Dto.User.LoginUserDto)">
             <summary>
             Endpoint handling user authentication.

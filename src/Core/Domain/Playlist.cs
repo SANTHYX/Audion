@@ -30,12 +30,13 @@ namespace Core.Domain
                 return;
             }
             
-            Name = name ?? $"Unnamed-{DateTime.UtcNow}";
+            Name = name;
         }
 
         public void AddUser(User user)
         {
-            User = user ?? throw new Exception("Cannot bind newly Playlist with empty user");
+            User = user ?? throw new ArgumentNullException
+                (nameof(user), "Cannot bind newly Playlist with empty user");
         }
     }
 }

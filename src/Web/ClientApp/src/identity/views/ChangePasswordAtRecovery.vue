@@ -16,7 +16,9 @@
 			</v-card-text>
 			<v-card-actions>
 				<v-row justify="center">
-					<v-btn @click="changePassword">Change</v-btn>
+					<v-btn @click="changePassword" class="success" :disabled="isFormValid"
+						>Change
+					</v-btn>
 				</v-row>
 			</v-card-actions>
 		</v-card>
@@ -34,6 +36,11 @@ export default {
 			required: true,
 		},
 	},
+	computed: {
+		isFormValid() {
+			return this.$refs.form.validate();
+		},
+	},
 	data: () => ({
 		newPassword: '',
 		validationRules: {
@@ -42,13 +49,11 @@ export default {
 	}),
 	methods: {
 		async changePassword() {
-			if (this.$refs.form.validate()) {
-				const recoveryObj = {
-					recoveryId: this.recoveryId,
-					newPassword: this.newPassword,
-				};
-				await this['identity/SET_PASSWORD_AT_RECOVERY'](recoveryObj);
-			} else return;
+			const recoveryObj = {
+				recoveryId: this.recoveryId,
+				newPassword: this.newPassword,
+			};
+			await this['identity/SET_PASSWORD_AT_RECOVERY'](recoveryObj);
 		},
 
 		...mapActions(['identity/SET_PASSWORD_AT_RECOVERY']),

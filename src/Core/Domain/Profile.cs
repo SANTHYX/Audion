@@ -12,7 +12,6 @@ namespace Core.Domain
         public string ImageId { get; private set; }
         public Guid UserId { get; private set; }
         public User User { get; private set; }
-        public Stats Stats { get; private set; }
 
         protected Profile() { }
 
@@ -67,13 +66,23 @@ namespace Core.Domain
 
         public void SetImage(string imageId)
         {
-            ImageId = imageId ?? throw new ArgumentNullException(nameof(imageId), 
-                "Passed empty value of image name");
+            if (string.IsNullOrWhiteSpace(imageId))
+            {
+                throw new ArgumentNullException(
+                    nameof(imageId),"Passed empty value of image name");
+            }
+            if (ImageId == imageId)
+            {
+                return;
+            }
+
+            ImageId = imageId;
         }
 
         public void AddUser(User user)
         {
-            User = user ?? throw new Exception("Cannot bind newly Profile with empty user");
+            User = user ?? throw new ArgumentNullException(nameof(user),
+                "Cannot bind newly Profile with empty user");
         }
     }
 }

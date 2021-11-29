@@ -19,7 +19,6 @@ namespace Infrastructure.Persistance.Maps
                 .HasMaxLength(30);
             builder.Property(x => x.ImageId)
                 .HasMaxLength(30);
-            builder.Ignore(x => x.Stats);
         }
     }
 }
