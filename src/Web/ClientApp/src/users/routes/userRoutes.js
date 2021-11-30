@@ -26,8 +26,10 @@ const userRoutes = [
                 name: 'EditCreedentials',
                 component: () => import('../views/account/CredentialsForm.vue'),
                 props: true,
-            }
+            },
+
         ],
+        meta: { requiresAuth: true }
     }
 ]
 

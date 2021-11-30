@@ -2,13 +2,6 @@ import api from '../../commons/plugins/axios'
 import storage from '../../commons/plugins/storage'
 
 const identityService = {
-    getTokenObj: () => {
-        const accessToken = storage.getAccessToken();
-        const refresh = storage.getRefresh();
-        const userName = storage.getUserName();
-        return { accessToken, refresh, userName }
-    },
-
     registerUser: async (userModel) => {
         await api.post('/identity/register', userModel);
     },

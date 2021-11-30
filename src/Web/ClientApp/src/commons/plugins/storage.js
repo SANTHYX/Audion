@@ -16,7 +16,14 @@ const storage = {
 
     getRefresh: () => localStorage.getItem('refresh'),
 
-    getUserName: () => localStorage.getItem('userName')
+    getUserName: () => localStorage.getItem('userName'),
+
+    getTokenObj: () => {
+        const accessToken = storage.getAccessToken();
+        const refresh = storage.getRefresh();
+        const userName = storage.getUserName();
+        return { accessToken, refresh, userName }
+    },
 };
 
 export default storage;

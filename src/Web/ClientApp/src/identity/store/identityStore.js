@@ -1,10 +1,11 @@
+import storage from '../../commons/plugins/storage';
 import identityService from '../services/identityService'
 
 const identityStore = {
     namespaced: true,
 
     state: {
-        tokens: identityService.getTokenObj(),
+        tokens: storage.getTokenObj(),
     },
 
     getters: {

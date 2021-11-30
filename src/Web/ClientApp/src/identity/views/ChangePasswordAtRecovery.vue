@@ -36,11 +36,6 @@ export default {
 			required: true,
 		},
 	},
-	computed: {
-		isFormValid() {
-			return this.$refs.form.validate();
-		},
-	},
 	data: () => ({
 		newPassword: '',
 		validationRules: {
@@ -49,11 +44,14 @@ export default {
 	}),
 	methods: {
 		async changePassword() {
-			const recoveryObj = {
-				recoveryId: this.recoveryId,
-				newPassword: this.newPassword,
-			};
-			await this['identity/SET_PASSWORD_AT_RECOVERY'](recoveryObj);
+			if (this.$refs.form.validate()) {
+				const recoveryObj = {
+					recoveryId: this.recoveryId,
+					newPassword: this.newPassword,
+				};
+				await this['identity/SET_PASSWORD_AT_RECOVERY'](recoveryObj);
+			}
+			return;
 		},
 
 		...mapActions(['identity/SET_PASSWORD_AT_RECOVERY']),

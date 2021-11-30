@@ -1,3 +1,4 @@
+import storage from './storage';
 import axios from 'axios';
 import identityService from '../../identity/services/identityService'
 
@@ -7,9 +8,9 @@ const api = axios.create({
 
 api.interceptors.request.use(
     request => {
-        const tokens = identityService.getTokenObj();
-        if (tokens)
-            request.headers['Authorization'] = `Bearer ${tokens.accessToken}`;
+        let token = storage.getAccessToken();
+        if (token)
+            request.headers['Authorization'] = `Bearer ${token}`;
 
         return request;
     },
@@ -18,12 +19,11 @@ api.interceptors.request.use(
 api.interceptors.response.use(
     response => response,
     async err => {
-        const tokens = identityService.getTokenObj();
-        if (err.response.status === '401' && !err.response.config.url.includes('login')) {
-            await identityService.refreshToken({ 'refreshToken': tokens.refresh });
+        if (err.response.status === 401 && !err.response.config.url.includes('/login')) {
+            let refresh = storage.getRefresh();
+            await identityService.refreshToken({ refreshToken: refresh });
             return api(err.config)
         }
-
         return Promise.reject(err);
     });
 

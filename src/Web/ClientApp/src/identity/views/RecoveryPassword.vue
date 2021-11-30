@@ -15,12 +15,9 @@
 			</v-card-text>
 			<v-card-actions>
 				<v-row justify="center">
-					<v-btn
-						@click="recoveryPassword"
-						class="success"
-						:disabled="isFormValid"
-						>Recover Password</v-btn
-					>
+					<v-btn @click="recoveryPassword" class="success">
+						Recover Password
+					</v-btn>
 				</v-row>
 			</v-card-actions>
 		</v-card>
@@ -32,11 +29,6 @@ import { mapActions } from 'vuex';
 
 export default {
 	name: 'PasswordRecovery',
-	computed: {
-		isFormValid() {
-			return this.$refs.form.validate();
-		},
-	},
 	data: () => ({
 		email: '',
 		validationRules: {
@@ -45,10 +37,13 @@ export default {
 	}),
 	methods: {
 		async recoveryPassword() {
-			const emailObj = {
-				email: this.email,
-			};
-			await this['identity/RECOVERY_PASSWORD'](emailObj);
+			if (this.$refs.form.validate()) {
+				const emailObj = {
+					email: this.email,
+				};
+				await this['identity/RECOVERY_PASSWORD'](emailObj);
+			}
+			return;
 		},
 		...mapActions(['identity/RECOVERY_PASSWORD']),
 	},

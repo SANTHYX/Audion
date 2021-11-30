@@ -24,7 +24,7 @@ namespace Infrastructure.Identity
         {
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_settings.Key));
             var signingCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-            var expiresAt = DateTime.Now.AddDays(2);
+            var expiresAt = DateTime.Now.AddMinutes(3);
             var claim = new Claim[]
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),

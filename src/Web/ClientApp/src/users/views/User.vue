@@ -1,6 +1,6 @@
 <template>
 	<v-container id="user" v-show="!state.isLoading">
-		<div v-if="Object.entries(this['user/USER']).length">
+		<div v-if="userNotNull">
 			{{ `Hi ${userName}` }}
 		</div>
 		<v-row class="justify-center" v-else>
@@ -21,6 +21,9 @@ export default {
 		},
 	}),
 	computed: {
+		userNotNull() {
+			return Object.entries(this['user/USER']).length;
+		},
 		...mapGetters(['user/USER']),
 	},
 	methods: {

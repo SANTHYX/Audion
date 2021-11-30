@@ -38,7 +38,6 @@
 						<v-btn
 							class="success"
 							width="120"
-							:disabled="isFormValid"
 							@click="loginUser"
 							v-if="!state.isAwaiting"
 						>
@@ -72,11 +71,6 @@ import { mapActions } from 'vuex';
 
 export default {
 	name: 'Login',
-	computed: {
-		isFormValid() {
-			return this.$refs.form.validate();
-		},
-	},
 	data: () => ({
 		creedentials: {
 			userName: '',
@@ -95,9 +89,12 @@ export default {
 	}),
 	methods: {
 		async loginUser() {
-			this.await();
-			await this['identity/LOGIN_USER'](this.creedentials);
-			this.$router.push(this.$route.query.redirect || '/');
+			if (this.$refs.form.validate()) {
+				this.await();
+				await this['identity/LOGIN_USER'](this.creedentials);
+				this.$router.push(this.$route.query.redirect || '/');
+			}
+			return;
 		},
 		await() {
 			this.state.isAwaiting = true;
