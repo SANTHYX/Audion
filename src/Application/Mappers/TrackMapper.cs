@@ -33,7 +33,7 @@ namespace Application.Mappers
                 Collection = source.Collection?.Select(x => new GetTracksDto
                 {
                     Title = x.Title,
-                    Track = new Uri($"{ _server.GetServerURL() }/Track/{ x.Id }")
+                    Track = new Uri($"{ _server.GetServerURL() }files/audio/{ x.TrackId }")
                 }),
                 TotalResults = source.TotalResults,
                 TotalPages = source.TotalPages

@@ -1,6 +1,5 @@
 ﻿using Application.Commons.Services.Business;
 using Application.Dto.Playlist;
-using Core.Commons.Pagination;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -34,7 +33,7 @@ namespace Web.Controllers
         /// <param name="query"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IActionResult> BrowseAsync([FromQuery] PagedQuery query)
+        public async Task<IActionResult> BrowseAsync([FromQuery] BrowsePlaylistQueryDto query)
             => Ok(await _service.BrowseAsync(query));
 
         /// <summary>

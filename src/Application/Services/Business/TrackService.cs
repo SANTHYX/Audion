@@ -7,11 +7,11 @@ using Application.Dto;
 using Application.Dto.Track;
 using Application.Extensions.Validations;
 using Application.Extensions.Validations.Track;
-using Core.Commons.Pagination;
 using Core.Commons.Persistance;
 using Core.Domain;
 using Microsoft.Extensions.Logging;
 using System;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace Application.Services.Business
@@ -23,7 +23,7 @@ namespace Application.Services.Business
         private readonly IUnitOfWork _unit;
         private readonly ITrackMapper _mapper;
         private readonly IStaticFileManager<IAudioFile> _fileManager;
-        private readonly Guid _userId;
+        private Guid _userId;
 
         public TrackService(
             ILogger<TrackService> logger,
@@ -51,27 +51,35 @@ namespace Application.Services.Business
             return _mapper.MapTo<GetTrackDto>(track);
         }
 
-        public async Task<PagedResponseDto<GetTracksDto>> BrowseAsync(PagedQuery query)
+        public async Task<PagedResponseDto<GetTracksDto>> BrowseAsync(BrowseTracksQueryDto query)
         {
             _logger.LogInformation("Fetching collection...");
 
-            var tracks = await _unit.Track.GetAllAsync(x => x.Title == "", query);
+            var tracks = await _unit.Track.GetAllAsync(x => 
+            x.Title.ToLower().Contains(query.Title.ToLower())         
+            , query);
 
             return _mapper.MapTo<PagedResponseDto<GetTracksDto>>(tracks);
         }
 
         public async Task UploadAsync(UploadTrackDto model)
         {
+            _logger.LogInformation($"Start of uploading track : { model.Track.FileName }");
+
             var user = await _unit.User.GetByIdAsync(_userId);
 
             user.NotNull();
 
             var trackId = Guid.NewGuid().ToString();
             await _fileManager.SaveAsync(model.Track, trackId);
-   
+            
+            trackId = $"{trackId}{Path.GetExtension(model.Track.FileName)}";
+
             Track track = new(model.Title, trackId, user);
             await _unit.Track.AddAsync(track);
             await _unit.CommitAsync();
+
+            _logger.LogInformation("File has been uploaded succesfully");
         }
 
         public async Task RemoveAsync(RemoveTrackDto model)

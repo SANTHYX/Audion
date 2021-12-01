@@ -5,7 +5,6 @@ using Application.Dto;
 using Application.Dto.Playlist;
 using Application.Extensions.Validations;
 using Application.Extensions.Validations.Playlist;
-using Core.Commons.Pagination;
 using Core.Commons.Persistance;
 using Core.Domain;
 using Microsoft.Extensions.Logging;
@@ -20,7 +19,7 @@ namespace Application.Services.Business
         private readonly IUnitOfWork _unit;
         private readonly IUserProvider _provider;
         private readonly IPlaylistMapper _mapper;
-        private readonly Guid _userId;
+        private Guid _userId;
 
         public PlaylistService(
             ILogger<PlaylistService> logger,
@@ -44,7 +43,7 @@ namespace Application.Services.Business
             return _mapper.MapTo<GetPlaylistDto>(playlist);
         }
 
-        public async Task<PagedResponseDto<GetPlaylistsDto>> BrowseAsync(PagedQuery query)
+        public async Task<PagedResponseDto<GetPlaylistsDto>> BrowseAsync(BrowsePlaylistQueryDto query)
         {
             _logger.LogInformation($"Fetching playlists collection...");
 

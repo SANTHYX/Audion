@@ -1,4 +1,4 @@
-﻿using Application.Dto.User.NestedModels;
+﻿using Application.Dto.Track.NestedModels;
 
 namespace Application.Dto.User
 {

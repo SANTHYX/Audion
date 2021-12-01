@@ -50,6 +50,7 @@ namespace Web.Controllers
         /// </summary>
         /// <param name="model">Object with refresh token</param>
         /// <returns>Object wit access token and metadata</returns>
+        [AllowAnonymous]
         [HttpPost("refresh-token")]
         public async Task<IActionResult> RefreshTokenAsync([FromBody] RefreshTokenDto model)
         {

@@ -12,7 +12,7 @@ namespace Infrastructure.Commons.Pagination
     {
         public async Task<Page<T>> GetPagedResponse(IQueryable<T> context, int page = 1, int results = 5)
         {
-            page = page < 0 ? 0 : page;
+            page = page <= 0 ? 1 : page;
             results = results <= 0 ? 5 : results;
 
             var totalResults = await context.CountAsync();

@@ -1,12 +1,12 @@
 using Application.Extensions;
+using Infrastructure.Commons.Helpers;
 using Infrastructure.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
-using System;
 using System.IO;
 using VueCliMiddleware;
 using Web.Extensions;
@@ -28,12 +28,7 @@ namespace Web
 
             services.AddControllers();
             services.AddSpaStaticFiles(spa => spa.RootPath = "ClientApp");
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Web", Version = "v1" });
-                var path = Path.Combine(AppContext.BaseDirectory,"audion-documentation.xml");
-                c.IncludeXmlComments(path,true);               
-            });
+            services.AddSwagger();
             services.AddInfrastructureIoC(Configuration);
             services.AddApplicationIoC();
         }
@@ -50,7 +45,11 @@ namespace Web
 
             app.UseRouting();
 
-            app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions 
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(DirectoriesStore.FilesStoreDirectory)),
+                RequestPath = "/Files"
+            });
 
             app.UseSpaStaticFiles();
 

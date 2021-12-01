@@ -10,8 +10,7 @@ namespace Infrastructure.Identity
 
         public UserProvider(IHttpContextAccessor accessor)
         {
-            CurrentUserId = accessor.HttpContext.User?.Identity.IsAuthenticated == true
-                ? Guid.Parse(accessor.HttpContext.User.Identity.Name)
+            CurrentUserId = accessor.HttpContext.User?.Identity.IsAuthenticated == true ? Guid.Parse(accessor.HttpContext.User.Identity.Name)
                 : Guid.Empty;
         }
     }

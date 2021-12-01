@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Application.Dto.User.NestedModels
+namespace Application.Dto.Track.NestedModels
 {
     public record ProfileModel
     {

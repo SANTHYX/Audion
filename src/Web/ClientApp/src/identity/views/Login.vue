@@ -27,13 +27,11 @@
 			</v-card-text>
 			<v-card-actions>
 				<v-col>
-					<!------------- ErrorsAlertRow -------------->
 					<v-row class="justify-center">
 						<v-alert v-model="state.isThrown" border="bottom" type="error">
 							{{ error.message }}
 						</v-alert>
 					</v-row>
-					<!------------- ButtonRow -------------->
 					<v-row class="justify-center">
 						<v-btn
 							class="success"

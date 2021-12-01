@@ -19,7 +19,7 @@ namespace Application.Services.Business
         private readonly IUserProvider _provider;
         private readonly IUnitOfWork _unit;
         private readonly IStaticFileManager<IImageFile> _fileManager;
-        private readonly Guid _userId;
+        private Guid _userId;
 
         public ProfileService(
             ILogger<ProfileService> logger,

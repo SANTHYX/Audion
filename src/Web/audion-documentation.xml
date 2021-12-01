@@ -99,7 +99,7 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:Web.Controllers.PlaylistsController.BrowseAsync(Core.Commons.Pagination.PagedQuery)">
+        <member name="M:Web.Controllers.PlaylistsController.BrowseAsync(Application.Dto.Playlist.BrowsePlaylistQueryDto)">
             <summary>
             
             </summary>
@@ -155,7 +155,7 @@
             <param name="title"></param>
             <returns></returns>
         </member>
-        <member name="M:Web.Controllers.TracksController.BrowseAsync(Core.Commons.Pagination.PagedQuery)">
+        <member name="M:Web.Controllers.TracksController.BrowseAsync(Application.Dto.Track.BrowseTracksQueryDto)">
             <summary>
             
             </summary>

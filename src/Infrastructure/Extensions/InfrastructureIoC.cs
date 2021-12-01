@@ -35,9 +35,9 @@ namespace Infrastructure.Extensions
             services.AddSingleton<IEncryptor, Encryptor>();
             services.AddSingleton<IJwtHandler, JwtHandler>();
             services.AddSingleton<IServerDetails, ServerDetails>();
-            services.AddSingleton<IUserProvider, UserProvider>();
             services.AddSingleton<IRecoveryIdentityStorage, RecoveryIdentityStorage>();
             services.AddSingleton<ICollection<RecoveryIdentity>, Collection<RecoveryIdentity>>();
+            services.AddScoped<IUserProvider, UserProvider>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
     }

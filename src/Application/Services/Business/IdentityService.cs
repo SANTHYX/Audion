@@ -24,7 +24,7 @@ namespace Application.Services.Business
         private readonly IEncryptor _encryptor;
         private readonly IJwtHandler _jwtHandler;
         private readonly IIdentityCommunicatesService _communicatesService;
-        private readonly Guid _userId;
+        private Guid _userId;
 
         public IdentityService(
             ILogger<IdentityService> logger,

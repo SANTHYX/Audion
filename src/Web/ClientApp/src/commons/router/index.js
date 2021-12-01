@@ -6,7 +6,6 @@ import userRoutes from '../../users/routes/userRoutes'
 import trackRoutes from '../../tracks/routes/trackRoutes'
 import playlistRoutes from '../../playlists/routes/playlistRoutes'
 import identityStore from '../../identity/store/identityStore'
-import searchingRoutes from './modules/searchingRoutes'
 
 Vue.use(VueRouter)
 
@@ -16,7 +15,6 @@ const routes = [
     name: 'Home',
     component: Home
   },
-  ...searchingRoutes,
   ...identityRoutes,
   ...userRoutes,
   ...trackRoutes,

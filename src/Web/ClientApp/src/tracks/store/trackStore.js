@@ -11,7 +11,7 @@ const trackStore = {
     getters: {
         GET_TRACK: (state) => state.track,
 
-        GET_TRACKS_COLLECTION: (state) => state.tracksCollection.collection
+        GET_TRACKS_COLLECTION: (state) => state.tracksCollection
     },
 
     mutations: {
@@ -35,7 +35,6 @@ const trackStore = {
     actions: {
         UPLOAD_TRACK: async (context, track) => {
             try {
-                console.log(track);
                 await trackService.uploadTrack(track);
             } catch (err) {
                 throw new Error(err.response.data.Message);
