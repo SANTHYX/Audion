@@ -9,12 +9,12 @@
 			outlined
 			dense
 			@keypress.enter="
-				$router.push({ name: 'BrowseTracks', query: { title: title } })
+				$router.push({ name: 'BrowseTracks', query: { title: title, page: 1 } })
 			"
 		/>
 		<v-btn
 			color="blue"
-			:to="{ name: 'BrowseTracks', query: { title: title } }"
+			:to="{ name: 'BrowseTracks', query: { title: title, page: 1 } }"
 			replace
 		>
 			<v-icon>mdi-magnify</v-icon>

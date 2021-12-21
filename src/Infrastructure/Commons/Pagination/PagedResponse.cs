@@ -22,8 +22,7 @@ namespace Infrastructure.Commons.Pagination
                 return Empty();
             }
 
-            var totalPages = (int)Math.Ceiling((double)(results / totalResults));
-
+            var totalPages = (int)Math.Ceiling((decimal)totalResults / results);
             var collection = await context
                 .Skip((page - 1) * results)
                 .Take(results)
