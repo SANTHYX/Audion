@@ -13,7 +13,7 @@ namespace Core.Commons.Pagination
         public Page(int page, int results, IEnumerable<T> collection,
             int totalResults, int totalPages)
         {
-            CurrentPage = page;
+            CurrentPage = page >= totalPages ? totalPages : page;
             Results = results;
             Collection = collection;
             TotalResults = totalResults;

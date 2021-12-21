@@ -4,17 +4,17 @@
 			class="mt-6"
 			color="green"
 			placeholder="Search..."
-			v-model="searchPhrase"
+			v-model="title"
 			filled
 			outlined
 			dense
 			@keypress.enter="
-				$router.push({ name: 'DefaultBrowse', query: { phrase: searchPhrase } })
+				$router.push({ name: 'BrowseTracks', query: { title: title } })
 			"
 		/>
 		<v-btn
 			color="blue"
-			:to="{ name: 'DefaultBrowse', query: { phrase: searchPhrase } }"
+			:to="{ name: 'BrowseTracks', query: { title: title } }"
 			replace
 		>
 			<v-icon>mdi-magnify</v-icon>
@@ -26,7 +26,7 @@
 export default {
 	name: 'TheSearchBar',
 	data: () => ({
-		searchPhrase: '',
+		title: '',
 	}),
 };
 </script>

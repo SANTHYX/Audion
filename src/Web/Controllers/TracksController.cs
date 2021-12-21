@@ -21,11 +21,11 @@ namespace Web.Controllers
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="title"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet("{title}")]
-        public async Task<IActionResult> GetAsync(string title)
-            => Ok(await _service.GetAsync(title));
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetAsync(Guid id)
+            => Ok(await _service.GetAsync(id));
 
         /// <summary>
         /// 

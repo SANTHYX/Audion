@@ -5,6 +5,12 @@
 <script>
 export default {
 	name: 'Playlist',
+	props: {
+		id: {
+			type: String,
+			required: true,
+		},
+	},
 };
 </script>
 

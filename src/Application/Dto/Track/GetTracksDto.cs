@@ -4,7 +4,7 @@ namespace Application.Dto.Track
 {
     public record GetTracksDto
     {
+        public Guid Id { get; set; }
         public string Title { get; set; }
-        public Uri Track { get; set; }
     }
 }

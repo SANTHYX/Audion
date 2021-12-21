@@ -9,8 +9,8 @@ const trackService = {
         await api.post('/tracks', model);
     },
 
-    getTrack: async (title) => {
-        const response = await api.get(`/tracks/${title}`);
+    getTrack: async (trackId) => {
+        const response = await api.get(`/tracks/${trackId}`);
 
         return response;
     },

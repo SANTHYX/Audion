@@ -40,11 +40,11 @@ namespace Application.Services.Business
             _userId = _provider.CurrentUserId;
         }
 
-        public async Task<GetTrackDto> GetAsync(string title)
+        public async Task<GetTrackDto> GetAsync(Guid id)
         {
-            _logger.LogInformation($"Fetching object with Title '{ title }'...");
+            _logger.LogInformation($"Fetching object with Id '{ id }'...");
 
-            var track = await _unit.Track.GetByTitleAsync(title);
+            var track = await _unit.Track.GetByIdAsync(id);
 
             track.NotNull();
 
@@ -55,8 +55,8 @@ namespace Application.Services.Business
         {
             _logger.LogInformation("Fetching collection...");
 
-            var tracks = await _unit.Track.GetAllAsync(x => 
-            x.Title.ToLower().Contains(query.Title.ToLower())         
+            var tracks = await _unit.Track.GetAllAsync(x =>
+                (query.Title != null ? x.Title.ToLower().Contains(query.Title.ToLower()) : x.Title == null)
             , query);
 
             return _mapper.MapTo<PagedResponseDto<GetTracksDto>>(tracks);
@@ -73,7 +73,7 @@ namespace Application.Services.Business
             var trackId = Guid.NewGuid().ToString();
             await _fileManager.SaveAsync(model.Track, trackId);
             
-            trackId = $"{trackId}{Path.GetExtension(model.Track.FileName)}";
+            trackId = $"{ trackId }{ Path.GetExtension(model.Track.FileName) }";
 
             Track track = new(model.Title, trackId, user);
             await _unit.Track.AddAsync(track);

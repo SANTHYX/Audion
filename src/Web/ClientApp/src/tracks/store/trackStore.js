@@ -41,7 +41,7 @@ const trackStore = {
             }
         },
 
-        GET_TRACK: async (context, title) => {
+        GET_TRACK_ASYNC: async (context, title) => {
             try {
                 const response = await trackService.getTrack(title);
                 context.commit('SET_TRACK', response.data);

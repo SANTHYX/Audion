@@ -21,7 +21,8 @@ namespace Application.Mappers
         public GetTrackDto MapTo<TOut>(Track source) where TOut : GetTrackDto
             => source is null ? null : new()
             {
-                
+                Title = source.Title,
+                Track = new Uri($"{ _server.GetServerURL() }files/audio/{ source.TrackId }"),
             };
 
         public PagedResponseDto<GetTracksDto> MapTo<TOut>(Page<Track> source) 
@@ -32,8 +33,8 @@ namespace Application.Mappers
                 Results = source.Results,
                 Collection = source.Collection?.Select(x => new GetTracksDto
                 {
+                    Id = x.Id,
                     Title = x.Title,
-                    Track = new Uri($"{ _server.GetServerURL() }files/audio/{ x.TrackId }")
                 }),
                 TotalResults = source.TotalResults,
                 TotalPages = source.TotalPages

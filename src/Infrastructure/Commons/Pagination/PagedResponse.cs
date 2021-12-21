@@ -22,18 +22,18 @@ namespace Infrastructure.Commons.Pagination
                 return Empty();
             }
 
+            var totalPages = (int)Math.Ceiling((double)(results / totalResults));
+
             var collection = await context
                 .Skip((page - 1) * results)
                 .Take(results)
                 .ToListAsync();
-
-            var totalPages = (int)Math.Ceiling((double)(totalResults / results));
 
             return new(page, results,
                 collection, totalResults, totalPages);
         }
 
         private static Page<T> Empty()
-            => new(0,0,new List<T>(), 0,0);
+            => new(1,0,new List<T>(), 0,1);
     }
 }

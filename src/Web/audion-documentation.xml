@@ -148,11 +148,11 @@
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="M:Web.Controllers.TracksController.GetAsync(System.String)">
+        <member name="M:Web.Controllers.TracksController.GetAsync(System.Guid)">
             <summary>
             
             </summary>
-            <param name="title"></param>
+            <param name="id"></param>
             <returns></returns>
         </member>
         <member name="M:Web.Controllers.TracksController.BrowseAsync(Application.Dto.Track.BrowseTracksQueryDto)">
