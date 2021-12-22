@@ -11,7 +11,7 @@ const playlistStore = {
     getters: {
         GET_PLAYLIST: (state) => state.playlist,
 
-        GET_PLAYLISTS_COLLECTION: (state) => state.playlistsCollection.collection,
+        GET_PLAYLISTS_COLLECTION: (state) => state.playlistsCollection,
     },
 
     mutations: {
@@ -69,6 +69,15 @@ const playlistStore = {
         BROWSE_PLAYLISTS: async (context, playlistsQuerry) => {
             try {
                 const response = await playlistService.browsePlaylists(playlistsQuerry);
+                context.commit('SET_PLAYLISTS_COLLECTION', response.data);
+            } catch (err) {
+                throw new Error(err.response.data.Message);
+            }
+        },
+
+        BROWSE_USER_PLAYLISTS: async (context, browseQuerry) => {
+            try {
+                const response = await playlistService.browseUserPlaylists(browseQuerry);
                 context.commit('SET_PLAYLISTS_COLLECTION', response.data);
             } catch (err) {
                 throw new Error(err.response.data.Message);

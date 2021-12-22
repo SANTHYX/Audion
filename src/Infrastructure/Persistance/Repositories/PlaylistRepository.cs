@@ -27,7 +27,7 @@ namespace Infrastructure.Persistance.Repositories
 
         public async Task<Page<Playlist>> GetAllAsync(Expression<Func<Playlist, bool>> expression, PagedQuery pagedQuery)
             => await _response.GetPagedResponse(
-                _context.Playlists.Where(expression),
+                _context.Playlists.AsNoTracking().Where(expression),
                 pagedQuery.Page,
                 pagedQuery.Results);
 

@@ -23,6 +23,12 @@ const playlistService = {
         const response = await api.get('/playlists', { params: { ...playlistQuery } });
 
         return response;
+    },
+
+    browseUserPlaylists: async (browseQuery) => {
+        const response = await api.get('/playlists/user', { params: { ...browseQuery } });
+
+        return response;
     }
 }
 

@@ -5,6 +5,7 @@ using Application.Dto;
 using Application.Dto.Playlist;
 using Application.Extensions.Validations;
 using Application.Extensions.Validations.Playlist;
+using Core.Commons.Pagination;
 using Core.Commons.Persistance;
 using Core.Domain;
 using Microsoft.Extensions.Logging;
@@ -48,9 +49,19 @@ namespace Application.Services.Business
             _logger.LogInformation($"Fetching playlists collection...");
 
             var playlists = await _unit.Playlist
-                .GetAllAsync(x => 
-                    x.Name.Contains(query.Name),
+                .GetAllAsync(x =>
+                    (x.Name != null ? x.Name.ToLower().Contains(query.Name.ToLower()) : x.Name == null),
                 query);
+
+            return _mapper.MapTo<PagedResponseDto<GetPlaylistsDto>>(playlists);
+        }
+
+        public async Task<PagedResponseDto<GetPlaylistsDto>> BrowseForCurrentUserAsync(PagedQuery query)
+        {
+            _logger.LogInformation($"Fetching playlists collection...");
+
+            var playlists = await _unit.Playlist
+               .GetAllAsync(x => x.UserId == _userId, query);
 
             return _mapper.MapTo<PagedResponseDto<GetPlaylistsDto>>(playlists);
         }

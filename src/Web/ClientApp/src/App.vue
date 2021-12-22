@@ -7,7 +7,7 @@
 			:uploadTrackAction="this['track/UPLOAD_TRACK']"
 		/>
 		<v-main>
-			<router-view :key="$route.fullPath" />
+			<router-view :key="$route.fullPath" :isAuthenticated="isAuthenticated" />
 		</v-main>
 		<v-footer />
 	</v-app>

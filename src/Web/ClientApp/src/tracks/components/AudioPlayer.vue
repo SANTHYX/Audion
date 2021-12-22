@@ -2,8 +2,14 @@
 	<div id="audio-player">
 		<v-card>
 			<v-card-title>
-				<v-btn @click="previous"></v-btn>
-				<v-btn @click="play"></v-btn>
+				<v-spacer />
+				<v-btn @click="previous">
+					<v-icon>mdi-previous</v-icon>
+				</v-btn>
+				<v-btn @click="play">
+					<v-icon v-if="!isPlaying" color="green">mdi-play</v-icon>
+					<v-icon v-else color="red">mdi-pause</v-icon>
+				</v-btn>
 				<v-btn @click="next"></v-btn>
 			</v-card-title>
 		</v-card>
@@ -14,11 +20,14 @@
 export default {
 	name: 'AudioPlayer',
 	props: {
-		track: {
-			type: File,
+		trackURL: {
+			type: String,
 			required: true,
 		},
 	},
+	data: () => ({
+		isPlaying: false,
+	}),
 	methods: {
 		previous() {
 			this.$emit('previous');

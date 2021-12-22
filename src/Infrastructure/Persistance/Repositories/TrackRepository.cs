@@ -30,7 +30,7 @@ namespace Infrastructure.Persistance.Repositories
 
         public async Task<Page<Track>> GetAllAsync(Expression<Func<Track, bool>> expression, PagedQuery pagedQuery)
             => await _response.GetPagedResponse(
-                _context.Tracks.Where(expression),
+                _context.Tracks.AsNoTracking().Where(expression),
                 pagedQuery.Page,
                 pagedQuery.Results);
 

@@ -1,6 +1,7 @@
 ﻿using Application.Commons.Types;
 using Application.Dto;
 using Application.Dto.Playlist;
+using Core.Commons.Pagination;
 using System;
 using System.Threading.Tasks;
 
@@ -10,6 +11,7 @@ namespace Application.Commons.Services.Business
     {
         Task<GetPlaylistDto> GetAsync(Guid id);
         Task<PagedResponseDto<GetPlaylistsDto>> BrowseAsync(BrowsePlaylistQueryDto query);
+        Task<PagedResponseDto<GetPlaylistsDto>> BrowseForCurrentUserAsync(PagedQuery query);
         Task CreateAsync(CreatePlaylistDto model);
         Task UpdateAsync(UpdatePlaylistDto model);
         Task RemoveAsync(RemovePlaylistDto model);
