@@ -27,10 +27,24 @@ const userRoutes = [
                 component: () => import('../views/account/CredentialsForm.vue'),
                 props: true,
             },
-
+            {
+                path: 'playlists',
+                name: 'ManagePlaylists',
+                component: () => import('../../playlists/views/sub-routes/ManagePlaylists.vue'),
+            },
+            {
+                path: 'tracks',
+                name: 'ManageTracks',
+                component: () => import('../../tracks/views/sub-route/ManageTracks.vue')
+            },
         ],
         meta: { requiresAuth: true }
-    }
+    },
+    {
+        path: '/account/playlists/create',
+        name: 'MakePlaylist',
+        component: () => import('../../playlists/views/sub-routes/MakePlaylist.vue')
+    },
 ]
 
 export default userRoutes;

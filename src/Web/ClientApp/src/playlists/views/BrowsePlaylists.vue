@@ -1,7 +1,12 @@
 <template>
 	<v-container>
-		<h2>Results of searching Playlist {{ $route.query.name }}</h2>
+		<v-row dense>
+			<h2>Results of searching Playlist "{{ $route.query.name }}"</h2>
+			<v-spacer />
+			<h3>Found Results: {{ totalResults }}</h3>
+		</v-row>
 		<v-divider class="my-2" />
+		<v-container> </v-container>
 	</v-container>
 </template>
 
@@ -11,6 +16,16 @@ import { mapActions, mapGetters, mapMutations } from 'vuex';
 export default {
 	name: 'BrowsePlaylists',
 	computed: {
+		collection() {
+			return this['playlist/GET_PLAYLISTS_COLLECTION'].collection;
+		},
+		totalPages() {
+			return this['playlist/GET_PLAYLISTS_COLLECTION'].totalPages;
+		},
+		totalResults() {
+			return this['playlist/GET_PLAYLISTS_COLLECTION'].totalResults;
+		},
+
 		...mapGetters(['playlist/GET_PLAYLISTS_COLLECTION']),
 	},
 	methods: {

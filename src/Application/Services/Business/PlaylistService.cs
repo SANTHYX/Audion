@@ -50,8 +50,8 @@ namespace Application.Services.Business
 
             var playlists = await _unit.Playlist
                 .GetAllAsync(x =>
-                    (x.Name != null ? x.Name.ToLower().Contains(query.Name.ToLower()) : x.Name == null),
-                query);
+                    (x.Name != null ? x.Name.ToLower().Contains(query.Name.ToLower()) : x.Name == null)
+                ,query);
 
             return _mapper.MapTo<PagedResponseDto<GetPlaylistsDto>>(playlists);
         }

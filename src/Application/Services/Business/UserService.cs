@@ -1,7 +1,9 @@
 ﻿using Application.Commons.Mappers;
 using Application.Commons.Services.Business;
+using Application.Dto;
 using Application.Dto.User;
 using Application.Extensions.Validations;
+using Core.Commons.Pagination;
 using Core.Commons.Persistance;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
@@ -30,6 +32,11 @@ namespace Application.Services.Business
             _logger.LogInformation($"User with userName: { user.UserName } has been fetched");
 
             return _mapper.MapTo<GetUserDto>(user);
+        }
+
+        public async Task<PagedResponseDto<GetUserDto>> BrowseAsync(PagedQuery query)
+        {
+            throw new global::System.NotImplementedException();
         }
     }
 }

@@ -15,6 +15,24 @@ const routes = [
     name: 'Home',
     component: Home
   },
+  {
+    path: '/search',
+    name: 'Search',
+    component: () => import('../views/public/Search.vue'),
+    children: [
+      {
+        path: 'track',
+        name: 'BrowseTracks',
+        component: () => import('../../tracks/views/BrowseTracks.vue')
+      },
+      {
+        path: 'playlist',
+        name: 'BrowsePlaylists',
+        component: () => import('../../playlists/views/BrowsePlaylists.vue')
+      },
+    ],
+    meta: { requiresAuth: false }
+  },
   ...identityRoutes,
   ...userRoutes,
   ...trackRoutes,

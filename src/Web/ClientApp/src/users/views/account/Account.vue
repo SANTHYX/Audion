@@ -4,19 +4,9 @@
 			<v-card>
 				<v-navigation-drawer height="100vh">
 					<v-list>
-						<v-list-item>
-							<v-btn :to="{ name: 'UserOverview' }" plain>
-								Overview
-							</v-btn>
-						</v-list-item>
-						<v-list-item>
-							<v-btn :to="{ name: 'EditProfile' }" plain>
-								Profile
-							</v-btn>
-						</v-list-item>
-						<v-list-item>
-							<v-btn :to="{ name: 'EditCreedentials' }" plain>
-								Account
+						<v-list-item v-for="route in routes" :key="route.routeName">
+							<v-btn :to="{ name: route.routeName }" plain>
+								{{ route.title }}
 							</v-btn>
 						</v-list-item>
 					</v-list>
@@ -44,6 +34,30 @@ export default {
 	computed: {
 		...mapGetters(['identity/userName', 'user/USER']),
 	},
+	data: () => ({
+		routes: [
+			{
+				routeName: 'UserOverview',
+				title: 'Overview',
+			},
+			{
+				routeName: 'EditProfile',
+				title: 'Profile',
+			},
+			{
+				routeName: 'EditCreedentials',
+				title: 'Account',
+			},
+			{
+				routeName: 'ManageTracks',
+				title: 'Tracks',
+			},
+			{
+				routeName: 'ManagePlaylists',
+				title: 'Playlists',
+			},
+		],
+	}),
 	methods: {
 		...mapActions([
 			'user/GET_USER',

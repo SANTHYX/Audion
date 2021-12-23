@@ -1,7 +1,7 @@
 <template>
-	<v-container width="100vw" fluid>
-		<v-row class="justify-center teal lighten-1"> </v-row>
-	</v-container>
+	<v-footer>
+		<h2>Footer</h2>
+	</v-footer>
 </template>
 
 <script>

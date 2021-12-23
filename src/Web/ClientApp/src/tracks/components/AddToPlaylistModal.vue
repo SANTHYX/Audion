@@ -16,7 +16,7 @@
 			</v-card-subtitle>
 			<v-card-actions class="mt-5 border">
 				<v-flex>
-					<v-layout wrap justify-center align-end class="flex-container">
+					<v-layout wrap justify-center class="flex-container">
 						<v-card
 							v-for="item in collection"
 							:key="item.id"
@@ -24,9 +24,12 @@
 							height="120px"
 							class="my-3"
 						>
-							<v-card-title>
-								{{ item.title }}
-							</v-card-title>
+							<v-layout justify-end align-start>
+								<v-checkbox
+									v-model="choosenPlaylists"
+									:value="{ id: item.id }"
+								/>
+							</v-layout>
 						</v-card>
 					</v-layout>
 					<pagination :totalPages="totalPages" :visablePages="5" />
@@ -40,7 +43,7 @@
 </template>
 
 <script>
-import Pagination from '../../commons/components/Pagination.vue';
+import Pagination from '@/commons/components/Pagination.vue';
 
 export default {
 	props: {
@@ -78,7 +81,7 @@ export default {
 		Pagination,
 	},
 	async created() {
-		await this.switchPage(1);
+		await this.switchPage();
 	},
 };
 </script>

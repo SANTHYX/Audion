@@ -7,62 +7,31 @@
 		</v-row>
 		<v-divider class="my-2" />
 		<v-container id="list-height">
-			<v-card
-				class="mt-5"
-				v-for="item in tracksCollection"
-				:key="item.track"
-				width="1300px"
-			>
-				<v-card-title>
-					<h3>{{ item.title }}</h3>
-				</v-card-title>
-				<v-card-text>
-					<v-img
-						dark
-						gradient="to top right, rgba(100,115,201,.33), rgba(25,32,72,.7)"
-						aspect-ratio="1"
-						max-width="200px"
-					/>
-					<v-spacer />
-				</v-card-text>
-				<v-card-actions>
-					<v-btn
-						class="ml-2"
-						color="orange"
-						@click="openPlaylistsModal(item.id)"
-						:disabled="!isAuthenticated"
-						width="200px"
-					>
-						Add To Playlist
-						<v-icon>mdi-plus</v-icon>
-					</v-btn>
-					<v-spacer />
-					<v-btn
-						class="success"
-						:to="{ name: 'Track', params: { id: item.id } }"
-					>
-						Check
-						<v-icon>mdi-play</v-icon>
-					</v-btn>
-				</v-card-actions>
-			</v-card>
+			<browse-track-card
+				v-for="track in tracksCollection"
+				:key="track.id"
+				:isAuthenticated="isAuthenticated"
+				:track="track"
+				@openPlaylistsModal="openPlaylistsModal"
+				@check="$router.push({ name: 'Track', params: { id: $event } })"
+			/>
 		</v-container>
 		<pagination
 			:totalPages="tracksTotalPages"
 			:visablePages="5"
-			@switchPage="changePage($event)"
+			@switchPage="changePage"
 		/>
 		<add-to-playlist-modal
-			v-if="isAuthenticated"
 			v-model="isVisable"
 			:collection="playlistsCollection"
-			@switchPage="changeModalPage($event)"
+			@switchPage="changeModalPage"
 		/>
 	</v-container>
 </template>
 
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex';
+import BrowseTrackCard from '../components/BrowseTrackCard.vue';
 import Pagination from '@/commons/components/Pagination.vue';
 
 export default {
@@ -107,11 +76,13 @@ export default {
 			this.isVisable = true;
 			this.trackId = id;
 		},
+
 		...mapActions(['track/BROWSE_TRACKS', 'playlist/BROWSE_USER_PLAYLISTS']),
 		...mapMutations(['track/REMOVE_TRACKS_COLLECTION']),
 	},
 	components: {
 		AddToPlaylistModal: () => import('../components/AddToPlaylistModal.vue'),
+		BrowseTrackCard,
 		Pagination,
 	},
 	async mounted() {
