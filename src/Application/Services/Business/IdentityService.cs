@@ -95,8 +95,8 @@ namespace Application.Services.Business
             var user = await _unit.User.GetByIdAsync(_userId);
 
             ValidateCreedentials(user, model.OldPassword);
-           
-            var(hash, salt) = _encryptor.HashPassword(model.NewPassword);
+
+            var (hash, salt) = _encryptor.HashPassword(model.NewPassword);
 
             user.SetPassword(hash);
             user.SetSalt(salt);
@@ -140,7 +140,7 @@ namespace Application.Services.Business
 
             recoveryThread.NotNull();
 
-            var(hash, salt) = _encryptor.HashPassword(model.NewPassword);
+            var (hash, salt) = _encryptor.HashPassword(model.NewPassword);
 
             recoveryThread.User.SetPassword(hash);
             recoveryThread.User.SetSalt(salt);
@@ -154,7 +154,7 @@ namespace Application.Services.Business
         private void ValidateCreedentials(User user, string password)
         {
             if (!_encryptor.IsValidPassword(user, password))
-            { 
+            {
                 throw new UnauthorizedAccessException("Invalid creedentials");
             }
         }
@@ -162,7 +162,7 @@ namespace Application.Services.Business
         private async Task CheckUserExistance(string userName)
         {
             if (await _unit.User.IsExist(userName))
-            { 
+            {
                 throw new Exception($"User with this Username: '{ userName }' already exist");
             }
         }

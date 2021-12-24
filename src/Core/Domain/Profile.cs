@@ -69,7 +69,7 @@ namespace Core.Domain
             if (string.IsNullOrWhiteSpace(imageId))
             {
                 throw new ArgumentNullException(
-                    nameof(imageId),"Passed empty value of image name");
+                    nameof(imageId), "Passed empty value of image name");
             }
             if (ImageId == imageId)
             {

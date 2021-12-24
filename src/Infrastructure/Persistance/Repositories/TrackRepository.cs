@@ -15,7 +15,7 @@ namespace Infrastructure.Persistance.Repositories
         private readonly DataContext _context;
         private readonly IPagedResponse<Track> _response;
 
-        public TrackRepository(DataContext context, IPagedResponse<Track> response) 
+        public TrackRepository(DataContext context, IPagedResponse<Track> response)
             : base(context)
         {
             _context = context;

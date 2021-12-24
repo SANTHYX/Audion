@@ -15,7 +15,7 @@ namespace Infrastructure.Persistance.Repositories
         private readonly DataContext _context;
         private readonly IPagedResponse<Playlist> _response;
 
-        public PlaylistRepository(DataContext context, IPagedResponse<Playlist> response) 
+        public PlaylistRepository(DataContext context, IPagedResponse<Playlist> response)
             : base(context)
         {
             _context = context;

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Commons.Persistance
 {
-    public abstract class GenericRepository<T> where T: class, IEntity
+    public abstract class GenericRepository<T> where T : class, IEntity
     {
         private readonly DataContext _context;
 

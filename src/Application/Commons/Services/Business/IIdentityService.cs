@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
-using Application.Commons.Types;
+﻿using Application.Commons.Types;
 using Application.Dto.Identity.Requests;
 using Application.Dto.Identity.Responses;
+using System.Threading.Tasks;
 
 namespace Application.Commons.Services.Business
 {

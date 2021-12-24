@@ -1,5 +1,4 @@
 ﻿using Core.Commons.Identity;
-using Core.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -17,7 +16,7 @@ namespace Infrastructure.Persistance.Configurations
             builder.Property(x => x.ExpiresAt)
                 .HasMaxLength(15);
             builder.HasOne(x => x.User)
-                .WithMany(y=>y.Tokens);
+                .WithMany(y => y.Tokens);
         }
     }
 }

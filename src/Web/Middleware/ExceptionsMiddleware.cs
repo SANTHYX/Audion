@@ -33,7 +33,7 @@ namespace Web.Middleware
                 {
                     NotFoundException => StatusCodes.Status404NotFound,
                     UnauthorizedAccessException => StatusCodes.Status401Unauthorized,
-                    _=> StatusCodes.Status500InternalServerError
+                    _ => StatusCodes.Status500InternalServerError
                 };
 
                 var error = JsonSerializer.Serialize(

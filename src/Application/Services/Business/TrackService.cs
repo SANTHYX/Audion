@@ -72,7 +72,7 @@ namespace Application.Services.Business
 
             var trackId = Guid.NewGuid().ToString();
             await _fileManager.SaveAsync(model.Track, trackId);
-            
+
             trackId = $"{ trackId }{ Path.GetExtension(model.Track.FileName) }";
 
             Track track = new(model.Title, trackId, user);

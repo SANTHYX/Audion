@@ -1,17 +1,17 @@
-﻿using System;
-using Core.Domain;
-using Application.Dto;
-using Core.Commons.Pagination;
-using Core.Commons.Persistance;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
-using Application.Commons.Identity;
+﻿using Application.Commons.Identity;
 using Application.Commons.Mappers;
 using Application.Commons.Services.Business;
+using Application.Dto;
 using Application.Dto.Playlist.Requests;
 using Application.Dto.Playlist.Responses;
 using Application.Extensions.Validations;
 using Application.Extensions.Validations.Playlist;
+using Core.Commons.Pagination;
+using Core.Commons.Persistance;
+using Core.Domain;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Threading.Tasks;
 
 namespace Application.Services.Business
 {
@@ -52,7 +52,7 @@ namespace Application.Services.Business
             var playlists = await _unit.Playlist
                 .GetAllAsync(x =>
                     (x.Name != null ? x.Name.ToLower().Contains(query.Name.ToLower()) : x.Name == null)
-                ,query);
+                , query);
 
             return _mapper.MapTo<PagedResponseDto<GetPlaylistCollectionDto>>(playlists);
         }

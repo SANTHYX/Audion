@@ -4,7 +4,6 @@ using Infrastructure.Commons.Helpers;
 using Infrastructure.Commons.Toolkits;
 using Infrastructure.Exceptions;
 using Microsoft.AspNetCore.Http;
-using System;
 using System.IO;
 using System.Threading.Tasks;
 

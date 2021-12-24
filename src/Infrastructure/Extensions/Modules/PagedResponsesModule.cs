@@ -8,6 +8,6 @@ namespace Infrastructure.Extensions.Modules
         public static IImplementationTypeSelector AddPagedResponsesModule(this IImplementationTypeSelector selector)
             => selector.AddClasses(x => x.AssignableTo((typeof(IPagedResponse<>))))
                 .AsImplementedInterfaces()
-                .WithSingletonLifetime();        
+                .WithSingletonLifetime();
     }
 }

@@ -57,7 +57,7 @@ namespace Infrastructure.Identity
         private static byte[] GetBytes(string value)
         {
             var bytes = new byte[value.Length * sizeof(char)];
-            Buffer.BlockCopy(value.ToCharArray(),0,bytes,0,value.Length);
+            Buffer.BlockCopy(value.ToCharArray(), 0, bytes, 0, value.Length);
 
             return bytes;
         }

@@ -3,7 +3,7 @@ using System;
 
 namespace Core.Domain
 {
-    public class Track : Entity 
+    public class Track : Entity
     {
         public string Title { get; private set; }
         public string TrackId { get; private set; }

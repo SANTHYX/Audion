@@ -9,7 +9,6 @@ namespace Application.Commons.Mappers
     public interface IPlaylistMapper : IMapper<GetPlaylistDto, Playlist>,
         IMapper<PagedResponseDto<GetPlaylistCollectionDto>, Page<Playlist>>
     {
-        
+
     }
 }
- 

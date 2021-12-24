@@ -18,7 +18,7 @@ namespace Core.Commons.Identity
         public Token(DateTime expiresAt, User user)
         {
             RefreshToken = Guid.NewGuid().ToString("N");
-            CreatedAt = DateTime.UtcNow; 
+            CreatedAt = DateTime.UtcNow;
             ExpiresAt = expiresAt;
             IsRevoked = false;
             User = user ?? throw new Exception("Cannot generate token for non existing user");

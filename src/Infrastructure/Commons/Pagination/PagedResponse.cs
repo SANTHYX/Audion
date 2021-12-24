@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Commons.Pagination
 {
-    public class PagedResponse<T> : IPagedResponse<T> where T: Entity
+    public class PagedResponse<T> : IPagedResponse<T> where T : Entity
     {
         public async Task<Page<T>> GetPagedResponse(IQueryable<T> context, int page = 1, int results = 5)
         {
@@ -33,6 +33,6 @@ namespace Infrastructure.Commons.Pagination
         }
 
         private static Page<T> Empty()
-            => new(1,0,new List<T>(), 0,1);
+            => new(1, 0, new List<T>(), 0, 1);
     }
 }

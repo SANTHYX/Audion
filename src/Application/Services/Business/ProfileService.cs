@@ -1,15 +1,15 @@
-﻿using System;
-using Core.Domain;
-using System.Threading.Tasks;
-using Core.Commons.Persistance;
-using Application.Commons.Types;
-using Microsoft.Extensions.Logging;
-using Application.Extensions.Validations;
-using Application.Commons.Identity;
+﻿using Application.Commons.Identity;
 using Application.Commons.Services.Business;
 using Application.Commons.Toolkits.Files;
+using Application.Commons.Types;
 using Application.Dto.Profile.Requests;
+using Application.Extensions.Validations;
 using Application.Extensions.Validations.Profile;
+using Core.Commons.Persistance;
+using Core.Domain;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Threading.Tasks;
 
 namespace Application.Services.Business
 {
@@ -24,7 +24,7 @@ namespace Application.Services.Business
         public ProfileService(
             ILogger<ProfileService> logger,
             IUserProvider provider,
-            IUnitOfWork unit ,
+            IUnitOfWork unit,
             IStaticFileManager<IImageFile> fileManager)
         {
             _logger = logger;
@@ -41,7 +41,7 @@ namespace Application.Services.Business
             user.NotNull().NotOwnProfile();
 
             Profile profile = new(
-                model.FirstName, 
+                model.FirstName,
                 model.LastName,
                 model.Country,
                 model.City,

@@ -45,7 +45,7 @@ namespace Web
 
             app.UseRouting();
 
-            app.UseStaticFiles(new StaticFileOptions 
+            app.UseStaticFiles(new StaticFileOptions
             {
                 FileProvider = new PhysicalFileProvider(Path.Combine(DirectoriesStore.FilesStoreDirectory)),
                 RequestPath = "/Files"
@@ -67,7 +67,7 @@ namespace Web
             app.UseSpa(spa =>
             {
                 if (env.IsDevelopment())
-                { 
+                {
                     spa.Options.SourcePath = "ClientApp/";
                     spa.UseVueCli("serve", forceKill: true);
                 }

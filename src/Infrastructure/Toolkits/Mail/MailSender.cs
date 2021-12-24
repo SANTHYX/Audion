@@ -20,13 +20,13 @@ namespace Infrastructure.Toolkits.Mail
         }
         public async Task SendTemplatedEmailAsync<T>(string templateName, string targetEmail, string subject, T model)
         {
-            var templatePath = Path.Combine(DirectoriesStore.EmailTemplatesStoreDirectory,templateName);
+            var templatePath = Path.Combine(DirectoriesStore.EmailTemplatesStoreDirectory, templateName);
 
             var mail = _emailFactory.Create()
                 .SetFrom(_settings.Address)
                 .To(targetEmail)
                 .Subject(subject)
-                .UsingTemplateFromFile(templatePath,model);
+                .UsingTemplateFromFile(templatePath, model);
 
             await mail.SendAsync();
         }

@@ -20,14 +20,14 @@ namespace Infrastructure.Commons.Persistance
         private readonly DataContext _context;
 
         public UnitOfWork(DataContext context,
-            IPagedResponse<Track> _trackResponse, 
+            IPagedResponse<Track> _trackResponse,
             IPagedResponse<Playlist> _playlistResponse)
         {
             _context = context;
             User = new UserRepository(context);
             Profile = new ProfileRepository(context);
             Token = new TokenRepository(context);
-            Track = new TrackRepository(context,_trackResponse);
+            Track = new TrackRepository(context, _trackResponse);
             Playlist = new PlaylistRepository(context, _playlistResponse);
             Comment = new CommentRepository(context);
         }

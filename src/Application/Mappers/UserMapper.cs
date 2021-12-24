@@ -16,7 +16,7 @@ namespace Application.Mappers
         }
 
         public GetUserDto MapTo<TOut>(User source) where TOut : GetUserDto
-            => source is null ? null :new()
+            => source is null ? null : new()
             {
                 UserName = source.UserName,
                 Email = source.Email,
@@ -26,9 +26,9 @@ namespace Application.Mappers
                     LastName = source.Profile.LastName,
                     City = source.Profile.City,
                     Country = source.Profile.Country,
-                    Avatar = source.Profile.ImageId is null ? null 
+                    Avatar = source.Profile.ImageId is null ? null
                         : new Uri($"{ _server.GetServerURL() }/Images/{ source.Profile.ImageId }")
                 }
-            };      
+            };
     }
 }

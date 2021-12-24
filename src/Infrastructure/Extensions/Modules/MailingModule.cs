@@ -18,10 +18,10 @@ namespace Infrastructure.Extensions.Modules
                 .AddRazorRenderer()
                 .AddSmtpSender(new SmtpClient(option.Server)
                 {
-                     Port = option.Port,
-                     EnableSsl = option.UseSSL,
-                     UseDefaultCredentials = false,
-                     Credentials = new NetworkCredential(option.User, option.Password)
+                    Port = option.Port,
+                    EnableSsl = option.UseSSL,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(option.User, option.Password)
                 });
 
             service.AddScoped<IMailSender, MailSender>();

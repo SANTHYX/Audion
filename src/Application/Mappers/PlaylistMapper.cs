@@ -1,9 +1,9 @@
-﻿using System.Linq;
-using Core.Domain;
+﻿using Application.Commons.Mappers;
 using Application.Dto;
-using Core.Commons.Pagination;
-using Application.Commons.Mappers;
 using Application.Dto.Playlist.Responses;
+using Core.Commons.Pagination;
+using Core.Domain;
+using System.Linq;
 
 namespace Application.Mappers
 {
@@ -15,7 +15,7 @@ namespace Application.Mappers
 
             };
 
-        public PagedResponseDto<GetPlaylistCollectionDto> MapTo<TOut>(Page<Playlist> source) 
+        public PagedResponseDto<GetPlaylistCollectionDto> MapTo<TOut>(Page<Playlist> source)
             where TOut : PagedResponseDto<GetPlaylistCollectionDto>
             => source is null ? null : new()
             {
@@ -25,9 +25,9 @@ namespace Application.Mappers
                 TotalResults = source.TotalResults,
                 Collection = source.Collection?.Select(x => new GetPlaylistCollectionDto
                 {
-                   Name = x.Name
+                    Name = x.Name
                 }),
             };
-            
+
     }
 }

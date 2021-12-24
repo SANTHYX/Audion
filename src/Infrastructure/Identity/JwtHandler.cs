@@ -33,12 +33,12 @@ namespace Infrastructure.Identity
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 
-            var securityToken = new JwtSecurityToken(null,null,
-                claim,DateTime.Now,expiresAt,signingCredentials);
+            var securityToken = new JwtSecurityToken(null, null,
+                claim, DateTime.Now, expiresAt, signingCredentials);
 
             var accessToken = new JwtSecurityTokenHandler().WriteToken(securityToken);
 
-            return(new(expiresAt, user), accessToken);
+            return (new(expiresAt, user), accessToken);
         }
     }
 }

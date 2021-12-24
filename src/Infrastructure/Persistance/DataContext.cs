@@ -1,7 +1,7 @@
-﻿using Core.Domain;
-using System.Reflection;
+﻿using Core.Commons.Identity;
+using Core.Domain;
 using Microsoft.EntityFrameworkCore;
-using Core.Commons.Identity;
+using System.Reflection;
 
 namespace Infrastructure.Persistance
 {
@@ -13,7 +13,7 @@ namespace Infrastructure.Persistance
         public DbSet<Track> Tracks { get; set; }
         public DbSet<Playlist> Playlists { get; set; }
 
-        public DataContext(DbContextOptions<DataContext> options) 
+        public DataContext(DbContextOptions<DataContext> options)
             : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder builder)

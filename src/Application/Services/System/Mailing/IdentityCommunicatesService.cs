@@ -20,9 +20,9 @@ namespace Application.Services.System.Mailing
 
         public async Task SendMailWithRecoveryPageLinkAsync(string targetEmail, Guid recoveryThreadId)
         {
-            var model = new RecoveryMessageModel { BaseUrl = _server.GetServerURL(), RecoveryId = recoveryThreadId};
+            var model = new RecoveryMessageModel { BaseUrl = _server.GetServerURL(), RecoveryId = recoveryThreadId };
 
-            await _sender.SendTemplatedEmailAsync("RecoveryResource.cshtml", 
+            await _sender.SendTemplatedEmailAsync("RecoveryResource.cshtml",
             targetEmail, "Password recovery", model);
         }
     }

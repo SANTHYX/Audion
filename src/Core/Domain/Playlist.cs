@@ -29,7 +29,7 @@ namespace Core.Domain
             {
                 return;
             }
-            
+
             Name = name;
         }
 

@@ -1,16 +1,16 @@
-﻿using System;
-using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Application.Commons.Services.Business;
+﻿using Application.Commons.Services.Business;
 using Application.Dto.Identity.Requests;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
 
 namespace Web.Controllers
 {
     [Route("[controller]")]
     [ApiController]
     public class IdentityController : ControllerBase
-    {      
+    {
         private readonly IIdentityService _service;
 
         public IdentityController(IIdentityService service)
@@ -80,7 +80,7 @@ namespace Web.Controllers
         /// <returns></returns>
         [HttpPut("recovery-password/{recoveryId}")]
         public async Task<IActionResult> ChangePasswordAtRecoveryAsync
-            ([FromRoute] Guid recoveryId, [FromBody]ChangePasswordAtRecoveryDto model)
+            ([FromRoute] Guid recoveryId, [FromBody] ChangePasswordAtRecoveryDto model)
         {
             model.RecoveryId = recoveryId;
             await _service.ChangePasswordAtRecoveryAsync(model);

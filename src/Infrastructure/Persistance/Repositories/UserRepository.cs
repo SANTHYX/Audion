@@ -37,7 +37,7 @@ namespace Infrastructure.Persistance.Repositories
 
         public async Task<User> GetAggregateAsync(string userName)
             => await _context.Users
-                .AsNoTracking()    
+                .AsNoTracking()
                 .Include(x => x.Profile)
                 .Include(x => x.Playlists)
                 .Include(x => x.Tracks)

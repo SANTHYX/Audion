@@ -20,7 +20,7 @@ namespace Core.Domain
         {
             if (string.IsNullOrWhiteSpace(text))
             {
-                throw new ArgumentNullException(nameof(text), 
+                throw new ArgumentNullException(nameof(text),
                     "If you want to add comment, text cannot be empty");
             }
             if (Text == text)

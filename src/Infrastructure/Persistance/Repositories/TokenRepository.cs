@@ -1,6 +1,5 @@
 ﻿using Core.Commons.Identity;
 using Core.Commons.Persistance.Repositories;
-using Core.Domain;
 using Infrastructure.Commons.Persistance;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;

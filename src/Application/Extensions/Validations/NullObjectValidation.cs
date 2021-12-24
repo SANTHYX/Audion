@@ -14,6 +14,6 @@ namespace Application.Extensions.Validations
 
             return entity;
         }
-        
+
     }
 }
