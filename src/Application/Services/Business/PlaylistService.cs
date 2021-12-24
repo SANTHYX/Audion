@@ -1,16 +1,17 @@
-﻿using Application.Commons.Identity;
-using Application.Commons.Mappers;
-using Application.Commons.Services.Business;
+﻿using System;
+using Core.Domain;
 using Application.Dto;
-using Application.Dto.Playlist;
-using Application.Extensions.Validations;
-using Application.Extensions.Validations.Playlist;
 using Core.Commons.Pagination;
 using Core.Commons.Persistance;
-using Core.Domain;
-using Microsoft.Extensions.Logging;
-using System;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
+using Application.Commons.Identity;
+using Application.Commons.Mappers;
+using Application.Commons.Services.Business;
+using Application.Dto.Playlist.Requests;
+using Application.Dto.Playlist.Responses;
+using Application.Extensions.Validations;
+using Application.Extensions.Validations.Playlist;
 
 namespace Application.Services.Business
 {
@@ -44,7 +45,7 @@ namespace Application.Services.Business
             return _mapper.MapTo<GetPlaylistDto>(playlist);
         }
 
-        public async Task<PagedResponseDto<GetPlaylistsDto>> BrowseAsync(BrowsePlaylistQueryDto query)
+        public async Task<PagedResponseDto<GetPlaylistCollectionDto>> BrowseAsync(BrowsePlaylistQueryDto query)
         {
             _logger.LogInformation($"Fetching playlists collection...");
 
@@ -53,17 +54,17 @@ namespace Application.Services.Business
                     (x.Name != null ? x.Name.ToLower().Contains(query.Name.ToLower()) : x.Name == null)
                 ,query);
 
-            return _mapper.MapTo<PagedResponseDto<GetPlaylistsDto>>(playlists);
+            return _mapper.MapTo<PagedResponseDto<GetPlaylistCollectionDto>>(playlists);
         }
 
-        public async Task<PagedResponseDto<GetPlaylistsDto>> BrowseForCurrentUserAsync(PagedQuery query)
+        public async Task<PagedResponseDto<GetPlaylistCollectionDto>> BrowseForCurrentUserAsync(PagedQuery query)
         {
             _logger.LogInformation($"Fetching playlists collection...");
 
             var playlists = await _unit.Playlist
                .GetAllAsync(x => x.UserId == _userId, query);
 
-            return _mapper.MapTo<PagedResponseDto<GetPlaylistsDto>>(playlists);
+            return _mapper.MapTo<PagedResponseDto<GetPlaylistCollectionDto>>(playlists);
         }
 
         public async Task CreateAsync(CreatePlaylistDto model)

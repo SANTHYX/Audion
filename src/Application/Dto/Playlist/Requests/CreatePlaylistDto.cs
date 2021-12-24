@@ -1,4 +1,4 @@
-﻿namespace Application.Dto.Playlist
+﻿namespace Application.Dto.Playlist.Requests
 {
     public record CreatePlaylistDto
     {

@@ -1,15 +1,15 @@
-﻿using Application.Commons.Identity;
+﻿using System;
+using Core.Domain;
+using System.Threading.Tasks;
+using Core.Commons.Persistance;
+using Application.Commons.Types;
+using Microsoft.Extensions.Logging;
+using Application.Extensions.Validations;
+using Application.Commons.Identity;
 using Application.Commons.Services.Business;
 using Application.Commons.Toolkits.Files;
-using Application.Commons.Types;
-using Application.Dto.Profile;
-using Application.Extensions.Validations;
+using Application.Dto.Profile.Requests;
 using Application.Extensions.Validations.Profile;
-using Core.Commons.Persistance;
-using Core.Domain;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Threading.Tasks;
 
 namespace Application.Services.Business
 {

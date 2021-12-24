@@ -1,4 +1,4 @@
-﻿namespace Application.Dto.Comment
+﻿namespace Application.Dto.Comment.Requests
 {
     public class EditCommentDto
     {

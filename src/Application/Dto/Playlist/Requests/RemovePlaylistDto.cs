@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Text.Json.Serialization;
 
-namespace Application.Dto.Playlist
+namespace Application.Dto.Playlist.Requests
 {
     public record RemovePlaylistDto
     {

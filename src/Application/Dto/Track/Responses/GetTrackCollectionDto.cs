@@ -2,7 +2,7 @@
 
 namespace Application.Dto.Track
 {
-    public record GetTracksDto
+    public record GetTrackCollectionDto
     {
         public Guid Id { get; set; }
         public string Title { get; set; }

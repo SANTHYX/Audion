@@ -1,5 +1,5 @@
 ﻿using Application.Commons.Types;
-using Application.Dto.Comment;
+using Application.Dto.Comment.Requests;
 using System.Threading.Tasks;
 
 namespace Application.Commons.Services.Business

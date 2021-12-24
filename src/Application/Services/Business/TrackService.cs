@@ -51,7 +51,7 @@ namespace Application.Services.Business
             return _mapper.MapTo<GetTrackDto>(track);
         }
 
-        public async Task<PagedResponseDto<GetTracksDto>> BrowseAsync(BrowseTracksQueryDto query)
+        public async Task<PagedResponseDto<GetTrackCollectionDto>> BrowseAsync(BrowseTracksQueryDto query)
         {
             _logger.LogInformation("Fetching collection...");
 
@@ -59,7 +59,7 @@ namespace Application.Services.Business
                 (query.Title != null ? x.Title.ToLower().Contains(query.Title.ToLower()) : x.Title == null)
             , query);
 
-            return _mapper.MapTo<PagedResponseDto<GetTracksDto>>(tracks);
+            return _mapper.MapTo<PagedResponseDto<GetTrackCollectionDto>>(tracks);
         }
 
         public async Task UploadAsync(UploadTrackDto model)

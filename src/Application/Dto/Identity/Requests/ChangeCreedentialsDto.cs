@@ -1,4 +1,4 @@
-﻿namespace Application.Dto.Identity
+﻿namespace Application.Dto.Identity.Requests
 {
     public record ChangeCreedentialsDto
     {

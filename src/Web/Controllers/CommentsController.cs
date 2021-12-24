@@ -1,9 +1,9 @@
-﻿using Application.Commons.Services.Business;
-using Application.Dto.Comment;
-using Microsoft.AspNetCore.Authorization;
+﻿using System;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Threading.Tasks;
+using Application.Commons.Services.Business;
+using Application.Dto.Comment.Requests;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Web.Controllers
 {

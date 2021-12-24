@@ -1,5 +1,5 @@
 ﻿using Application.Commons.Types;
-using Application.Dto.Profile;
+using Application.Dto.Profile.Requests;
 using System.Threading.Tasks;
 
 namespace Application.Commons.Services.Business

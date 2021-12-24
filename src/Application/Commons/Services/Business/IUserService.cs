@@ -9,6 +9,6 @@ namespace Application.Commons.Services.Business
     public interface IUserService : IService
     {
         Task<GetUserDto> GetAsync(string userName);
-        Task<PagedResponseDto<GetUserDto>> BrowseAsync(PagedQuery query);
+        Task<PagedResponseDto<GetUserCollectionDto>> BrowseAsync(PagedQuery query);
     }
 }

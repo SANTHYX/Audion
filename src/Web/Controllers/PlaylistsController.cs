@@ -1,10 +1,10 @@
-﻿using Application.Commons.Services.Business;
-using Application.Dto.Playlist;
-using Core.Commons.Pagination;
-using Microsoft.AspNetCore.Authorization;
+﻿using System;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Threading.Tasks;
+using Core.Commons.Pagination;
+using Application.Commons.Services.Business;
+using Application.Dto.Playlist.Requests;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Web.Controllers
 {

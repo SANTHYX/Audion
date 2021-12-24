@@ -1,6 +1,6 @@
 ﻿using Core.Commons.Pagination;
 
-namespace Application.Dto.Playlist
+namespace Application.Dto.Playlist.Requests
 {
     public record BrowsePlaylistQueryDto : PagedQuery
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.Json.Serialization;
 
-namespace Application.Dto.Identity
+namespace Application.Dto.Identity.Requests
 {
     public record ChangePasswordAtRecoveryDto
     {

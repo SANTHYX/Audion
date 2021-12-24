@@ -1,4 +1,4 @@
-﻿namespace Application.Dto.User
+﻿namespace Application.Dto.Identity.Requests
 {
     public record LoginUserDto
     {

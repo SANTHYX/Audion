@@ -1,10 +1,9 @@
-﻿using Application.Commons.Services.Business;
-using Application.Dto.Identity;
-using Application.Dto.User;
-using Microsoft.AspNetCore.Authorization;
+﻿using System;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Application.Commons.Services.Business;
+using Application.Dto.Identity.Requests;
 
 namespace Web.Controllers
 {

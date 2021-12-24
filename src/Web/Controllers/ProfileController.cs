@@ -1,5 +1,5 @@
 ﻿using Application.Commons.Services.Business;
-using Application.Dto.Profile;
+using Application.Dto.Profile.Requests;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;

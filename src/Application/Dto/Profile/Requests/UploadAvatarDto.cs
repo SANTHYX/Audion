@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace Application.Dto.Profile
+namespace Application.Dto.Profile.Requests
 {
     public record UploadAvatarDto
     {

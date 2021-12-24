@@ -34,7 +34,7 @@ namespace Application.Services.Business
             return _mapper.MapTo<GetUserDto>(user);
         }
 
-        public async Task<PagedResponseDto<GetUserDto>> BrowseAsync(PagedQuery query)
+        public async Task<PagedResponseDto<GetUserCollectionDto>> BrowseAsync(PagedQuery query)
         {
             throw new global::System.NotImplementedException();
         }

@@ -1,6 +1,6 @@
 ﻿using Application.Commons.Identity;
 using Application.Commons.Services.Business;
-using Application.Dto.Comment;
+using Application.Dto.Comment.Requests;
 using Core.Commons.Persistance;
 using Microsoft.Extensions.Logging;
 using System;

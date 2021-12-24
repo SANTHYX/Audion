@@ -4,42 +4,42 @@
         <name>Web</name>
     </assembly>
     <members>
-        <member name="M:Web.Controllers.CommentsController.CommentTrackAsync(Application.Dto.Comment.AddCommentDto)">
+        <member name="M:Web.Controllers.CommentsController.CommentTrackAsync(Application.Dto.Comment.Requests.AddCommentDto)">
             <summary>
             
             </summary>
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="M:Web.Controllers.CommentsController.CommentPlaylistAsync(Application.Dto.Comment.AddCommentDto)">
+        <member name="M:Web.Controllers.CommentsController.CommentPlaylistAsync(Application.Dto.Comment.Requests.AddCommentDto)">
             <summary>
             
             </summary>
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="M:Web.Controllers.CommentsController.EditTrackCommentAsync(Application.Dto.Comment.EditCommentDto)">
+        <member name="M:Web.Controllers.CommentsController.EditTrackCommentAsync(Application.Dto.Comment.Requests.EditCommentDto)">
             <summary>
             
             </summary>
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="M:Web.Controllers.CommentsController.EditPlaylistCommentAsync(Application.Dto.Comment.EditCommentDto)">
+        <member name="M:Web.Controllers.CommentsController.EditPlaylistCommentAsync(Application.Dto.Comment.Requests.EditCommentDto)">
             <summary>
             
             </summary>
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="M:Web.Controllers.CommentsController.ReplyToCommentAsync(System.Guid,Application.Dto.Comment.ReplyCommentDto)">
+        <member name="M:Web.Controllers.CommentsController.ReplyToCommentAsync(System.Guid,Application.Dto.Comment.Requests.ReplyCommentDto)">
             <summary>
             
             </summary>
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="M:Web.Controllers.IdentityController.LoginUser(Application.Dto.User.LoginUserDto)">
+        <member name="M:Web.Controllers.IdentityController.LoginUser(Application.Dto.Identity.Requests.LoginUserDto)">
             <summary>
             Endpoint handling user authentication.
             If he pass proccess sucesfully, controller will return access token. 
@@ -47,20 +47,20 @@
             <param name="model">Object contains user creedentials</param>
             <returns>Access token and metadata</returns>
         </member>
-        <member name="M:Web.Controllers.IdentityController.RegisterAsync(Application.Dto.User.RegisterUserDto)">
+        <member name="M:Web.Controllers.IdentityController.RegisterAsync(Application.Dto.Identity.Requests.RegisterUserDto)">
             <summary>
             Endpoint handling registration user instance to system 
             </summary>
             <param name="model">Informations required to create user instance</param>
         </member>
-        <member name="M:Web.Controllers.IdentityController.RefreshTokenAsync(Application.Dto.Identity.RefreshTokenDto)">
+        <member name="M:Web.Controllers.IdentityController.RefreshTokenAsync(Application.Dto.Identity.Requests.RefreshTokenDto)">
             <summary>
             Endpoint handling generation of new access tokens for sign-in users after expire
             </summary>
             <param name="model">Object with refresh token</param>
             <returns>Object wit access token and metadata</returns>
         </member>
-        <member name="M:Web.Controllers.IdentityController.RecoveryPasswordAsync(Application.Dto.Identity.RecoveryPasswordDto)">
+        <member name="M:Web.Controllers.IdentityController.RecoveryPasswordAsync(Application.Dto.Identity.Requests.RecoveryPasswordDto)">
             <summary>
             Endpoint handle making recovery thread, after that service will send email message
             to user with link to route handling change password operation
@@ -68,7 +68,7 @@
             <param name="model">Object including mail</param>
             <returns></returns>
         </member>
-        <member name="M:Web.Controllers.IdentityController.ChangePasswordAtRecoveryAsync(System.Guid,Application.Dto.Identity.ChangePasswordAtRecoveryDto)">
+        <member name="M:Web.Controllers.IdentityController.ChangePasswordAtRecoveryAsync(System.Guid,Application.Dto.Identity.Requests.ChangePasswordAtRecoveryDto)">
             <summary>
             Endpoint handle operation to set new user password at recovery
             </summary>
@@ -76,7 +76,7 @@
             <param name="model">New user password</param>
             <returns></returns>
         </member>
-        <member name="M:Web.Controllers.IdentityController.RevokeTokenAsync(Application.Dto.Identity.RevokeTokenDto)">
+        <member name="M:Web.Controllers.IdentityController.RevokeTokenAsync(Application.Dto.Identity.Requests.RevokeTokenDto)">
             <summary>
             Endpoint handling process of expiration refresh tokens, 
             after invoke this operation if user will try to generate 
@@ -85,7 +85,7 @@
             <param name="model">Object containing refresh token</param>
             <returns></returns>
         </member>
-        <member name="M:Web.Controllers.IdentityController.ChangeCreedentialsAsync(Application.Dto.Identity.ChangeCreedentialsDto)">
+        <member name="M:Web.Controllers.IdentityController.ChangeCreedentialsAsync(Application.Dto.Identity.Requests.ChangeCreedentialsDto)">
             <summary>
             Endpoint handle setting new password for authenticated user
             </summary>
@@ -99,7 +99,7 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:Web.Controllers.PlaylistsController.BrowseAsync(Application.Dto.Playlist.BrowsePlaylistQueryDto)">
+        <member name="M:Web.Controllers.PlaylistsController.BrowseAsync(Application.Dto.Playlist.Requests.BrowsePlaylistQueryDto)">
             <summary>
             
             </summary>
@@ -113,14 +113,14 @@
             <param name="query"></param>
             <returns></returns>
         </member>
-        <member name="M:Web.Controllers.PlaylistsController.CreateAsync(Application.Dto.Playlist.CreatePlaylistDto)">
+        <member name="M:Web.Controllers.PlaylistsController.CreateAsync(Application.Dto.Playlist.Requests.CreatePlaylistDto)">
             <summary>
             
             </summary>
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="M:Web.Controllers.PlaylistsController.UpdateAsync(Application.Dto.Playlist.UpdatePlaylistDto)">
+        <member name="M:Web.Controllers.PlaylistsController.UpdateAsync(Application.Dto.Playlist.Requests.UpdatePlaylistDto)">
             <summary>
             
             </summary>
@@ -134,21 +134,21 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:Web.Controllers.ProfileController.CreateAsync(Application.Dto.Profile.CreateProfileDto)">
+        <member name="M:Web.Controllers.ProfileController.CreateAsync(Application.Dto.Profile.Requests.CreateProfileDto)">
             <summary>
             
             </summary>
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="M:Web.Controllers.ProfileController.UpdateAsync(Application.Dto.Profile.UpdateProfileDto)">
+        <member name="M:Web.Controllers.ProfileController.UpdateAsync(Application.Dto.Profile.Requests.UpdateProfileDto)">
             <summary>
             
             </summary>
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="M:Web.Controllers.ProfileController.UploadAvatarAsync(Application.Dto.Profile.UploadAvatarDto)">
+        <member name="M:Web.Controllers.ProfileController.UploadAvatarAsync(Application.Dto.Profile.Requests.UploadAvatarDto)">
             <summary>
             
             </summary>

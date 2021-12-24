@@ -1,8 +1,8 @@
 ﻿using Application.Commons.Identity;
 using Application.Commons.Services.Business;
 using Application.Commons.Services.System.Mailing;
-using Application.Dto.Identity;
-using Application.Dto.User;
+using Application.Dto.Identity.Requests;
+using Application.Dto.Identity.Responses;
 using Application.Extensions.Validations;
 using Application.Extensions.Validations.Identity;
 using Core.Commons.Identity;

@@ -1,7 +1,6 @@
 ﻿using Core.Commons.Identity;
-using Core.Domain;
 
-namespace Application.Dto.Identity
+namespace Application.Dto.Identity.Responses
 {
     public record GetJwtTokenDto
     {

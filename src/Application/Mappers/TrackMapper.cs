@@ -25,13 +25,13 @@ namespace Application.Mappers
                 Track = new Uri($"{ _server.GetServerURL() }files/audio/{ source.TrackId }"),
             };
 
-        public PagedResponseDto<GetTracksDto> MapTo<TOut>(Page<Track> source) 
-            where TOut : PagedResponseDto<GetTracksDto>
+        public PagedResponseDto<GetTrackCollectionDto> MapTo<TOut>(Page<Track> source) 
+            where TOut : PagedResponseDto<GetTrackCollectionDto>
             => new()
             {
                 Page = source.CurrentPage,
                 Results = source.Results,
-                Collection = source.Collection?.Select(x => new GetTracksDto
+                Collection = source.Collection?.Select(x => new GetTrackCollectionDto
                 {
                     Id = x.Id,
                     Title = x.Title,
