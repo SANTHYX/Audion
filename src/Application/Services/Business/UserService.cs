@@ -3,7 +3,6 @@ using Application.Commons.Services.Business;
 using Application.Dto;
 using Application.Dto.User;
 using Application.Extensions.Validations;
-using Core.Commons.Pagination;
 using Core.Commons.Persistance;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
@@ -34,9 +33,13 @@ namespace Application.Services.Business
             return _mapper.MapTo<GetUserDto>(user);
         }
 
-        public async Task<PagedResponseDto<GetUserCollectionDto>> BrowseAsync(PagedQuery query)
+        public async Task<PagedResponseDto<GetUserCollectionDto>> BrowseAsync(BrowseUsersQueryDto query)
         {
-            throw new global::System.NotImplementedException();
+            var users = await _unit.User.GetAllAsync(x =>
+                (query.UserName != null ? x.UserName.ToLower().Contains(query.UserName.ToLower()) : x.UserName == null)
+                , query);
+
+            return _mapper.MapTo<PagedResponseDto<GetUserCollectionDto>>(users);
         }
     }
 }

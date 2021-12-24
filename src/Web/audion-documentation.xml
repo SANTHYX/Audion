@@ -185,10 +185,17 @@
         </member>
         <member name="M:Web.Controllers.UsersController.GetAsync(System.String)">
             <summary>
-            
+            Endpoint returns informations about user instance
             </summary>
-            <param name="userName"></param>
-            <returns></returns>
+            <param name="userName">Current UserName</param>
+            <returns>Object representing user instance</returns>
+        </member>
+        <member name="M:Web.Controllers.UsersController.BrowseAsync(Application.Dto.User.BrowseUsersQueryDto)">
+            <summary>
+            Endpoint returns collection of users containing details given from query
+            </summary>
+            <param name="query">Query object including querying parameters</param>
+            <returns>Object including collection of users with page details</returns>
         </member>
     </members>
 </doc>

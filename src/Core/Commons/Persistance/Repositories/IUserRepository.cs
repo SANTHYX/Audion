@@ -1,6 +1,8 @@
-﻿using Core.Commons.Types;
+﻿using Core.Commons.Pagination;
+using Core.Commons.Types;
 using Core.Domain;
 using System;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Core.Commons.Persistance.Repositories
@@ -13,6 +15,7 @@ namespace Core.Commons.Persistance.Repositories
         Task<User> GetWithProfileByIdAsync(Guid id);
         Task<User> GetWithProfileByUsernameAsync(string userName);
         Task<User> GetAggregateAsync(string userName);
+        Task<Page<User>> GetAllAsync(Expression<Func<User, bool>> expression, PagedQuery pagedQuery);
         Task<bool> IsExist(string userName);
     }
 }

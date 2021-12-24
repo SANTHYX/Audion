@@ -21,10 +21,11 @@ namespace Infrastructure.Commons.Persistance
 
         public UnitOfWork(DataContext context,
             IPagedResponse<Track> _trackResponse,
-            IPagedResponse<Playlist> _playlistResponse)
+            IPagedResponse<Playlist> _playlistResponse,
+            IPagedResponse<User> _userResponse)
         {
             _context = context;
-            User = new UserRepository(context);
+            User = new UserRepository(context, _userResponse);
             Profile = new ProfileRepository(context);
             Token = new TokenRepository(context);
             Track = new TrackRepository(context, _trackResponse);

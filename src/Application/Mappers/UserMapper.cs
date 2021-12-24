@@ -1,8 +1,11 @@
 ﻿using Application.Commons.Helpers;
 using Application.Commons.Mappers;
+using Application.Dto;
 using Application.Dto.User;
+using Core.Commons.Pagination;
 using Core.Domain;
 using System;
+using System.Linq;
 
 namespace Application.Mappers
 {
@@ -29,6 +32,20 @@ namespace Application.Mappers
                     Avatar = source.Profile.ImageId is null ? null
                         : new Uri($"{ _server.GetServerURL() }/Images/{ source.Profile.ImageId }")
                 }
+            };
+
+        public PagedResponseDto<GetUserCollectionDto> MapTo<TOut>(Page<User> source)
+            where TOut : PagedResponseDto<GetUserCollectionDto>
+            => new()
+            {
+                Page = source.CurrentPage,
+                Collection = source.Collection?.Select(x => new GetUserCollectionDto
+                {
+
+                }),
+                Results = source.Results,
+                TotalPages = source.TotalPages,
+                TotalResults = source.TotalResults
             };
     }
 }

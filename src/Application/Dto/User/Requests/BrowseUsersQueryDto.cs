@@ -1,6 +1,9 @@
-﻿namespace Application.Dto.User
+﻿using Core.Commons.Pagination;
+
+namespace Application.Dto.User
 {
-    public record BrowseUsersQueryDto
+    public record BrowseUsersQueryDto : PagedQuery
     {
+        public string UserName { get; set; }
     }
 }
