@@ -19,8 +19,9 @@ namespace Web.Controllers
         }
 
         /// <summary>
-        /// Endpoint handling user authentication.
-        /// If he pass proccess sucesfully, controller will return access token. 
+        /// Endpoint perform user authentication and return object with creedentials.
+        /// If he pass proccess sucesfully, controller will return access token.
+        /// Endpoint doesn't require authentication
         /// </summary>
         /// <param name="model">Object contains user creedentials</param>
         /// <returns>Access token and metadata</returns>
@@ -33,7 +34,8 @@ namespace Web.Controllers
         }
 
         /// <summary>
-        /// Endpoint handling registration user instance to system 
+        /// Endpoint perform registration user instance to system.
+        /// Endpoint doesn't require authentication
         /// </summary>
         /// <param name="model">Informations required to create user instance</param>
         [HttpPost("register")]
@@ -45,7 +47,8 @@ namespace Web.Controllers
         }
 
         /// <summary>
-        /// Endpoint handling generation of new access tokens for sign-in users after expire
+        /// Endpoint perform generation of new access tokens for sign-in users after expire.
+        /// Endpoint doesn't require authentication
         /// </summary>
         /// <param name="model">Object with refresh token</param>
         /// <returns>Object wit access token and metadata</returns>
@@ -59,8 +62,9 @@ namespace Web.Controllers
         }
 
         /// <summary>
-        /// Endpoint handle making recovery thread, after that service will send email message
+        /// Endpoint perform making recovery thread, after that service will send email message
         /// to user with link to route handling change password operation
+        /// Endpoint doesn't require authentication
         /// </summary>
         /// <param name="model">Object including mail</param>
         /// <returns></returns>
@@ -73,7 +77,8 @@ namespace Web.Controllers
         }
 
         /// <summary>
-        /// Endpoint handle operation to set new user password at recovery
+        /// Endpoint perform operation to set new user password at recovery
+        /// Endpoint doesn't require authentication
         /// </summary>
         /// <param name="recoveryId">Id of created thread</param>
         /// <param name="model">New user password</param>
@@ -89,9 +94,10 @@ namespace Web.Controllers
         }
 
         /// <summary>
-        /// Endpoint handling process of expiration refresh tokens, 
+        /// Endpoint perform expiring of refresh tokens, 
         /// after invoke this operation if user will try to generate 
-        /// new token from expired refresh in session he will recive exception 
+        /// new token from expired refresh in session he will recive exception.
+        /// Endpoint doesn't require authentication
         /// </summary>
         /// <param name="model">Object containing refresh token</param>
         /// <returns></returns>
@@ -105,7 +111,8 @@ namespace Web.Controllers
         }
 
         /// <summary>
-        /// Endpoint handle setting new password for authenticated user
+        /// Endpoint perform setting new password for authenticated user
+        /// Endpoint doesn't require authentication
         /// </summary>
         /// <param name="model">Object with old and new password</param>
         /// <returns></returns>

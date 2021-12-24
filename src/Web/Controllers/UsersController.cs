@@ -17,7 +17,8 @@ namespace Web.Controllers
         }
 
         /// <summary>
-        /// Endpoint returns informations about user instance
+        /// Endpoint returns informations about user instance.
+        /// Endpoint doesn't require authentication
         /// </summary>
         /// <param name="userName">Current userName</param>
         /// <returns>Object representing user instance</returns>
@@ -26,9 +27,10 @@ namespace Web.Controllers
             => Ok(await _service.GetAsync(userName));
 
         /// <summary>
-        /// Endpoint returns collection of users containing details given from query
+        /// Endpoint returns collection of users fullyfing details included in query parameters.
+        /// Endpoint doesn't require authentication
         /// </summary>
-        /// <param name="query">Query object including querying parameters</param>
+        /// <param name="query">Query object including query parameters</param>
         /// <returns>Object including collection of users with page details</returns>
         [HttpGet]
         public async Task<IActionResult> BrowseAsync([FromQuery] BrowseUsersQueryDto query)

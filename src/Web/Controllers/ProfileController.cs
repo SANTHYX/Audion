@@ -19,9 +19,9 @@ namespace Web.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Endpoint perform creating instance of profile. Endpoint require authentication
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="model">Object including data for new profile</param>
         /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> CreateAsync([FromBody] CreateProfileDto model)
@@ -32,9 +32,9 @@ namespace Web.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Endpoint perform changes of profile instance. Endpoint require authentication 
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="model">Object including properties keeping new values for profile instance</param>
         /// <returns></returns>
         [HttpPut]
         public async Task<IActionResult> UpdateAsync([FromBody] UpdateProfileDto model)
@@ -45,9 +45,9 @@ namespace Web.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Endpoint perform serialization of avatar for profile on server. Endpoint require authentication
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="model">Object include image file</param>
         /// <returns></returns>
         [HttpPut("upload-avatar")]
         public async Task<IActionResult> UploadAvatarAsync([FromForm] UploadAvatarDto model)

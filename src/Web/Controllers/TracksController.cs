@@ -19,27 +19,29 @@ namespace Web.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Endpoint returning track instance by Id. Endpoint doesn't require authentication
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">Id of track</param>
+        /// <returns>Object including track metadata with URL to static file</returns>
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAsync(Guid id)
             => Ok(await _service.GetAsync(id));
 
         /// <summary>
-        /// 
+        /// Endpoint return collection of tracks fullyfing details included in query parameters.
+        /// Endpoint doesnt require authentication
         /// </summary>
         /// <param name="query"></param>
-        /// <returns></returns>
+        /// <returns>Object including collection of playlists with metadata about page</returns>
         [HttpGet]
         public async Task<IActionResult> BrowseAsync([FromQuery] BrowseTracksQueryDto query)
             => Ok(await _service.BrowseAsync(query));
 
         /// <summary>
-        /// 
+        /// Endpoint perform serialization of send music file on server. Acceptable file formats are *.wav and *.mp3.
+        /// Endpoint require authentication
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="model">Object with file and file name</param>
         /// <returns></returns>
         [Authorize]
         [HttpPost]
@@ -51,9 +53,9 @@ namespace Web.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Endpoint perform removing track by Id. Endpoint require user authentication
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Id of object</param>
         /// <returns></returns>
         [Authorize]
         [HttpDelete("{id}")]

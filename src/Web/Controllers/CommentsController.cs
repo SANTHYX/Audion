@@ -20,9 +20,9 @@ namespace Web.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Endpoint perform posting comment in track comment section. Endpoint require authentication
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="model">Object including message and Id of track</param>
         /// <returns></returns>
         [HttpPost("track")]
         public async Task<IActionResult> CommentTrackAsync([FromBody] AddCommentDto model)
@@ -33,9 +33,9 @@ namespace Web.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Endpoint perform posting comment in track comment section. Endpoint require authentication
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="model">Object including message and Id of playlist</param>
         /// <returns></returns>
         [HttpPost("playlist")]
         public async Task<IActionResult> CommentPlaylistAsync([FromBody] AddCommentDto model)
@@ -46,9 +46,9 @@ namespace Web.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Endpoint perform changing posted comment in track comment section. Endpoint require authentication
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="model">Object including Id of message and new message</param>
         /// <returns></returns>
         [HttpPut("track")]
         public async Task<IActionResult> EditTrackCommentAsync([FromBody] EditCommentDto model)
@@ -59,9 +59,9 @@ namespace Web.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Endpoint perform changing posted comment in playlist comment section. Endpoint require authentication
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="model">Object including Id of message and new message</param>
         /// <returns></returns>
         [HttpPut("playlist")]
         public async Task<IActionResult> EditPlaylistCommentAsync([FromBody] EditCommentDto model)
@@ -72,9 +72,9 @@ namespace Web.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Endpoint perform replaying on other users comments. Endpoint require authentication
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="model">Object including Id of comment that we will reply and message</param>
         /// <returns></returns>
         [HttpPost("{id}/reply")]
         public async Task<IActionResult> ReplyToCommentAsync([FromRoute] Guid id, [FromBody] ReplyCommentDto model)

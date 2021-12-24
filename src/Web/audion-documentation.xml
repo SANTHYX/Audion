@@ -6,71 +6,76 @@
     <members>
         <member name="M:Web.Controllers.CommentsController.CommentTrackAsync(Application.Dto.Comment.Requests.AddCommentDto)">
             <summary>
-            
+            Endpoint perform posting comment in track comment section. Endpoint require authentication
             </summary>
-            <param name="model"></param>
+            <param name="model">Object including message and Id of track</param>
             <returns></returns>
         </member>
         <member name="M:Web.Controllers.CommentsController.CommentPlaylistAsync(Application.Dto.Comment.Requests.AddCommentDto)">
             <summary>
-            
+            Endpoint perform posting comment in track comment section. Endpoint require authentication
             </summary>
-            <param name="model"></param>
+            <param name="model">Object including message and Id of playlist</param>
             <returns></returns>
         </member>
         <member name="M:Web.Controllers.CommentsController.EditTrackCommentAsync(Application.Dto.Comment.Requests.EditCommentDto)">
             <summary>
-            
+            Endpoint perform changing posted comment in track comment section. Endpoint require authentication
             </summary>
-            <param name="model"></param>
+            <param name="model">Object including Id of message and new message</param>
             <returns></returns>
         </member>
         <member name="M:Web.Controllers.CommentsController.EditPlaylistCommentAsync(Application.Dto.Comment.Requests.EditCommentDto)">
             <summary>
-            
+            Endpoint perform changing posted comment in playlist comment section. Endpoint require authentication
             </summary>
-            <param name="model"></param>
+            <param name="model">Object including Id of message and new message</param>
             <returns></returns>
         </member>
         <member name="M:Web.Controllers.CommentsController.ReplyToCommentAsync(System.Guid,Application.Dto.Comment.Requests.ReplyCommentDto)">
             <summary>
-            
+            Endpoint perform replaying on other users comments. Endpoint require authentication
             </summary>
-            <param name="model"></param>
+            <param name="model">Object including Id of comment that we will reply and message</param>
             <returns></returns>
         </member>
         <member name="M:Web.Controllers.IdentityController.LoginUser(Application.Dto.Identity.Requests.LoginUserDto)">
             <summary>
-            Endpoint handling user authentication.
-            If he pass proccess sucesfully, controller will return access token. 
+            Endpoint perform user authentication and return object with creedentials.
+            If he pass proccess sucesfully, controller will return access token.
+            Endpoint doesn't require authentication
             </summary>
             <param name="model">Object contains user creedentials</param>
             <returns>Access token and metadata</returns>
         </member>
         <member name="M:Web.Controllers.IdentityController.RegisterAsync(Application.Dto.Identity.Requests.RegisterUserDto)">
             <summary>
-            Endpoint handling registration user instance to system 
+            Endpoint perform registration user instance to system.
+            Endpoint doesn't require authentication
             </summary>
             <param name="model">Informations required to create user instance</param>
         </member>
         <member name="M:Web.Controllers.IdentityController.RefreshTokenAsync(Application.Dto.Identity.Requests.RefreshTokenDto)">
             <summary>
-            Endpoint handling generation of new access tokens for sign-in users after expire
+            Endpoint perform generation of new access tokens for sign-in users after expire.
+            Endpoint doesn't require authentication
             </summary>
             <param name="model">Object with refresh token</param>
             <returns>Object wit access token and metadata</returns>
         </member>
         <member name="M:Web.Controllers.IdentityController.RecoveryPasswordAsync(Application.Dto.Identity.Requests.RecoveryPasswordDto)">
             <summary>
-            Endpoint handle making recovery thread, after that service will send email message
+            Endpoint perform making recovery thread, after that service will send email message
             to user with link to route handling change password operation
+            Endpoint doesn't require authentication
             </summary>
             <param name="model">Object including mail</param>
             <returns></returns>
         </member>
         <member name="M:Web.Controllers.IdentityController.ChangePasswordAtRecoveryAsync(System.Guid,Application.Dto.Identity.Requests.ChangePasswordAtRecoveryDto)">
             <summary>
-            Endpoint handle operation to set new user password at recovery
+            Endpoint perform operation to set new user password at recovery
+            Endpoint doesn't require authentication
             </summary>
             <param name="recoveryId">Id of created thread</param>
             <param name="model">New user password</param>
@@ -78,123 +83,132 @@
         </member>
         <member name="M:Web.Controllers.IdentityController.RevokeTokenAsync(Application.Dto.Identity.Requests.RevokeTokenDto)">
             <summary>
-            Endpoint handling process of expiration refresh tokens, 
+            Endpoint perform expiring of refresh tokens, 
             after invoke this operation if user will try to generate 
-            new token from expired refresh in session he will recive exception 
+            new token from expired refresh in session he will recive exception.
+            Endpoint doesn't require authentication
             </summary>
             <param name="model">Object containing refresh token</param>
             <returns></returns>
         </member>
         <member name="M:Web.Controllers.IdentityController.ChangeCreedentialsAsync(Application.Dto.Identity.Requests.ChangeCreedentialsDto)">
             <summary>
-            Endpoint handle setting new password for authenticated user
+            Endpoint perform setting new password for authenticated user
+            Endpoint doesn't require authentication
             </summary>
             <param name="model">Object with old and new password</param>
             <returns></returns>
         </member>
         <member name="M:Web.Controllers.PlaylistsController.GetAsync(System.Guid)">
             <summary>
-            
+            Endpoint perform returning single playlist instance by Id.
+            Endpoint doesn't require authentication
             </summary>
-            <param name="id"></param>
-            <returns></returns>
+            <param name="id">Id of object</param>
+            <returns>Object if will be found, otherwise null value</returns>
         </member>
         <member name="M:Web.Controllers.PlaylistsController.BrowseAsync(Application.Dto.Playlist.Requests.BrowsePlaylistQueryDto)">
             <summary>
-            
+            Endpoint perform returning collection of playlists fullyfing details included in query parameters.
+            Endpoint doesn't require authentication
             </summary>
-            <param name="query"></param>
-            <returns></returns>
+            <param name="query">Object including query parameters</param>
+            <returns>Object with collection of playlists and metadata about page</returns>
         </member>
         <member name="M:Web.Controllers.PlaylistsController.BrowseForCurrentAsync(Core.Commons.Pagination.PagedQuery)">
             <summary>
-            
+            Endpoint perform returning collection of playlists belongs to authenticated user.
+            Endpoint require authentication
             </summary>
-            <param name="query"></param>
-            <returns></returns>
+            <param name="query">Object including query parameters</param>
+            <returns>Object with collection of playlists and metadata about page</returns>
         </member>
         <member name="M:Web.Controllers.PlaylistsController.CreateAsync(Application.Dto.Playlist.Requests.CreatePlaylistDto)">
             <summary>
-            
+            Endpoint perform creating a instance of playlist. Endpoint require authentication
             </summary>
-            <param name="model"></param>
+            <param name="model">Object including data for new playlist</param>
             <returns></returns>
         </member>
         <member name="M:Web.Controllers.PlaylistsController.UpdateAsync(Application.Dto.Playlist.Requests.UpdatePlaylistDto)">
             <summary>
-            
+            Endpoint perform changing a instance of playlist. Endpoint require authentication
             </summary>
-            <param name="model"></param>
+            <param name="model">Object including new values for playlist</param>
             <returns></returns>
         </member>
-        <member name="M:Web.Controllers.PlaylistsController.DeleteAsync(System.Guid)">
+        <member name="M:Web.Controllers.PlaylistsController.RemoveAsync(System.Guid)">
             <summary>
-            
+            Endpoint perform removing playlist object by Id. Endpoint require authentication
             </summary>
-            <param name="id"></param>
+            <param name="id">Id of object</param>
             <returns></returns>
         </member>
         <member name="M:Web.Controllers.ProfileController.CreateAsync(Application.Dto.Profile.Requests.CreateProfileDto)">
             <summary>
-            
+            Endpoint perform creating instance of profile. Endpoint require authentication
             </summary>
-            <param name="model"></param>
+            <param name="model">Object including data for new profile</param>
             <returns></returns>
         </member>
         <member name="M:Web.Controllers.ProfileController.UpdateAsync(Application.Dto.Profile.Requests.UpdateProfileDto)">
             <summary>
-            
+            Endpoint perform changes of profile instance. Endpoint require authentication 
             </summary>
-            <param name="model"></param>
+            <param name="model">Object including properties keeping new values for profile instance</param>
             <returns></returns>
         </member>
         <member name="M:Web.Controllers.ProfileController.UploadAvatarAsync(Application.Dto.Profile.Requests.UploadAvatarDto)">
             <summary>
-            
+            Endpoint perform serialization of avatar for profile on server. Endpoint require authentication
             </summary>
-            <param name="model"></param>
+            <param name="model">Object include image file</param>
             <returns></returns>
         </member>
         <member name="M:Web.Controllers.TracksController.GetAsync(System.Guid)">
             <summary>
-            
+            Endpoint returning track instance by Id. Endpoint doesn't require authentication
             </summary>
-            <param name="id"></param>
-            <returns></returns>
+            <param name="id">Id of track</param>
+            <returns>Object including track metadata with URL to static file</returns>
         </member>
         <member name="M:Web.Controllers.TracksController.BrowseAsync(Application.Dto.Track.BrowseTracksQueryDto)">
             <summary>
-            
+            Endpoint return collection of tracks fullyfing details included in query parameters.
+            Endpoint doesnt require authentication
             </summary>
             <param name="query"></param>
-            <returns></returns>
+            <returns>Object including collection of playlists with metadata about page</returns>
         </member>
         <member name="M:Web.Controllers.TracksController.UploadAsync(Application.Dto.Track.UploadTrackDto)">
             <summary>
-            
+            Endpoint perform serialization of send music file on server. Acceptable file formats are *.wav and *.mp3.
+            Endpoint require authentication
             </summary>
-            <param name="model"></param>
+            <param name="model">Object with file and file name</param>
             <returns></returns>
         </member>
         <member name="M:Web.Controllers.TracksController.RemoveAsync(System.Guid)">
             <summary>
-            
+            Endpoint perform removing track by Id. Endpoint require user authentication
             </summary>
-            <param name="id"></param>
+            <param name="id">Id of object</param>
             <returns></returns>
         </member>
         <member name="M:Web.Controllers.UsersController.GetAsync(System.String)">
             <summary>
-            Endpoint returns informations about user instance
+            Endpoint returns informations about user instance.
+            Endpoint doesn't require authentication
             </summary>
-            <param name="userName">Current UserName</param>
+            <param name="userName">Current userName</param>
             <returns>Object representing user instance</returns>
         </member>
         <member name="M:Web.Controllers.UsersController.BrowseAsync(Application.Dto.User.BrowseUsersQueryDto)">
             <summary>
-            Endpoint returns collection of users containing details given from query
+            Endpoint returns collection of users fullyfing details included in query parameters.
+            Endpoint doesn't require authentication
             </summary>
-            <param name="query">Query object including querying parameters</param>
+            <param name="query">Query object including query parameters</param>
             <returns>Object including collection of users with page details</returns>
         </member>
     </members>
