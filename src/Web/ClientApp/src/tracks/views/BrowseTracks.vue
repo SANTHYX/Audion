@@ -6,14 +6,14 @@
 			<h3>Found Results: {{ tracksTotalResults }}</h3>
 		</v-row>
 		<v-divider class="my-2" />
-		<v-container id="list-height">
+		<v-container class="collection-wraper">
 			<browse-track-card
 				v-for="track in tracksCollection"
 				:key="track.id"
 				:isAuthenticated="isAuthenticated"
 				:track="track"
 				@openPlaylistsModal="openPlaylistsModal"
-				@check="$router.push({ name: 'Track', params: { id: $event } })"
+				@check="$router.push({ name: 'Track', params: { id: track.id } })"
 			/>
 		</v-container>
 		<pagination
@@ -66,7 +66,6 @@ export default {
 	}),
 	methods: {
 		async changePage(page) {
-			await this['track/BROWSE_TRACKS'](this.$route.query);
 			this.$router.replace({ query: { ...this.$route.query, page } });
 		},
 		async changeModalPage(page) {
@@ -95,7 +94,7 @@ export default {
 </script>
 
 <style>
-#list-height {
+.collection-wraper {
 	display: flex;
 	flex-direction: column;
 	align-items: center;

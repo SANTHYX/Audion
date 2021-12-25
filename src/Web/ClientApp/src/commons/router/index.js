@@ -30,6 +30,11 @@ const routes = [
         name: 'BrowsePlaylists',
         component: () => import('../../playlists/views/BrowsePlaylists.vue')
       },
+      {
+        path: 'users',
+        name: 'BrowseUsers',
+        component: () => import('../../users/views/BrowseUsers.vue')
+      }
     ],
     meta: { requiresAuth: false }
   },

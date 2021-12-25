@@ -28,7 +28,12 @@
 			<v-card-actions>
 				<v-col>
 					<v-row class="justify-center">
-						<v-alert v-model="state.isThrown" border="bottom" type="error">
+						<v-alert
+							class="text-center"
+							v-model="state.isThrowing"
+							border="bottom"
+							type="error"
+						>
 							{{ error.message }}
 						</v-alert>
 					</v-row>
@@ -79,7 +84,7 @@ export default {
 		},
 		state: {
 			isAwaiting: false,
-			isThrown: false,
+			isThrowing: false,
 		},
 		validationRules: {
 			isRequired: (v) => !!v || 'This field is required',
@@ -96,11 +101,11 @@ export default {
 		},
 		await() {
 			this.state.isAwaiting = true;
-			this.state.isThrown = false;
+			this.state.isThrowing = false;
 		},
 		throw() {
 			this.state.isAwaiting = false;
-			this.state.isThrown = true;
+			this.state.isThrowing = true;
 		},
 		...mapActions(['identity/LOGIN_USER']),
 	},

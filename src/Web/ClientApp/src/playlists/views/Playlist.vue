@@ -1,5 +1,5 @@
 <template>
-	<v-container id="playlist"> </v-container>
+	<v-container> </v-container>
 </template>
 
 <script>
@@ -14,13 +14,13 @@ export default {
 		},
 	},
 	computed: {
-		...mapGetters(['playlist/GET_PLAYLIST']),
+		...mapGetters(['playlist/PLAYLIST']),
 	},
 	methods: {
 		...mapActions(['playlist/GET_PLAYLIST']),
 	},
 	async created() {
-		await this['playlist/GET_PLAYLIST'](this.$route.query);
+		await this['playlist/GET_PLAYLIST'](this.id);
 	},
 };
 </script>

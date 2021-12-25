@@ -24,7 +24,7 @@
 				<v-icon>mdi-plus</v-icon>
 			</v-btn>
 			<v-spacer />
-			<v-btn class="success mr-2 mb-5" @click="check(track.id)">
+			<v-btn class="success mr-2 mb-5" @click="check">
 				Check
 				<v-icon>mdi-play</v-icon>
 			</v-btn>
@@ -51,8 +51,8 @@ export default {
 		openModal(trackId) {
 			this.$emit('openPlaylistsModal', trackId);
 		},
-		check(trackId) {
-			this.$emit('check', trackId);
+		check() {
+			this.$emit('check');
 		},
 	},
 };

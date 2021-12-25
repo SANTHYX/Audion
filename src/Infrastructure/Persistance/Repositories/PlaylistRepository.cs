@@ -31,6 +31,9 @@ namespace Infrastructure.Persistance.Repositories
                 pagedQuery.Page,
                 pagedQuery.Results);
 
+        public async Task<bool> IsExistInUserCollection(Guid userId, string name)
+            => await _context.Playlists.AnyAsync(x => x.Name == name && x.UserId == userId);
+
         public void Remove(Playlist playlist)
         {
             _context.Playlists.Remove(playlist);

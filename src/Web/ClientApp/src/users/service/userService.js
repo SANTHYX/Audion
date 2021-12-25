@@ -5,6 +5,11 @@ const userService = {
         const response = await api.get(`/users/${userName}`);
 
         return response;
+    },
+    browseUsers: async (queryObj) => {
+        const response = await api.get(`/users`, { params: queryObj });
+
+        return response;
     }
 };
 

@@ -1,6 +1,6 @@
 const playlistRoutes = [
     {
-        path: 'playlist/:id',
+        path: '/playlist/:id',
         name: 'Playlist',
         component: () => import('../views/Playlist.vue'),
         prop: true

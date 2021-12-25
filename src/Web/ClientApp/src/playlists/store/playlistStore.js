@@ -9,7 +9,7 @@ const playlistStore = {
     },
 
     getters: {
-        GET_PLAYLIST: (state) => state.playlist,
+        PLAYLIST: (state) => state.playlist,
 
         GET_PLAYLISTS_COLLECTION: (state) => state.playlistsCollection,
     },

@@ -25,6 +25,7 @@ namespace Application.Mappers
                 TotalResults = source.TotalResults,
                 Collection = source.Collection?.Select(x => new GetPlaylistCollectionDto
                 {
+                    Id = x.Id,
                     Name = x.Name
                 }),
             };

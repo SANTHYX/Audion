@@ -69,6 +69,8 @@ namespace Application.Services.Business
 
         public async Task CreateAsync(CreatePlaylistDto model)
         {
+            await ValidateIsExistInUserCollection(_userId, model.Name);
+
             var user = await _unit.User.GetByIdAsync(_userId);
 
             Playlist playlist = new(model.Name, user);
@@ -94,6 +96,14 @@ namespace Application.Services.Business
 
             _unit.Playlist.Remove(playlist);
             await _unit.CommitAsync();
+        }
+
+        private async Task ValidateIsExistInUserCollection(Guid userId, string playlistName)
+        { 
+            if (await _unit.Playlist.IsExistInUserCollection(userId, playlistName))
+            {
+                throw new Exception("Playlist with this name already exist in your collection");
+            } 
         }
     }
 }

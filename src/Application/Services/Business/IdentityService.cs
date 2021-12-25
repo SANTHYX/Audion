@@ -52,6 +52,7 @@ namespace Application.Services.Business
             ValidateCreedentials(user, model.Password);
 
             var (token, accessToken) = _jwtHandler.GenerateToken(user);
+
             await _unit.Token.AddAsync(token);
             await _unit.CommitAsync();
 
@@ -79,7 +80,7 @@ namespace Application.Services.Business
 
         public async Task RegisterAsync(RegisterUserDto model)
         {
-            await CheckUserExistance(model.UserName);
+            await ValidateUserExistance(model.UserName);
 
             var (hash, salt) = _encryptor.HashPassword(model.Password);
 
@@ -159,7 +160,7 @@ namespace Application.Services.Business
             }
         }
 
-        private async Task CheckUserExistance(string userName)
+        private async Task ValidateUserExistance(string userName)
         {
             if (await _unit.User.IsExist(userName))
             {

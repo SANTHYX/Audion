@@ -11,6 +11,7 @@ namespace Core.Commons.Persistance.Repositories
     {
         Task<Playlist> GetByIdAsync(Guid id);
         Task<Page<Playlist>> GetAllAsync(Expression<Func<Playlist, bool>> expression, PagedQuery pagedQuery);
+        Task<bool> IsExistInUserCollection(Guid userId, string name);
         void Remove(Playlist playlist);
     }
 }

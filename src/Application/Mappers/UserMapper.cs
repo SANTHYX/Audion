@@ -41,7 +41,7 @@ namespace Application.Mappers
                 Page = source.CurrentPage,
                 Collection = source.Collection?.Select(x => new GetUserCollectionDto
                 {
-
+                    
                 }),
                 Results = source.Results,
                 TotalPages = source.TotalPages,

@@ -8,7 +8,10 @@
 						:to="{
 							name: 'BrowseTracks',
 							query: {
-								title: $route.query.title || $route.query.name,
+								title:
+									$route.query.title ||
+									$route.query.name ||
+									$route.query.userName,
 								page: 1,
 							},
 						}"
@@ -18,12 +21,31 @@
 						class="mx-4"
 						:to="{
 							name: 'BrowsePlaylists',
-							query: { name: $route.query.title || $route.query.name, page: 1 },
+							query: {
+								name:
+									$route.query.title ||
+									$route.query.name ||
+									$route.query.userName,
+								page: 1,
+							},
 						}"
 					>
 						Playlists
 					</v-btn>
-					<v-btn class="mx-4">Users</v-btn>
+					<v-btn
+						class="mx-4"
+						:to="{
+							name: 'BrowseUsers',
+							query: {
+								userName:
+									$route.query.title ||
+									$route.query.name ||
+									$route.query.userName,
+								page: 1,
+							},
+						}"
+						>Users</v-btn
+					>
 				</v-row>
 			</v-layout>
 		</v-flex>
