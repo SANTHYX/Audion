@@ -115,7 +115,7 @@
             <param name="query">Object including query parameters</param>
             <returns>Object with collection of playlists and metadata about page</returns>
         </member>
-        <member name="M:Web.Controllers.PlaylistsController.BrowseForCurrentAsync(Core.Commons.Pagination.PagedQuery)">
+        <member name="M:Web.Controllers.PlaylistsController.BrowseForCurrentAsync(Application.Dto.Playlist.Requests.BrowseUserPlaylistsQueryDto)">
             <summary>
             Endpoint perform returning collection of playlists belongs to authenticated user.
             Endpoint require authentication

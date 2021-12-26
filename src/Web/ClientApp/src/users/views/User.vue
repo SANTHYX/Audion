@@ -14,7 +14,12 @@ import { mapActions, mapMutations, mapGetters } from 'vuex';
 
 export default {
 	name: 'User',
-	props: ['userName'],
+	props: {
+		userName: {
+			type: String,
+			required: true,
+		},
+	},
 	data: () => ({
 		state: {
 			isLoading: true,

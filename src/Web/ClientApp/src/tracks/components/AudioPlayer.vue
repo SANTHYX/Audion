@@ -3,14 +3,21 @@
 		<v-card>
 			<v-card-title>
 				<v-spacer />
-				<v-btn @click="previous">
+				<v-btn class="mx-1" @click="previous">
 					<v-icon>mdi-previous</v-icon>
 				</v-btn>
-				<v-btn @click="play">
-					<v-icon v-if="!isPlaying" color="green">mdi-play</v-icon>
-					<v-icon v-else color="red">mdi-pause</v-icon>
+				<v-btn class="mx-1" @click="playPause">
+					<v-icon color="green">mdi-play</v-icon>
 				</v-btn>
-				<v-btn @click="next"></v-btn>
+				<v-btn class="mx-1" @click="next"></v-btn>
+				<v-slider
+					class="audio-slider"
+					min="0"
+					max="1"
+					step="0.01"
+					v-model="volume"
+					dense
+				/>
 			</v-card-title>
 		</v-card>
 	</div>
@@ -26,14 +33,14 @@ export default {
 		},
 	},
 	data: () => ({
-		isPlaying: false,
+		volume: 0.5,
 	}),
 	methods: {
 		previous() {
 			this.$emit('previous');
 		},
-		play() {
-			this.$emit('play');
+		playPause() {
+			this.$emit('playPause');
 		},
 		next() {
 			this.$emit('next');

@@ -6,7 +6,16 @@
 			<h3>Found Results: {{ totalResults }}</h3>
 		</v-row>
 		<v-divider class="my-2" />
-		<v-container class="collection-wraper"> </v-container>
+		<v-container class="collection-wraper">
+			<browse-user-card
+				v-for="user in collection"
+				:key="user.userName"
+				:user="user"
+				@check="
+					$router.push({ name: 'User', params: { userName: user.userName } })
+				"
+			/>
+		</v-container>
 		<pagination
 			:totalPages="totalPages"
 			:visablePages="5"
@@ -18,6 +27,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import Pagination from '../../commons/components/Pagination.vue';
+import BrowseUserCard from '../components/BrowseUserCard.vue';
 
 export default {
 	name: 'BrowseUsers',
@@ -43,6 +53,7 @@ export default {
 	},
 	components: {
 		Pagination,
+		BrowseUserCard,
 	},
 	async mounted() {
 		await this['user/BROWSE_USERS'](this.$route.query);

@@ -21,15 +21,39 @@
 					<h3>Playlists</h3>
 				</v-card-title>
 				<v-divider />
-				<v-card-text> </v-card-text>
+				<v-card-text>
+					<v-card
+						class="mt-2"
+						v-for="playlist in collection"
+						:key="playlist.id"
+					>
+						<v-card-text>
+							<h2>{{ playlist.name }}</h2>
+						</v-card-text>
+					</v-card>
+				</v-card-text>
 			</v-card>
 		</v-row>
 	</v-container>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
+
 export default {
-	name: 'ManageTracks',
+	name: 'ManagePlaylists',
+	computed: {
+		collection() {
+			return this['playlist/GET_PLAYLISTS_COLLECTION'].collection;
+		},
+		...mapGetters(['playlist/GET_PLAYLISTS_COLLECTION']),
+	},
+	methods: {
+		...mapActions(['playlist/BROWSE_USER_PLAYLISTS']),
+	},
+	async mounted() {
+		await this['playlist/BROWSE_USER_PLAYLISTS']({ page: 1 });
+	},
 };
 </script>
 

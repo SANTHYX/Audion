@@ -2,5 +2,7 @@
 {
     public record GetUserCollectionDto
     {
+        public string UserName { get; set; }
+        
     }
 }

@@ -47,7 +47,7 @@ namespace Web.Controllers
         /// <returns>Object with collection of playlists and metadata about page</returns>
         [Authorize]
         [HttpGet("user")]
-        public async Task<IActionResult> BrowseForCurrentAsync([FromQuery] PagedQuery query)
+        public async Task<IActionResult> BrowseForCurrentAsync([FromQuery] BrowseUserPlaylistsQueryDto query)
             => Ok(await _service.BrowseForCurrentUserAsync(query));
 
         /// <summary>
