@@ -71,6 +71,7 @@ namespace Web.Controllers
             return Ok();
         }
 
+        /*
         /// <summary>
         /// Endpoint perform replaying on other users comments. Endpoint require authentication
         /// </summary>
@@ -83,5 +84,6 @@ namespace Web.Controllers
 
             return Ok();
         }
+        */
     }
 }

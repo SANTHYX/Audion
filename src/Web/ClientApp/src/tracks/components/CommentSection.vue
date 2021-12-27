@@ -1,5 +1,6 @@
 <template>
-	<v-container>
+	<v-container class="container">
+		<h2>CommentSection</h2>
 		<slot> </slot>
 	</v-container>
 </template>
@@ -8,4 +9,8 @@
 export default {};
 </script>
 
-<style></style>
+<style>
+.container {
+	max-width: 1300px;
+}
+</style>

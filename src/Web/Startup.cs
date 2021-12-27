@@ -27,7 +27,7 @@ namespace Web
         {
 
             services.AddControllers();
-            services.AddSpaStaticFiles(spa => spa.RootPath = "ClientApp");
+            services.AddSpaStaticFiles(spa => spa.RootPath = "/ClientApp");
             services.AddSwagger();
             services.AddInfrastructureIoC(Configuration);
             services.AddApplicationIoC();

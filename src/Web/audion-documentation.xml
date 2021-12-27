@@ -32,13 +32,6 @@
             <param name="model">Object including Id of message and new message</param>
             <returns></returns>
         </member>
-        <member name="M:Web.Controllers.CommentsController.ReplyToCommentAsync(System.Guid,Application.Dto.Comment.Requests.ReplyCommentDto)">
-            <summary>
-            Endpoint perform replaying on other users comments. Endpoint require authentication
-            </summary>
-            <param name="model">Object including Id of comment that we will reply and message</param>
-            <returns></returns>
-        </member>
         <member name="M:Web.Controllers.IdentityController.LoginUser(Application.Dto.Identity.Requests.LoginUserDto)">
             <summary>
             Endpoint perform user authentication and return object with creedentials.
