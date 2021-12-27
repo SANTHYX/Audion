@@ -2,11 +2,19 @@
 	<v-container v-if="trackURL">
 		<v-row dense justify="center">
 			<v-card class="mb-2" width="1300px">
-				<v-card-title class="teal accent-3">
+				<v-card-title>
 					<h3 class="text-center">{{ track.title }}</h3>
 				</v-card-title>
 				<v-divider />
-				<v-card-text class="teal accent-4">
+				<v-card-text>
+					<v-row justify="space-beetwen">
+						<v-chip class="ml-2 mt-2">
+							Download
+							<v-icon>mdi-download</v-icon>
+						</v-chip>
+						<v-spacer />
+						<v-icon size="35px" class="mr-2 mt-2">mdi-heart</v-icon>
+					</v-row>
 					<v-row justify="center">
 						<v-img
 							dark
@@ -26,6 +34,7 @@
 				@forward="forward"
 				@previous="previous"
 			/>
+			<component />
 			<comment-section>
 				<comment />
 			</comment-section>
@@ -36,6 +45,7 @@
 <script>
 import { mapGetters, mapActions, mapMutations } from 'vuex';
 import AudioPlayer from '../components/AudioPlayer.vue';
+import TrackDetails from '../components/TrackDetails.vue';
 import CommentSection from '../components/CommentSection.vue';
 import Comment from '../components/Comment.vue';
 
@@ -80,6 +90,7 @@ export default {
 	},
 	components: {
 		AudioPlayer,
+		TrackDetails,
 		CommentSection,
 		Comment,
 	},

@@ -38,7 +38,7 @@
 					prepend-icon="mdi-volume-high"
 					v-model="audio.volume"
 					min="0"
-					max="1"
+					max="0.7"
 					value="0.2"
 					step="0.01"
 				/>
@@ -118,6 +118,7 @@ export default {
 	},
 	mounted() {
 		this.audio.src = this.trackURL;
+		this.audio.volume = 0.3;
 		this.getCurrentPosition();
 	},
 	destroyed() {
@@ -129,6 +130,7 @@ export default {
 <style>
 .fix {
 	margin-top: 25px;
+	margin-right: 3px;
 	width: 170px;
 	display: flex;
 	align-items: flex-end;
