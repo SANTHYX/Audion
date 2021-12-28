@@ -4,7 +4,15 @@
 			<h2>{{ playlist.name }}</h2>
 		</v-card-title>
 		<v-divider />
-		<v-card-text> </v-card-text>
+		<v-card-text>
+			<v-img
+				dark
+				gradient="to top right, rgba(100,115,201,.33), rgba(25,32,72,.7)"
+				aspect-ratio="1"
+				max-width="200px"
+			/>
+			<v-spacer />
+		</v-card-text>
 		<v-card-actions>
 			<v-btn class="ml-2" @click="like">Like</v-btn>
 			<v-spacer />

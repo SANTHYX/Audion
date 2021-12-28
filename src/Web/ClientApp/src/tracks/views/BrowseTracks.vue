@@ -77,7 +77,10 @@ export default {
 		},
 
 		...mapActions(['track/BROWSE_TRACKS', 'playlist/BROWSE_USER_PLAYLISTS']),
-		...mapMutations(['track/REMOVE_TRACKS_COLLECTION']),
+		...mapMutations([
+			'track/REMOVE_TRACKS_COLLECTION',
+			'playlist/REMOVE_PLAYLISTS_COLLECTION',
+		]),
 	},
 	components: {
 		AddToPlaylistModal: () => import('../components/AddToPlaylistModal.vue'),
@@ -89,6 +92,7 @@ export default {
 	},
 	destroyed() {
 		this['track/REMOVE_TRACKS_COLLECTION']();
+		this['playlist/REMOVE_PLAYLISTS_COLLECTION']();
 	},
 };
 </script>

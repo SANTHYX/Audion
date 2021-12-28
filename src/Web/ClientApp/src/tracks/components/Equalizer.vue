@@ -1,5 +1,7 @@
 <template>
-	<div></div>
+	<v-card height="200px" width="1300px">
+		<v-card-title> </v-card-title>
+	</v-card>
 </template>
 
 <script>

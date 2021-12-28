@@ -1,13 +1,13 @@
 <template>
 	<v-container v-if="trackURL">
 		<v-row dense justify="center">
-			<v-card class="mb-2" width="1300px">
+			<v-card class="mb-2 mt-5" width="1300px">
 				<v-card-title>
 					<h3 class="text-center">{{ track.title }}</h3>
 				</v-card-title>
 				<v-divider />
 				<v-card-text>
-					<v-row justify="space-beetwen">
+					<v-row justify="space-between">
 						<v-chip class="ml-2 mt-2">
 							Download
 							<v-icon>mdi-download</v-icon>
@@ -34,10 +34,12 @@
 				@forward="forward"
 				@previous="previous"
 			/>
-			<component />
-			<comment-section>
-				<comment />
-			</comment-section>
+			<v-tabs class="mt-5" center-active centered>
+				<v-tab @click="currentTab = 'InfoDisplayer'">Info</v-tab>
+				<v-tab @click="currentTab = 'CommentSection'">Comments</v-tab>
+				<v-tab @click="currentTab = 'Equalizer'">Equalizer</v-tab>
+			</v-tabs>
+			<component class="mt-2" :is="currentTab" />
 		</v-row>
 	</v-container>
 </template>
@@ -45,9 +47,10 @@
 <script>
 import { mapGetters, mapActions, mapMutations } from 'vuex';
 import AudioPlayer from '../components/AudioPlayer.vue';
-import TrackDetails from '../components/TrackDetails.vue';
+import TrackDetails from '../components/InfoDisplayer.vue';
+import InfoDisplayer from '../components/InfoDisplayer.vue';
 import CommentSection from '../components/CommentSection.vue';
-import Comment from '../components/Comment.vue';
+import Equalizer from '../components/Equalizer.vue';
 
 export default {
 	name: 'Track',
@@ -69,6 +72,7 @@ export default {
 	},
 	data: () => ({
 		isLooping: false,
+		currentTab: 'InfoDisplayer',
 	}),
 	methods: {
 		playPause(e) {
@@ -91,8 +95,9 @@ export default {
 	components: {
 		AudioPlayer,
 		TrackDetails,
+		InfoDisplayer,
 		CommentSection,
-		Comment,
+		Equalizer,
 	},
 	async mounted() {
 		await this['track/GET_TRACK_ASYNC'](this.id);

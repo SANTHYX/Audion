@@ -1,6 +1,6 @@
 <template>
 	<v-container id="account" fluid>
-		<v-row>
+		<v-row justify="space-between">
 			<v-card>
 				<v-navigation-drawer height="100vh">
 					<v-list>
@@ -70,4 +70,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+#account {
+	width: 100vw;
+}
+</style>

@@ -35,7 +35,9 @@
 			<v-spacer />
 			<div class="fix">
 				<v-slider
-					prepend-icon="mdi-volume-high"
+					:prepend-icon="
+						audio.volume !== 0.0 ? 'mdi-volume-high' : 'mdi-volume-variant-off'
+					"
 					v-model="audio.volume"
 					min="0"
 					max="0.7"

@@ -3,6 +3,7 @@
 		<v-card-title>
 			<h3>{{ track.title }}</h3>
 		</v-card-title>
+		<v-divider />
 		<v-card-text>
 			<v-img
 				dark
